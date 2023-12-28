@@ -2,19 +2,22 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.8
+      nodejs: 20
     commands:
-      - echo "Installing dependencies..."
-      - pip install -r requirements.txt -t lib
+      - echo "Installing Node.js dependencies..."
+      - npm install
+
   build:
     commands:
       - echo "Zipping deployment package..."
-      - cd lib
+      - mkdir deployment_package
+      - cp -r *.yml deployment_package/
+      - cd deployment_package
       - zip -r9 ../deployment_package.zip .
       - cd ..
-      - zip -g deployment_package.zip lukeTestingOne.mjs
+
   post_build:
     commands:
-      - echo "Updating lambda Function..."
+      - echo "Updating Lambda Function..."
       - aws lambda update-function-code --function-name lukeTestingOne --zip-file fileb://deployment_package.zip
       - echo "DONE!!"
