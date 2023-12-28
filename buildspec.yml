@@ -11,7 +11,7 @@ phases:
     commands:
       - echo "Zipping deployment package..."
       - mkdir deployment_package
-      - cp -r * deployment_package/
+      - cp -r *.mjs deployment_package/
       - cd deployment_package
       - zip -r9 ../deployment_package.zip .
       - cd ..
