@@ -6,7 +6,7 @@ export const handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify({ event }),
     };
-    // this is a test right now please
+    // this is a test right now now
     return response;
   };
   //:)
