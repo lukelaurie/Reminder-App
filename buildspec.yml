@@ -26,6 +26,7 @@ phases:
       - zip -r9 retrieveAppointments.zip .
       - cd ../sendAppointmentReminders
       - zip -r9 sendAppointmentReminders.zip .
+      - cd ..
 
   post_build:
     commands:
