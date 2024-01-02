@@ -11,13 +11,12 @@ phases:
     commands:
       - echo "Zipping deployment packages..."
       - mkdir newAssociate newAppointment login retrieveAppointments sendAppointmentReminders
-      - cd lambda_functions/
-      - cp add_new_associate/index.js newAssociate/
-      - cp create_new_appointment/index.js newAppointment/
-      - cp login/index.js login/
-      - cp retrieve_appointments/index.js retrieveAppointments/
-      - cp send_appointment_reminders/index.js sendAppointmentReminders/
-      - cd ../newAssociate
+      - cp lambda_functions/add_new_associate/index.js newAssociate/
+      - cp lambda_functions/create_new_appointment/index.js newAppointment/
+      - cp lambda_functions/login/index.js login/
+      - cp lambda_functions/retrieve_appointments/index.js retrieveAppointments/
+      - cp lambda_functions/send_appointment_reminders/index.js sendAppointmentReminders/
+      - cd newAssociate
       - zip -r9 newAssociate.zip .
       - cd ../newAppointment
       - zip -r9 newAppointment.zip .
