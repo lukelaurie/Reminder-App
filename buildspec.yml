@@ -26,11 +26,11 @@ phases:
       - zip -r9 retrieveAppointments.zip .
       - cd ../sendAppointmentReminders
       - zip -r9 sendAppointmentReminders.zip .
-      - cd ..
+      - cd ../../  # Move back to the parent directory
 
   post_build:
     commands:
-      - echo "Updating Lambda Function..."
+      - echo "Updating Lambda Functions..."
       - aws lambda update-function-code --function-name addNewAssociate --zip-file fileb://newAssociate.zip
       - aws lambda update-function-code --function-name createNewAppointment --zip-file fileb://newAppointment.zip
       - aws lambda update-function-code --function-name logAssociateIn --zip-file fileb://login.zip
