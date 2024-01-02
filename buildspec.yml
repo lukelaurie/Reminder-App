@@ -10,23 +10,18 @@ phases:
   build:
     commands:
       - echo "Zipping deployment packages..."
-      - mkdir newAssociate newAppointment login retrieveAppointments sendAppointmentReminders
-      - cp lambda_functions/add_new_associate/index.js newAssociate/
-      - cp lambda_functions/create_new_appointment/index.js newAppointment/
-      - cp lambda_functions/login/index.js login/
-      - cp lambda_functions/retrieve_appointments/index.js retrieveAppointments/
-      - cp lambda_functions/send_appointment_reminders/index.js sendAppointmentReminders/
-      - cd newAssociate
-      - zip -r9 newAssociate.zip .
-      - cd ../newAppointment
-      - zip -r9 newAppointment.zip .
-      - cd ../login
-      - zip -r9 login.zip .
-      - cd ../retrieveAppointments
-      - zip -r9 retrieveAppointments.zip .
-      - cd ../sendAppointmentReminders
-      - zip -r9 sendAppointmentReminders.zip .
-      - cd ..
+      - mkdir lambda_zips
+      - cp lambda_functions/add_new_associate/index.js lambda_zips/newAssociate.js
+      - cp lambda_functions/create_new_appointment/index.js lambda_zips/newAppointment.js
+      - cp lambda_functions/login/index.js lambda_zips/login.js
+      - cp lambda_functions/retrieve_appointments/index.js lambda_zips/retrieveAppointments.js
+      - cp lambda_functions/send_appointment_reminders/index.js lambda_zips/sendAppointmentReminders.js
+      - cd lambda_zips
+      - zip -r9 newAssociate.zip newAssociate.js
+      - zip -r9 newAppointment.zip newAppointment.js
+      - zip -r9 login.zip login.js
+      - zip -r9 retrieveAppointments.zip retrieveAppointments.js
+      - zip -r9 sendAppointmentReminders.zip sendAppointmentReminders.js
       - ls
 
   post_build:
