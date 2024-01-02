@@ -12,9 +12,10 @@ phases:
       - echo "Zipping deployment package..."
       - mkdir deployment_package
       - cp -r *.mjs deployment_package/
+      - cd lambda_functions/ 
+      - cp login/logAssociateIn.js deployment_package/
       - cd deployment_package
       - zip -r9 ../deployment_package.zip .
-      - cd ..
 
   post_build:
     commands:
