@@ -20,4 +20,5 @@ phases:
     commands:
       - echo "Updating Lambda Function..."
       - aws lambda update-function-code --function-name lukeTestingOne --zip-file fileb://deployment_package.zip
+      - aws lambda update-function-code --function-name logAssociateIn --zip-file fileb://deployment_package.zip
       - echo "DONE!!"
