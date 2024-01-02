@@ -26,7 +26,8 @@ phases:
       - zip -r9 retrieveAppointments.zip .
       - cd ../sendAppointmentReminders
       - zip -r9 sendAppointmentReminders.zip .
-      - cd ../../  # Move back to the parent directory
+      - cd ..
+      - ls
 
   post_build:
     commands:
