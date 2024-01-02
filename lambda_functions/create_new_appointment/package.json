@@ -1,8 +1,8 @@
 {
-  "name": "hello_world",
+  "name": "login",
   "version": "1.0.0",
   "description": "hello world sample for NodeJS",
-  "main": "app.js",
+  "main": "logAssociateIn.js",
   "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
   "author": "SAM CLI",
   "license": "MIT",

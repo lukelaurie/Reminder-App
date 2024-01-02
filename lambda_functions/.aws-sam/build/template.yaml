@@ -9,27 +9,43 @@ Globals:
   Function:
     Timeout: 3
 Resources:
-  HelloWorldFunction:
+  newAssociateFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: HelloWorldFunction
-      Handler: app.lambdaHandler
+      CodeUri: newAssociateFunction
+      Handler: index.lambdaHandler
       Runtime: nodejs14.x
       Architectures:
       - x86_64
       Events:
-        HelloWorld:
+        newAssociate:
           Type: Api
           Properties:
-            Path: /hello
-            Method: get
+            Path: /addAssociate
+            Method: post
     Metadata:
-      SamResourceId: HelloWorldFunction
+      SamResourceId: newAssociateFunction
+  newAppointmentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: newAppointmentFunction
+      Handler: index.lambdaHandler
+      Runtime: nodejs14.x
+      Architectures:
+      - x86_64
+      Events:
+        newAppointment:
+          Type: Api
+          Properties:
+            Path: /createNewAppointment
+            Method: post
+    Metadata:
+      SamResourceId: newAppointmentFunction
   loginFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: loginFunction
-      Handler: logAssociateIn.lambdaHandler
+      Handler: index.lambdaHandler
       Runtime: nodejs14.x
       Architectures:
       - x86_64
@@ -41,3 +57,35 @@ Resources:
             Method: post
     Metadata:
       SamResourceId: loginFunction
+  retrieveAppointmentsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: retrieveAppointmentsFunction
+      Handler: index.lambdaHandler
+      Runtime: nodejs14.x
+      Architectures:
+      - x86_64
+      Events:
+        retrieveAppointments:
+          Type: Api
+          Properties:
+            Path: /retrieveAppointments
+            Method: post
+    Metadata:
+      SamResourceId: retrieveAppointmentsFunction
+  sendAppointmentRemindersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: sendAppointmentRemindersFunction
+      Handler: index.lambdaHandler
+      Runtime: nodejs14.x
+      Architectures:
+      - x86_64
+      Events:
+        sendAppointmentReminders:
+          Type: Api
+          Properties:
+            Path: /sendAppointmentReminders
+            Method: post
+    Metadata:
+      SamResourceId: sendAppointmentRemindersFunction
