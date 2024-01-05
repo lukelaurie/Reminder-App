@@ -7,7 +7,9 @@
   "author": "SAM CLI",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.6.0"
+    "argon2": "^0.31.2",
+    "axios": "^1.6.0",
+    "bcryptjs": "^2.4.3"
   },
   "scripts": {
     "test": "mocha tests/unit/"
