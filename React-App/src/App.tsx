@@ -1,7 +1,7 @@
-import Message from './components/Message';
+import CreateAccount from './components/Pages/CreateAccount';
 
 function App() {
-  return <div><Message></Message></div>
+  return <div><CreateAccount></CreateAccount></div>
 }
 
 export default App

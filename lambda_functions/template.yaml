@@ -39,6 +39,10 @@ Resources:
           Properties:
             Path: /createNewAppointment
             Method: post
+            Cors:
+              AllowHeaders: "'*'"
+              AllowMethods: "'*'"
+              AllowOrigin: "'http://localhost:5173/'"
   loginFunction:
     Type: AWS::Serverless::Function
     Properties:
