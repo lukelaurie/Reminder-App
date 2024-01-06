@@ -78,7 +78,7 @@ async function saltAndHashPassword(password) {
         const hash = await bcrypt.hash(password, salt);
         return hash;
     } catch (error) {
-        throw new Error("Error encrypting the password");
+        throw new Error("Error encrypting the password!");
     }
 }
 
