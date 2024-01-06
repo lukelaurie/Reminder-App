@@ -4,8 +4,8 @@ const bcrypt = require("bcryptjs");
 let awsConfig = {
     region: "us-east-2",
     endpoint: "http://dynamodb.us-east-2.amazonaws.com",
-    accessKeyId: "AKIAZJG5FES4D43SUYML",
-    secretAccessKey: "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",
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 };
 AWS.config.update(awsConfig);
 let dynamoDB = new AWS.DynamoDB.DocumentClient();
