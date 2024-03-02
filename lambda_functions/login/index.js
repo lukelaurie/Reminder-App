@@ -21,32 +21,31 @@ exports.lambdaHandler = async (event) => {
         if (username == null || password == null) {
             return {
                 statusCode: 400,
-                body: JSON.stringify("Missing required fields"),
+                body: JSON.stringify("Missing required fields")
             };
         }
         // checks if username is valid
         const user = await retrieveUser(username);
-        console.log("user is " + user + "\n\n");
         if (user == null) {
             return {
                 statusCode: 401,
-                body: JSON.stringify("Username is incorrect"),
+                body: JSON.stringify("Username is incorrect")
             };
         }
         if (!(await isPasswordValid(password, user.password))) {
             return {
                 statusCode: 401,
-                body: JSON.stringify("Password is incorrect"),
+                body: JSON.stringify("Password is incorrect")
             };
         }
         return {
             statusCode: 200,
-            body: JSON.stringify("valid"),
+            body: JSON.stringify("valid")
         };
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify("An error has occured"),
+            body: JSON.stringify("An error has occured")
         };
     }
 };
@@ -56,8 +55,8 @@ async function retrieveUser(username) {
     const existingItem = {
         TableName: tableName,
         Key: {
-            username: username,
-        },
+            username: username
+        }
     };
     const foundUser = await dynamoDB.get(existingItem).promise();
     return foundUser.Item;

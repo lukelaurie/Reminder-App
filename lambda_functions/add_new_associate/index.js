@@ -17,30 +17,31 @@ exports.lambdaHandler = async (event) => {
         const body = JSON.parse(event.body);
         const username = body.username;
         const password = body.password;
+        const phoneNumber = body.phoneNumber; 
         const name = body.name;
         // verify that fileds are provided correctly
-        if (username == null || password == null || name == null) {
+        if (username == null || password == null || phoneNumber == null || name == null) {
             return {
                 statusCode: 400,
-                body: JSON.stringify("Missing required fields"),
+                body: JSON.stringify("Missing required fields")
             };
         }
         if (await doesUserExist(username)) {
             return {
                 statusCode: 409,
-                body: JSON.stringify("Username alrady exists"),
+                body: JSON.stringify("Username alrady exists")
             };
         }
         encryptedPassword = await saltAndHashPassword(password);
-        createNewAssociate(username, encryptedPassword, name);
+        createNewAssociate(username, encryptedPassword, phoneNumber, name);
         return {
             statusCode: 200,
-            body: JSON.stringify("The new user has been placed!"),
+            body: JSON.stringify("The new user has been placed!")
         };
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify("An error has occured"),
+            body: JSON.stringify("An error has occured")
         };
     }
 };
@@ -50,25 +51,25 @@ async function doesUserExist(username) {
     const existingItem = {
         TableName: tableName,
         Key: {
-            username: username,
-        },
+            username: username
+        }
     };
     const foundUser = await dynamoDB.get(existingItem).promise();
     return foundUser.Item != null;
 }
 
-async function createNewAssociate(username, encryptedPassword, name) {
+async function createNewAssociate(username, encryptedPassword, phoneNumber, name) {
     const newAssociate = {
         username: username,
         password: encryptedPassword,
         name: name,
+        phoneNumber: phoneNumber
     };
     const putValue = {
         TableName: tableName,
-        Item: newAssociate,
+        Item: newAssociate
     };
-    // place the new item into the dynamoDB
-    await dynamoDB.put(putValue).promise();
+    await dynamoDB.put(putValue).promise(); 
 }
 
 async function saltAndHashPassword(password) {
