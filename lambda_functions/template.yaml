@@ -1,87 +1,83 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  sam first lambda
+    sam first lambda
 
-  Sample SAM Template for sam first lambda
-  
+    Sample SAM Template for sam first lambda
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
-  Function:
-    Timeout: 3
+    Function:
+        Timeout: 3
 
 Resources:
-  newAssociateFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: add_new_associate/
-      Handler: index.lambdaHandler
-      Runtime: nodejs14.x
-      Architectures:
-      - x86_64
-      Events:
-        newAssociate:
-          Type: Api
-          Properties:
-            Path: /addAssociate
-            Method: post
-  newAppointmentFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: create_new_appointment/
-      Handler: index.lambdaHandler
-      Runtime: nodejs14.x
-      Architectures:
-      - x86_64
-      Events:
-        newAppointment:
-          Type: Api
-          Properties:
-            Path: /createNewAppointment
-            Method: post
-            Cors:
-              AllowHeaders: "'*'"
-              AllowMethods: "'*'"
-              AllowOrigin: "'http://localhost:5173/'"
-  loginFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: login/
-      Handler: index.lambdaHandler
-      Runtime: nodejs14.x
-      Architectures:
-      - x86_64
-      Events:
-        Login:
-          Type: Api
-          Properties:
-            Path: /login
-            Method: post
-  retrieveAppointmentsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: retrieve_appointments/
-      Handler: index.lambdaHandler
-      Runtime: nodejs14.x
-      Architectures:
-      - x86_64
-      Events:
-        retrieveAppointments:
-          Type: Api
-          Properties:
-            Path: /retrieveAppointments
-            Method: post
-  sendAppointmentRemindersFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: send_appointment_reminders/
-      Handler: index.lambdaHandler
-      Runtime: nodejs14.x
-      Architectures:
-      - x86_64
-      Events:
-        sendAppointmentReminders:
-          Type: Api
-          Properties:
-            Path: /sendAppointmentReminders
-            Method: post
+    newAssociateFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: add_new_associate/
+            Handler: index.lambdaHandler
+            Runtime: nodejs14.x
+            Architectures:
+                - x86_64
+            Events:
+                newAssociate:
+                    Type: Api
+                    Properties:
+                        Path: /addAssociate
+                        Method: post
+    newAppointmentFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: create_new_appointment/
+            Handler: index.lambdaHandler
+            Runtime: nodejs14.x
+            Architectures:
+                - x86_64
+            Events:
+                newAppointment:
+                    Type: Api
+                    Properties:
+                        Path: /createNewAppointment
+                        Method: post
+    loginFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: login/
+            Handler: index.lambdaHandler
+            Runtime: nodejs14.x
+            Architectures:
+                - x86_64
+            Events:
+                Login:
+                    Type: Api
+                    Properties:
+                        Path: /login
+                        Method: post
+    retrieveAppointmentsFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: retrieve_appointments/
+            Handler: index.lambdaHandler
+            Runtime: nodejs14.x
+            Architectures:
+                - x86_64
+            Events:
+                retrieveAppointments:
+                    Type: Api
+                    Properties:
+                        Path: /retrieveAppointments
+                        Method: post
+    sendAppointmentRemindersFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: send_appointment_reminders/
+            Handler: index.lambdaHandler
+            Runtime: nodejs14.x
+            Architectures:
+                - x86_64
+            Events:
+                sendAppointmentReminders:
+                    Type: Api
+                    Properties:
+                        Path: /sendAppointmentReminders
+                        Method: post

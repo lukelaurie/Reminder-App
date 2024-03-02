@@ -67,7 +67,7 @@ async function createNewAssociate(username, encryptedPassword, name) {
         TableName: tableName,
         Item: newAssociate,
     };
-    // place the new item into dynamoDB
+    // place the new item into the dynamoDB
     await dynamoDB.put(putValue).promise();
 }
 
@@ -81,4 +81,3 @@ async function saltAndHashPassword(password) {
         throw new Error("Error encrypting the password!");
     }
 }
-
