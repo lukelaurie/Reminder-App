@@ -31,6 +31,9 @@ Resources:
             CodeUri: create_new_appointment/
             Handler: index.lambdaHandler
             Runtime: nodejs14.x
+            Environment:
+                Variables:
+                    JWT_SECRET_KEY_VALUE: "flj3289gnw89jnfgjnw33fn33dfs"
             Architectures:
                 - x86_64
             Events:
@@ -45,6 +48,9 @@ Resources:
             CodeUri: login/
             Handler: index.lambdaHandler
             Runtime: nodejs14.x
+            Environment:
+                Variables:
+                    JWT_SECRET_KEY_VALUE: "flj3289gnw89jnfgjnw33fn33dfs"
             Architectures:
                 - x86_64
             Events:
@@ -59,6 +65,9 @@ Resources:
             CodeUri: retrieve_appointments/
             Handler: index.lambdaHandler
             Runtime: nodejs14.x
+            Environment:
+                Variables:
+                    JWT_SECRET_KEY_VALUE: "flj3289gnw89jnfgjnw33fn33dfs"
             Architectures:
                 - x86_64
             Events:
@@ -73,6 +82,9 @@ Resources:
             CodeUri: send_appointment_reminders/
             Handler: index.lambdaHandler
             Runtime: nodejs14.x
+            Environment:
+                Variables:
+                    JWT_SECRET_KEY_VALUE: "flj3289gnw89jnfgjnw33fn33dfs"
             Architectures:
                 - x86_64
             Events:
@@ -87,6 +99,9 @@ Resources:
             CodeUri: is_logged_in/
             Handler: index.lambdaHandler
             Runtime: nodejs14.x
+            Environment:
+                Variables:
+                    JWT_SECRET_KEY_VALUE: "flj3289gnw89jnfgjnw33fn33dfs"
             Architectures:
                 - x86_64
             Events:
@@ -95,3 +110,12 @@ Resources:
                     Properties:
                         Path: /isLoggedIn
                         Method: get
+    HelpersLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: SAM-Events-Advance-Helpers
+      Description: Layer that will be shared across multiple microservices
+      LicenseInfo: 'Available under the MIT license.'
+      ContentUri: ./helpers-layer
+      CompatibleRuntimes:
+        - nodejs14.x
