@@ -28,6 +28,8 @@ phases:
       - cd ../sam-app/layers/nodejs/node_modules/get_username_from_cookie
       - zip -r9 ../../../../../lambda_zips/getUsernameLayer.zip .
       - cd ../../../../../lambda_zips
+      - echo "check this out"
+      - ls
 
   post_build:
     commands:
