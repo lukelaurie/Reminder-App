@@ -39,4 +39,4 @@ phases:
             - aws lambda update-function-code --function-name sendAppointmentReminders --zip-file fileb://sendAppointmentReminders.zip
             - aws lambda update-function-code --function-name isLoggedIn --zip-file fileb://isLoggedIn.zip
             - aws lambda publish-layer-version --layer-name getUsernameLayer --description "Shared Node.js get username layer" --zip-file fileb://getUsernameLayer.zip --compatible-runtimes nodejs14.x
-            - echo "DONE!!"
+            - echo "DONE NOW!!"
