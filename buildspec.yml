@@ -1,44 +1,42 @@
 version: 0.2
 phases:
-  install:
-    runtime-versions:
-      nodejs: 14
-    commands:
-      - echo "Installing Node.js dependencies..."
-      - npm install
+    install:
+        runtime-versions:
+            nodejs: 14
+        commands:
+            - echo "Installing Node.js dependencies..."
+            - npm install
 
-  build:
-    commands:
-      - echo "Zipping deployment packages..."
-      - mkdir lambda_zips
-      - cp sam-app/lambda_functions/add_new_associate/index.js lambda_zips/newAssociate.js
-      - cp sam-app/lambda_functions/create_new_appointment/index.js lambda_zips/newAppointment.js
-      - cp sam-app/lambda_functions/login/index.js lambda_zips/login.js
-      - cp sam-app/lambda_functions/retrieve_appointments/index.js lambda_zips/retrieveAppointments.js
-      - cp sam-app/lambda_functions/send_appointment_reminders/index.js lambda_zips/sendAppointmentReminders.js
-      - cp sam-app/lambda_functions/is_logged_in/index.js lambda_zips/isLoggedIn.js
-      - cd lambda_zips
-      - zip -r9 newAssociate.zip newAssociate.js
-      - zip -r9 newAppointment.zip newAppointment.js
-      - zip -r9 login.zip login.js
-      - zip -r9 retrieveAppointments.zip retrieveAppointments.js
-      - zip -r9 sendAppointmentReminders.zip sendAppointmentReminders.js
-      - zip -r9 isLoggedIn.zip isLoggedIn.js
-      - echo "Zipping deployment package for Lambda layer..."
-      - cd ../sam-app/layers/nodejs/node_modules/get_username_from_cookie
-      - zip -r9 ../../../../../lambda_zips/getUsernameLayer.zip .
-      - cd ../../../../../lambda_zips
-      - echo "check this out"
-      - ls
+    build:
+        commands:
+            - echo "Zipping deployment packages..."
+            - mkdir lambda_zips
+            - cp sam-app/lambda_functions/add_new_associate/index.js lambda_zips/newAssociate.js
+            - cp sam-app/lambda_functions/create_new_appointment/index.js lambda_zips/newAppointment.js
+            - cp sam-app/lambda_functions/login/index.js lambda_zips/login.js
+            - cp sam-app/lambda_functions/retrieve_appointments/index.js lambda_zips/retrieveAppointments.js
+            - cp sam-app/lambda_functions/send_appointment_reminders/index.js lambda_zips/sendAppointmentReminders.js
+            - cp sam-app/lambda_functions/is_logged_in/index.js lambda_zips/isLoggedIn.js
+            - cd lambda_zips
+            - zip -r9 newAssociate.zip newAssociate.js
+            - zip -r9 newAppointment.zip newAppointment.js
+            - zip -r9 login.zip login.js
+            - zip -r9 retrieveAppointments.zip retrieveAppointments.js
+            - zip -r9 sendAppointmentReminders.zip sendAppointmentReminders.js
+            - zip -r9 isLoggedIn.zip isLoggedIn.js
+            - echo "Zipping deployment package for Lambda layer..."
+            - cd ../sam-app/layers/nodejs/node_modules/get_username_from_cookie
+            - zip -r9 ../../../../../lambda_zips/getUsernameLayer.zip .
+            - cd ../../../../../lambda_zips
 
-  post_build:
-    commands:
-      - echo "Updating Lambda Functions..."
-      - aws lambda update-function-code --function-name addNewAssociate --zip-file fileb://newAssociate.zip
-      - aws lambda update-function-code --function-name createNewAppointment --zip-file fileb://newAppointment.zip
-      - aws lambda update-function-code --function-name logAssociateIn --zip-file fileb://login.zip
-      - aws lambda update-function-code --function-name retrieveAppointments --zip-file fileb://retrieveAppointments.zip
-      - aws lambda update-function-code --function-name sendAppointmentReminders --zip-file fileb://sendAppointmentReminders.zip
-      - aws lambda update-function-code --function-name isLoggedIn --zip-file fileb://isLoggedIn.zip
-      - aws lambda publish-layer-version --layer-name getUsernameLayer --description "Shared Node.js get username layer" --zip-file fileb://getUsernameLayer.zip --compatible-runtimes nodejs14.x
-      - echo "DONE!!"
+    post_build:
+        commands:
+            - echo "Updating Lambda Functions..."
+            - aws lambda update-function-code --function-name addNewAssociate --zip-file fileb://newAssociate.zip
+            - aws lambda update-function-code --function-name createNewAppointment --zip-file fileb://newAppointment.zip
+            - aws lambda update-function-code --function-name logAssociateIn --zip-file fileb://login.zip
+            - aws lambda update-function-code --function-name retrieveAppointments --zip-file fileb://retrieveAppointments.zip
+            - aws lambda update-function-code --function-name sendAppointmentReminders --zip-file fileb://sendAppointmentReminders.zip
+            - aws lambda update-function-code --function-name isLoggedIn --zip-file fileb://isLoggedIn.zip
+            - aws lambda publish-layer-version --layer-name getUsernameLayer --description "Shared Node.js get username layer" --zip-file fileb://getUsernameLayer.zip --compatible-runtimes nodejs14.x
+            - echo "DONE!!"
