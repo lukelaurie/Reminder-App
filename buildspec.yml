@@ -26,7 +26,7 @@ phases:
       - zip -r9 isLoggedIn.zip isLoggedIn.js
       - echo "Zipping deployment package for Lambda layer..."
       - cd ../sam-app/layers/nodejs/node_modules/get_username_from_cookie
-      - zip -r9 ../../../../lambda_zips/getUsernameLayer.zip .
+      - zip -r9 ../../../../../lambda_zips/getUsernameLayer.zip .
 
   post_build:
     commands:
