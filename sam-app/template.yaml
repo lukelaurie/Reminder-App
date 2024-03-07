@@ -17,7 +17,15 @@ Resources:
         Properties:
             LayerName: get username layer
             Description: Shared Node.js get username layer
-            ContentUri: ./layers
+            ContentUri: ./layers/cookie
+            CompatibleRuntimes:
+                - nodejs14.x
+    SharedTextLayer:
+        Type: AWS::Serverless::LayerVersion
+        Properties:
+            LayerName: text layer
+            Description: Shared Node.js get text layer
+            ContentUri: ./layers/text
             CompatibleRuntimes:
                 - nodejs14.x
 
@@ -43,6 +51,7 @@ Resources:
             Handler: index.lambdaHandler
             Runtime: nodejs14.x
             Layers:
+                - !Ref SharedTextLayer
                 - !Ref SharedUsernameLayer
             Environment:
                 Variables:
@@ -78,6 +87,8 @@ Resources:
             CodeUri: lambda_functions/retrieve_appointments/
             Handler: index.lambdaHandler
             Runtime: nodejs14.x
+            Layers:
+                - !Ref SharedUsernameLayer
             Environment:
                 Variables:
                     JWT_SECRET_KEY_VALUE: "flj3289gnw89jnfgjnw33fn33dfs"
@@ -95,6 +106,8 @@ Resources:
             CodeUri: lambda_functions/send_appointment_reminders/
             Handler: index.lambdaHandler
             Runtime: nodejs14.x
+            Layers:
+                - !Ref SharedTextLayer
             Environment:
                 Variables:
                     JWT_SECRET_KEY_VALUE: "flj3289gnw89jnfgjnw33fn33dfs"

@@ -25,8 +25,11 @@ phases:
             - zip -r9 sendAppointmentReminders.zip sendAppointmentReminders.js
             - zip -r9 isLoggedIn.zip isLoggedIn.js
             - echo "Zipping deployment package for Lambda layer..."
-            - cd ../sam-app/layers/nodejs/node_modules/get_username_from_cookie
+            - cd ../sam-app/layers/cookie/nodejs/node_modules/get_username_from_cookie
             - zip -r9 ../../../../../lambda_zips/getUsernameLayer.zip .
+            - cd ../../../../../lambda_zips
+            - cd ../sam-app/layers/text/nodejs/node_modules/send-text-message
+            - zip -r9 ../../../../../lambda_zips/getTextLayer.zip .
             - cd ../../../../../lambda_zips
 
     post_build:
@@ -39,4 +42,5 @@ phases:
             - aws lambda update-function-code --function-name sendAppointmentReminders --zip-file fileb://sendAppointmentReminders.zip
             - aws lambda update-function-code --function-name isLoggedIn --zip-file fileb://isLoggedIn.zip
             - aws lambda publish-layer-version --layer-name getUsernameLayer --description "Shared Node.js get username layer" --zip-file fileb://getUsernameLayer.zip --compatible-runtimes nodejs14.x
+            - aws lambda publish-layer-version --layer-name getUsernameLayer --description "Shared Node.js get username layer" --zip-file fileb://getTextLayer.zip --compatible-runtimes nodejs14.x
             - echo "DONE NOW!!"

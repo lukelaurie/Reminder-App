@@ -30,7 +30,7 @@ exports.lambdaHandler = async (event) => {
         } catch (error) {
             return {
                 statusCode: 400,
-                body: JSON.stringify("Invalid cookie with username was given"),
+                body: JSON.stringify("Invalid cookie was provided"),
             };
         }
         // verify all the data was passed

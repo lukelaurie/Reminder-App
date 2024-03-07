@@ -1,4 +1,4 @@
-const cookieHandler = require("get_username_from_cookie")
+const cookieHandler = require("get_username_from_cookie");
 
 exports.lambdaHandler = async (event) => {
     try {

@@ -16,8 +16,6 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY_VALUE;
 
 exports.lambdaHandler = async (event) => {
     try {
-        console.log(process.env.AWS_ACCESS_KEY_ID);
-        console.log(process.env.AWS_SECRET_ACCESS_KEY);
         // Retrieve the data from the request
         const body = JSON.parse(event.body);
         const username = body.username;
