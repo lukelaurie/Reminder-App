@@ -19,7 +19,7 @@ const CreateAccount: React.FC = () => {
         }
         console.log("Account created!");
         console.log(accountData);
-        fetch("http://stocksimulator.me:8080/api/register", {
+        fetch("http://127.0.0.1:3000/addAssociate", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -28,6 +28,7 @@ Resources:
   newAssociateFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Timeout: 15
       CodeUri: newAssociateFunction
       Handler: index.lambdaHandler
       Runtime: nodejs18.x
@@ -44,6 +45,7 @@ Resources:
   newAppointmentFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Timeout: 15
       CodeUri: newAppointmentFunction
       Handler: index.lambdaHandler
       Runtime: nodejs18.x
@@ -86,6 +88,7 @@ Resources:
   retrieveAppointmentsFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Timeout: 15
       CodeUri: retrieveAppointmentsFunction
       Handler: index.lambdaHandler
       Runtime: nodejs18.x
@@ -107,6 +110,7 @@ Resources:
   sendAppointmentRemindersFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Timeout: 15
       CodeUri: sendAppointmentRemindersFunction
       Handler: index.lambdaHandler
       Runtime: nodejs18.x
@@ -128,6 +132,7 @@ Resources:
   isLoggedInFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Timeout: 15
       CodeUri: isLoggedInFunction
       Handler: index.lambdaHandler
       Runtime: nodejs18.x
