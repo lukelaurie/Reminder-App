@@ -16,6 +16,7 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY_VALUE;
 
 exports.lambdaHandler = async (event) => {
     try {
+        console.log("calling login function");
         // Retrieve the data from the request
         const body = JSON.parse(event.body);
         const username = body.username;
@@ -50,6 +51,7 @@ exports.lambdaHandler = async (event) => {
             // age is 1 day
             maxAge: 60 * 60 * 24,
         });
+        console.log("about to return with status code 200");
         return {
             statusCode: 200,
             headers: {

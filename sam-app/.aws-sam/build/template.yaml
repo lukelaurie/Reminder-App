@@ -66,6 +66,7 @@ Resources:
   loginFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Timeout: 15
       CodeUri: loginFunction
       Handler: index.lambdaHandler
       Runtime: nodejs18.x
