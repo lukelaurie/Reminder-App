@@ -1,7 +1,13 @@
-import CreateAccount from './components/Pages/CreateAccount';
+import Login from "./components/pages/Login";
+import CreateAccount from "./components/pages/CreateAccount";
 
 function App() {
-  return <div><CreateAccount></CreateAccount></div>
+  return (
+    <div>
+      <Login />
+      <CreateAccount />
+    </div>
+  );
 }
 
-export default App
+export default App;

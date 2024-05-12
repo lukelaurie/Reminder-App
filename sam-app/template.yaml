@@ -19,7 +19,7 @@ Resources:
             Description: Shared Node.js get username layer
             ContentUri: ./layers/cookie
             CompatibleRuntimes:
-                - nodejs14.x
+                - nodejs16.x
     SharedTextLayer:
         Type: AWS::Serverless::LayerVersion
         Properties:
@@ -27,7 +27,7 @@ Resources:
             Description: Shared Node.js get text layer
             ContentUri: ./layers/text
             CompatibleRuntimes:
-                - nodejs14.x
+                - nodejs16.x
 
     # handle the lambda functions
     newAssociateFunction:
@@ -35,7 +35,7 @@ Resources:
         Properties:
             CodeUri: lambda_functions/add_new_associate/
             Handler: index.lambdaHandler
-            Runtime: nodejs14.x
+            Runtime: nodejs16.x
             Architectures:
                 - x86_64
             Events:
@@ -49,7 +49,7 @@ Resources:
         Properties:
             CodeUri: lambda_functions/create_new_appointment/
             Handler: index.lambdaHandler
-            Runtime: nodejs14.x
+            Runtime: nodejs16.x
             Layers:
                 - !Ref SharedTextLayer
                 - !Ref SharedUsernameLayer
@@ -69,7 +69,7 @@ Resources:
         Properties:
             CodeUri: lambda_functions/login/
             Handler: index.lambdaHandler
-            Runtime: nodejs14.x
+            Runtime: nodejs16.x
             Environment:
                 Variables:
                     JWT_SECRET_KEY_VALUE: "flj3289gnw89jnfgjnw33fn33dfs"
@@ -86,7 +86,7 @@ Resources:
         Properties:
             CodeUri: lambda_functions/retrieve_appointments/
             Handler: index.lambdaHandler
-            Runtime: nodejs14.x
+            Runtime: nodejs16.x
             Layers:
                 - !Ref SharedUsernameLayer
             Environment:
@@ -105,7 +105,7 @@ Resources:
         Properties:
             CodeUri: lambda_functions/send_appointment_reminders/
             Handler: index.lambdaHandler
-            Runtime: nodejs14.x
+            Runtime: nodejs16.x
             Layers:
                 - !Ref SharedTextLayer
             Environment:
@@ -124,7 +124,7 @@ Resources:
         Properties:
             CodeUri: lambda_functions/is_logged_in/
             Handler: index.lambdaHandler
-            Runtime: nodejs14.x
+            Runtime: nodejs16.x
             Layers:
                 - !Ref SharedUsernameLayer
             Environment:

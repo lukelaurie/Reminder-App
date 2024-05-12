@@ -3,7 +3,7 @@
         {
             "type": "aws-sam",
             "request": "direct-invoke",
-            "name": "sam first lambda:HelloWorldFunction (nodejs14.x)",
+            "name": "sam first lambda:HelloWorldFunction (nodejs16.x)",
             "invokeTarget": {
                 "target": "template",
                 "templatePath": "${workspaceFolder}/sam first lambda/template.yaml",
@@ -12,13 +12,13 @@
             "lambda": {
                 "payload": {},
                 "environmentVariables": {},
-                "runtime": "nodejs14.x"
+                "runtime": "nodejs16.x"
             }
         },
         {
             "type": "aws-sam",
             "request": "direct-invoke",
-            "name": "API sam first lambda:HelloWorldFunction (nodejs14.x)",
+            "name": "API sam first lambda:HelloWorldFunction (nodejs16.x)",
             "invokeTarget": {
                 "target": "api",
                 "templatePath": "${workspaceFolder}/sam first lambda/template.yaml",
@@ -32,7 +32,7 @@
                 }
             },
             "lambda": {
-                "runtime": "nodejs14.x"
+                "runtime": "nodejs16.x"
             }
         }
     ]
