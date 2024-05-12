@@ -16,7 +16,7 @@ Resources:
       Description: Shared Node.js get username layer
       ContentUri: ..\..\layers\cookie
       CompatibleRuntimes:
-      - nodejs16.x
+      - nodejs18.x
   SharedTextLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
@@ -24,13 +24,13 @@ Resources:
       Description: Shared Node.js get text layer
       ContentUri: ..\..\layers\text
       CompatibleRuntimes:
-      - nodejs16.x
+      - nodejs18.x
   newAssociateFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: newAssociateFunction
       Handler: index.lambdaHandler
-      Runtime: nodejs16.x
+      Runtime: nodejs18.x
       Architectures:
       - x86_64
       Events:
@@ -46,7 +46,7 @@ Resources:
     Properties:
       CodeUri: newAppointmentFunction
       Handler: index.lambdaHandler
-      Runtime: nodejs16.x
+      Runtime: nodejs18.x
       Layers:
       - Ref: SharedTextLayer
       - Ref: SharedUsernameLayer
@@ -68,7 +68,7 @@ Resources:
     Properties:
       CodeUri: loginFunction
       Handler: index.lambdaHandler
-      Runtime: nodejs16.x
+      Runtime: nodejs18.x
       Environment:
         Variables:
           JWT_SECRET_KEY_VALUE: flj3289gnw89jnfgjnw33fn33dfs
@@ -87,7 +87,7 @@ Resources:
     Properties:
       CodeUri: retrieveAppointmentsFunction
       Handler: index.lambdaHandler
-      Runtime: nodejs16.x
+      Runtime: nodejs18.x
       Layers:
       - Ref: SharedUsernameLayer
       Environment:
@@ -108,7 +108,7 @@ Resources:
     Properties:
       CodeUri: sendAppointmentRemindersFunction
       Handler: index.lambdaHandler
-      Runtime: nodejs16.x
+      Runtime: nodejs18.x
       Layers:
       - Ref: SharedTextLayer
       Environment:
@@ -129,7 +129,7 @@ Resources:
     Properties:
       CodeUri: isLoggedInFunction
       Handler: index.lambdaHandler
-      Runtime: nodejs16.x
+      Runtime: nodejs18.x
       Layers:
       - Ref: SharedUsernameLayer
       Environment:
