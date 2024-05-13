@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 
 async function isLoggedIn(): Promise<boolean> {
     try {
-        const response = await fetch("http://127.0.0.1:3000/isLoggedIn");
+        const response = await fetch("http://127.0.0.1:3000/isLoggedIn", {
+            credentials: "include"
+        });
         // Return true if the status code is 200
         return response.status === 200;
     } catch (error) {

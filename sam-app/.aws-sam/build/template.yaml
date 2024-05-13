@@ -9,8 +9,9 @@ Globals:
   Api:
     Cors:
       AllowMethods: '''GET,POST,OPTIONS'''
-      AllowHeaders: '''content-type'''
-      AllowOrigin: '''*'''
+      AllowHeaders: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Origin,Accept'''
+      AllowOrigin: '''http://localhost:5173'''
+      AllowCredentials: true
   Function:
     Timeout: 15
 Resources:
