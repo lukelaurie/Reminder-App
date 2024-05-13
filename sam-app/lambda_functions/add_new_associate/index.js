@@ -24,25 +24,25 @@ exports.lambdaHandler = async (event) => {
         if (!username || !password || !phoneNumber || !name || !companyName) {
             return {
                 statusCode: 400,
-                body: JSON.stringify("Missing required fields")
+                body: "Missing required fields"
             };
         }
         if (await doesUserExist(username)) {
             return {
                 statusCode: 409,
-                body: JSON.stringify("Username alrady exists")
+                body: "Username alrady exists"
             };
         }
         encryptedPassword = await saltAndHashPassword(password);
         createNewAssociate(username, encryptedPassword, phoneNumber, name, companyName);
         return {
             statusCode: 200,
-            body: JSON.stringify("The new user has been placed!")
+            body: "The new user has been placed!"
         };
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify("An error has occured")
+            body: "An error has occured"
         };
     }
 };

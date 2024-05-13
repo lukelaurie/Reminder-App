@@ -30,21 +30,21 @@ exports.lambdaHandler = async (event) => {
         } catch (error) {
             return {
                 statusCode: 400,
-                body: JSON.stringify("Invalid cookie was provided"),
+                body: "Invalid cookie was provided"
             };
         }
         // verify all the data was passed
         if (!body || !startDate || !endDate || !notes || !clientName || !clientPhoneNumber || !associateUsername) {
             return {
                 statusCode: 400,
-                body: JSON.stringify("Missing required fields"),
+                body: "Missing required fields"
             };
         }
         // check that the username is a valid associate
         if (!(await doesUserExist(associateUsername))) {
             return {
                 statusCode: 409,
-                body: JSON.stringify("The username is invalid"),
+                body: "The username is invalid"
             };
         }
         // convert the dates to unix format
@@ -64,13 +64,13 @@ exports.lambdaHandler = async (event) => {
         // TODO: send appointment created message to the client
         return {
             statusCode: 200,
-            body: JSON.stringify("valid"),
+            body: "valid"
         };
     } catch (error) {
         console.log(error);
         return {
             statusCode: 500,
-            body: JSON.stringify("An error has occured"),
+            body: "An error has occured"
         };
     }
 };

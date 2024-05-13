@@ -34,17 +34,7 @@ exports.lambdaHandler = async (event) => {
             };
         }
         // verify all the data was passed
-        if (
-            !wasDataIncluded(
-                body,
-                startDate,
-                endDate,
-                notes,
-                clientName,
-                clientPhoneNumber,
-                associateUsername
-            )
-        ) {
+        if (!body || !startDate || !endDate || !notes || !clientName || !clientPhoneNumber || !associateUsername) {
             return {
                 statusCode: 400,
                 body: JSON.stringify("Missing required fields"),
@@ -108,26 +98,6 @@ async function createNewAppointment(
         Item: newAppointment,
     };
     await dynamoDB.put(putValue).promise();
-}
-
-function wasDataIncluded(
-    body,
-    startDate,
-    endDate,
-    notes,
-    clientName,
-    clientPhoneNumber,
-    associateUsername
-) {
-    return (
-        null != body &&
-        null != startDate &&
-        null != endDate &&
-        null != notes &&
-        null != clientName &&
-        null != clientPhoneNumber &&
-        null != associateUsername
-    );
 }
 
 async function doesUserExist(username) {

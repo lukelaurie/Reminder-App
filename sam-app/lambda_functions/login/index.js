@@ -25,7 +25,7 @@ exports.lambdaHandler = async (event) => {
         if (!username || !password) {
             return {
                 statusCode: 400,
-                body: JSON.stringify("Missing required fields"),
+                body: "Missing required fields"
             };
         }
         // checks if username is valid
@@ -33,13 +33,13 @@ exports.lambdaHandler = async (event) => {
         if (user == null) {
             return {
                 statusCode: 401,
-                body: JSON.stringify("Username is incorrect"),
+                body: "Username is incorrect"
             };
         }
         if (!(await isPasswordValid(password, user.password))) {
             return {
                 statusCode: 401,
-                body: JSON.stringify("Password is incorrect"),
+                body: "Password is incorrect"
             };
         }
         // the user is authenticated so create a jwt token for cookies/sessions
@@ -57,13 +57,13 @@ exports.lambdaHandler = async (event) => {
             headers: {
                 "Set-Cookie": cookieToSet,
             },
-            body: JSON.stringify("valid"),
+            body: "valid",
         };
     } catch (error) {
         console.log(error);
         return {
             statusCode: 500,
-            body: JSON.stringify("An error has occured"),
+            body: "An error has occured"
         };
     }
 };

@@ -18,6 +18,12 @@ exports.lambdaHandler = async (event) => {
         const body = JSON.parse(event.body);
         const startDateRange = body.startDateRange;
         const endDateRange = body.endDateRange;
+        if (!startDateRange || !endDateRange) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify("Missing required fields")
+            };
+        }
         let associateUsername;
         // checks if username was provided in the cookie
         try {

@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <Login />
-      <CreateAccount />
+      {/* <CreateAccount /> */}
     </div>
   );
 }

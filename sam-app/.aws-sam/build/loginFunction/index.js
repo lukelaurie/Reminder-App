@@ -22,7 +22,7 @@ exports.lambdaHandler = async (event) => {
         const username = body.username;
         const password = body.password;
         // verify that fileds are provided correctly
-        if (username == null || password == null) {
+        if (!username || !password) {
             return {
                 statusCode: 400,
                 body: JSON.stringify("Missing required fields"),
@@ -57,7 +57,7 @@ exports.lambdaHandler = async (event) => {
             headers: {
                 "Set-Cookie": cookieToSet,
             },
-            body: JSON.stringify("valid"),
+            body: "valid",
         };
     } catch (error) {
         console.log(error);
