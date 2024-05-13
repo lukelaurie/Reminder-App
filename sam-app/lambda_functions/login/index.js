@@ -22,7 +22,7 @@ exports.lambdaHandler = async (event) => {
         const username = body.username;
         const password = body.password;
         // verify that fileds are provided correctly
-        if (username == null || password == null) {
+        if (!username || !password) {
             return {
                 statusCode: 400,
                 body: JSON.stringify("Missing required fields"),

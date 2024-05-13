@@ -40,23 +40,23 @@ const AccountForm: React.FC<Props> = ({ onSubmit }) => {
         <>
             <form className='accountForm'>
                 <label htmlFor='username'>Username: </label>
-                <input type='text' id='username' placeholder='Enter username' className='accountFormInput' onChange={handleUsernameChange} />
+                <input type='text' id='username' placeholder='Enter username' className='accountFormInput' required onChange={handleUsernameChange} />
 
                 <label htmlFor='companyName'>Company Name: </label>
-                <input type='text' id='companyName' placeholder='Enter company name' className='accountFormInput' onChange={handleCompanyNameChange} />
+                <input type='text' id='companyName' placeholder='Enter company name' className='accountFormInput' required onChange={handleCompanyNameChange} />
 
                 <label htmlFor='name'>Name: </label>
-                <input type='text' id='name' placeholder='Enter name' className='accountFormInput' onChange={handleNameChange} />
+                <input type='text' id='name' placeholder='Enter name' className='accountFormInput' required onChange={handleNameChange} />
 
                 {/* TODO: make it so that the user can only type in numbers and it will auto format */}
                 <label htmlFor='phoneNumber'>Phone Number: </label>
-                <input type='text' id='phoneNumber' placeholder='Enter phone number' className='accountFormInput' onChange={handlePhoneNumberChange} />
+                <input type='text' id='phoneNumber' placeholder='Enter phone number' className='accountFormInput' required onChange={handlePhoneNumberChange} />
 
                 <label htmlFor='password'>Password: </label>
-                <input type='password' id='password' placeholder='Enter password' className='accountFormInput' onChange={handlePasswordChange} />
+                <input type='password' id='password' placeholder='Enter password' className='accountFormInput' required onChange={handlePasswordChange} />
 
                 <label htmlFor='confirmPassword'>Confirm Password: </label>
-                <input type='password' id='confirmPassword' placeholder='Confirm password' className='accountFormInput' onChange={handleConfirmPasswordChange} />
+                <input type='password' id='confirmPassword' placeholder='Confirm password' className='accountFormInput' required onChange={handleConfirmPasswordChange} />
 
                 <input type="submit" onClick={(event) => onSubmit(username, companyName, name, phoneNumber, password, confirmPassword, event)} />
             </form>

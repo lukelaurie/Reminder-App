@@ -17,11 +17,11 @@ exports.lambdaHandler = async (event) => {
         const body = JSON.parse(event.body);
         const username = body.username;
         const password = body.password;
-        const phoneNumber = body.phoneNumber; 
+        const phoneNumber = body.phoneNumber;
         const name = body.name;
         const companyName = body.companyName
         // verify that fileds are provided correctly
-        if (username == null || password == null || phoneNumber == null || name == null || companyName == null) {
+        if (!username || !password || !phoneNumber || !name || !companyName) {
             return {
                 statusCode: 400,
                 body: JSON.stringify("Missing required fields")
@@ -71,7 +71,7 @@ async function createNewAssociate(username, encryptedPassword, phoneNumber, name
         TableName: tableName,
         Item: newAssociate
     };
-    await dynamoDB.put(putValue).promise(); 
+    await dynamoDB.put(putValue).promise();
 }
 
 async function saltAndHashPassword(password) {
