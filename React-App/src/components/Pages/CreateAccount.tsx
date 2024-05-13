@@ -7,11 +7,16 @@ const CreateAccount: React.FC = () => {
         event.preventDefault();
         //TODO validate the rest of the form inputs phone number, etc
         if (!username || !password || !confirmPassword || !phoneNumber || !name || !companyName) {
-            alert("Please fill out all fields");
+            alert("Please fill out all fields.");
+            return;
+        }
+        let pattern = new RegExp("\\+[0-9]{11}");
+        if (!pattern.test(phoneNumber)) {
+            alert("Phone number is invalid.");
             return;
         }
         if (password !== confirmPassword) {
-            alert("Passwords must match");
+            alert("Passwords must match.");
             return;
         }
         let accountData = {
@@ -35,7 +40,12 @@ const CreateAccount: React.FC = () => {
             console.log(data);
         })
     }
-    return (<><AccountForm onSubmit={createAccount} /></>);
+    return (
+        <>
+            <h1>Create Account</h1>
+            <AccountForm onSubmit={createAccount} />
+        </>
+    );
 }
 
 export default CreateAccount;

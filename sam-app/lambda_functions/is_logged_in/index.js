@@ -15,6 +15,7 @@ exports.lambdaHandler = async (event) => {
             body: "valid"
         };
     } catch (error) {
+        console.log(error);
         return {
             statusCode: 500,
             body: "The token is invalid"

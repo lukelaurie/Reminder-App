@@ -6,18 +6,19 @@ exports.lambdaHandler = async (event) => {
         if (!(await cookieHandler.getUsernameFromCookie(event))) {
             return {
                 statusCode: 401,
-                body: JSON.stringify("no token was provided"),
+                body: "no token was provided"
             };
         }
         // The username is valid
         return {
             statusCode: 200,
-            body: JSON.stringify("valid"),
+            body: "valid"
         };
     } catch (error) {
+        console.log(error);
         return {
             statusCode: 500,
-            body: JSON.stringify("The token is invalid"),
+            body: "The token is invalid"
         };
     }
 };
