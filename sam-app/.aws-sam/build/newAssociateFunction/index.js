@@ -19,8 +19,9 @@ exports.lambdaHandler = async (event) => {
         const password = body.password;
         const phoneNumber = body.phoneNumber; 
         const name = body.name;
+        const companyName = body.companyName
         // verify that fileds are provided correctly
-        if (username == null || password == null || phoneNumber == null || name == null) {
+        if (username == null || password == null || phoneNumber == null || name == null || companyName == null) {
             return {
                 statusCode: 400,
                 body: JSON.stringify("Missing required fields")
@@ -33,7 +34,7 @@ exports.lambdaHandler = async (event) => {
             };
         }
         encryptedPassword = await saltAndHashPassword(password);
-        createNewAssociate(username, encryptedPassword, phoneNumber, name);
+        createNewAssociate(username, encryptedPassword, phoneNumber, name, companyName);
         return {
             statusCode: 200,
             body: JSON.stringify("The new user has been placed!")
@@ -58,12 +59,13 @@ async function doesUserExist(username) {
     return foundUser.Item != null;
 }
 
-async function createNewAssociate(username, encryptedPassword, phoneNumber, name) {
+async function createNewAssociate(username, encryptedPassword, phoneNumber, name, companyName) {
     const newAssociate = {
         username: username,
         password: encryptedPassword,
         name: name,
-        phoneNumber: phoneNumber
+        phoneNumber: phoneNumber,
+        companyName: companyName
     };
     const putValue = {
         TableName: tableName,
