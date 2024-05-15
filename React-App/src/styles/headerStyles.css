@@ -1,0 +1,14 @@
+.headerTitle {
+}
+
+/* Header formating */
+.topNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 4%;
+}
+
+.topLink a {
+    margin: 5%;
+}

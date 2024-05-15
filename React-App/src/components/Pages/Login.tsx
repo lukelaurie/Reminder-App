@@ -1,5 +1,5 @@
 import React from "react"; // we need this to make JSX compile
-import LoginForm from "../login/LoginForm";
+import LoginForm from "../Login/LoginForm";
 
 const Login: React.FC = () => {
     const loginCall = (
@@ -25,6 +25,7 @@ const Login: React.FC = () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(accountData),
+            credentials: "include",
         })
             .then((response) => {
                 return response.text();
@@ -32,9 +33,9 @@ const Login: React.FC = () => {
             .then((data) => {
                 // checks if the data was valid
                 if (data === "valid") {
-                    // redirect to the home page 
+                    // redirect to the home page
                     window.location.href = "/";
-                    alert("login successful");
+                    // alert("login successful");
                 } else {
                     alert(data);
                 }

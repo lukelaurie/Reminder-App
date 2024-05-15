@@ -1,5 +1,5 @@
 import React from 'react'; // we need this to make JSX compile
-import AccountForm from "../createAccount/AccountForm";
+import AccountForm from "../CreateAccount/AccountForm";
 
 const CreateAccount: React.FC = () => {
 

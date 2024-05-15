@@ -16,17 +16,20 @@ async function isLoggedIn(): Promise<boolean> {
 }
 
 const PrivateRoutes: React.FC = () => {
-
     const [authenticated, setAuthenticated] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
 
     useEffect(() => {
         async function auth() {
             let loggedIn = await isLoggedIn();
             setAuthenticated(loggedIn);
+            setLoggedIn(false);
         }
         auth()
     }, [])
-
+    // allow redirection only after logged in check is completed 
+    if (loggedIn) return;
+    
     return authenticated ? <Outlet /> : <Navigate to="login" />;
 };
 

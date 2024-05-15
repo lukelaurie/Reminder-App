@@ -1,0 +1,17 @@
+.dateChange  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dateRange {
+    display: flex;        
+    align-items: center;  
+    justify-content: center;
+}
+
+.dateChoice {
+    display: flex;        
+    align-items: center;  
+    justify-content: center;
+}

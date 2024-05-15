@@ -16,7 +16,6 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY_VALUE;
 
 exports.lambdaHandler = async (event) => {
     try {
-        console.log("calling login function");
         // Retrieve the data from the request
         const body = JSON.parse(event.body);
         const username = body.username;
@@ -25,7 +24,7 @@ exports.lambdaHandler = async (event) => {
         if (!username || !password) {
             return {
                 statusCode: 400,
-                body: "Missing required fields"
+                body: "Missing required fields",
             };
         }
         // checks if username is valid
@@ -33,13 +32,13 @@ exports.lambdaHandler = async (event) => {
         if (user == null) {
             return {
                 statusCode: 401,
-                body: "Username is incorrect"
+                body: "Username is incorrect",
             };
         }
         if (!(await isPasswordValid(password, user.password))) {
             return {
                 statusCode: 401,
-                body: "Password is incorrect"
+                body: "Password is incorrect",
             };
         }
         // the user is authenticated so create a jwt token for cookies/sessions
@@ -48,10 +47,12 @@ exports.lambdaHandler = async (event) => {
         });
         // cookie to add to the response
         const cookieToSet = cookie.serialize("token", jwtToken, {
-            // age is 1 day
-            maxAge: 60 * 60 * 24,
+            httpOnly: true,
+            sameSite: "None",
+            secure: true,
+            path: "/", // Ensure the cookie is available for all routes
+            maxAge: 60 * 60 * 24, // age is 1 day
         });
-        console.log("about to return with status code 200");
         return {
             statusCode: 200,
             headers: {
@@ -63,7 +64,7 @@ exports.lambdaHandler = async (event) => {
         console.log(error);
         return {
             statusCode: 500,
-            body: "An error has occured"
+            body: "An error has occured",
         };
     }
 };
