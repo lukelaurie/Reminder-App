@@ -15,7 +15,7 @@ const ViewAppointments: React.FC = () => {
     return (
         <>
             <Header />
-            <ButtonNav onDateChange={updateTable} />
+            <ButtonNav onDateChange={updateTable} curView={curView} />
             <div>
                 {curView === "Daily" && <DayTable />}
                 {curView === "Weekly" && <WeekTable />}

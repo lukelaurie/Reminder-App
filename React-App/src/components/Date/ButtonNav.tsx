@@ -1,13 +1,14 @@
 import React, { useState } from "react"; 
-import DateDropdown from "./DateDropDown";
+import DateDropdown from "./DateDropdown";
 import DateRange from "./DateRange";
 
 import "../../styles/dateStyles.css";
 
 interface Props {
     onDateChange: (newView: string) => void;
+    curView: string
 }
-const ButtonNav: React.FC<Props> = ({ onDateChange }) => {
+const ButtonNav: React.FC<Props> = ({ onDateChange, curView }) => {
 
     const resetDay = () => {
         console.log("TODO");  
@@ -23,7 +24,7 @@ const ButtonNav: React.FC<Props> = ({ onDateChange }) => {
                 <button onClick={resetDay} className="buttonDate">Day</button>
                 <DateDropdown onDateChange={onDateChange} />
             </span>
-            <DateRange />
+            <DateRange curView={curView}/>
             <button onClick={addAppointment} className="buttonDate">Add Appointment</button>
         </div>
     );

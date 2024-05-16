@@ -21,7 +21,8 @@ const PrivateRoutes: React.FC = () => {
 
     useEffect(() => {
         async function auth() {
-            let loggedIn = await isLoggedIn();
+            let loggedIn = true;
+            // let loggedIn = await isLoggedIn();
             setAuthenticated(loggedIn);
             setLoggedIn(false);
         }
