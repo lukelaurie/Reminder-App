@@ -32,7 +32,7 @@ const InitalEvents: event[] = [
 
 
 
-const updateEvents = (range: Date[] | { start: Date; end: Date }) => {
+const updateEvents = (range: Date[] | { start: Date; end: Date }, setEvents: (events: event[]) => void) => {
     var dateRange: { startDateRange: Date; endDateRange: Date };
 
     if (Array.isArray(range)) {
@@ -59,9 +59,21 @@ const updateEvents = (range: Date[] | { start: Date; end: Date }) => {
             return response.json();
         })
         .then((data) => {
+            let eventsInThisRange: event[] = [];
             for (let i = 0; i < data.length; i++) {
-
+                let newEvent: event = {
+                    title: data[i]["clientName"],
+                    start: new Date(data[i]["startDate"] * 1000),
+                    end: new Date(data[i]["endDate"] * 1000),
+                    notes: data[i]["notes"],
+                    appointmentId: data[i]["appointmentId"],
+                    associateUsername: data[i]["associateUsername"],
+                    clientPhoneNumber: data[i]["clientPhoneNumber"]
+                }
+                eventsInThisRange.push(newEvent);
             }
+            console.log(eventsInThisRange);
+            setEvents(eventsInThisRange);
         });
 };
 
@@ -74,12 +86,12 @@ const ViewAppointments: React.FC = () => {
             <div style={{ height: '500px' }}>
                 <Calendar
                     localizer={localizer}
-                    events={InitalEvents}
+                    events={events}
                     startAccessor="start"
                     endAccessor="end"
                     style={{ height: 500 }}
                     onRangeChange={(range: Date[] | { start: Date; end: Date }) => {
-                        updateEvents(range);
+                        updateEvents(range, setEvents);
                     }}
                 />
             </div>
