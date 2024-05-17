@@ -14,7 +14,7 @@ Globals:
             AllowOrigin: "'http://localhost:5173'"
             AllowCredentials: true
     Function:
-        Timeout: 15
+        Timeout: 60
 
 Resources:
     # handle the layers

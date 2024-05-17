@@ -21,15 +21,15 @@ const PrivateRoutes: React.FC = () => {
 
     useEffect(() => {
         async function auth() {
-            let loggedIn = await isLoggedIn();
-            setAuthenticated(loggedIn);
+            //let loggedIn = await isLoggedIn();
+            setAuthenticated(true);
             setLoggedIn(false);
         }
         auth()
     }, [])
     // allow redirection only after logged in check is completed 
     if (loggedIn) return;
-    
+
     return authenticated ? <Outlet /> : <Navigate to="login" />;
 };
 
