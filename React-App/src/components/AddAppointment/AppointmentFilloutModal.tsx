@@ -42,7 +42,7 @@ const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal }) => {
             clientPhoneNumber: clientPhoneNumber,
         };
         // make a request to the backend with the given login information
-        fetch("http://127.0.0.1:3000/login", {
+        fetch("http://127.0.0.1:3000/createNewAppointment", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -33,6 +33,13 @@ exports.lambdaHandler = async (event) => {
                 body: "Invalid cookie was provided"
             };
         }
+        console.log(body);
+        console.log(startDate);
+        console.log(endDate);
+        console.log(notes);
+        console.log(clientName);
+        console.log(clientPhoneNumber);
+        console.log(associateUsername);
         // verify all the data was passed
         if (!body || !startDate || !endDate || !notes || !clientName || !clientPhoneNumber || !associateUsername) {
             return {
