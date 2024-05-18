@@ -1,0 +1,3 @@
+**/node_modules/
+lambda_functions/
+**/sam-app/.aws-sam/
