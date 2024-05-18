@@ -5,7 +5,6 @@ const CreateAccount: React.FC = () => {
 
     const createAccount = (username: string, companyName: string, name: string, phoneNumber: string, password: string, confirmPassword: string, event: React.FormEvent): void => {
         event.preventDefault();
-        //TODO validate the rest of the form inputs phone number, etc
         if (!username || !password || !confirmPassword || !phoneNumber || !name || !companyName) {
             alert("Please fill out all fields.");
             return;

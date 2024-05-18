@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Header from "../Header/Header";
+import AddAppointmentButton from "../AddAppointment/AddAppointmentButton";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -71,6 +72,7 @@ const ViewAppointments: React.FC = () => {
     return (
         <>
             <Header />
+            <AddAppointmentButton />
             <div style={{ height: '500px' }}>
                 <Calendar
                     localizer={localizer}
