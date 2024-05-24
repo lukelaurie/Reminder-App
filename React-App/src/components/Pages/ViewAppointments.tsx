@@ -1,35 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
-import AddAppointmentButton from "../AddAppointment/AddAppointmentButton";
+import AppointmentFilloutModal from "../AddAppointment/AppointmentFilloutModal";
+import ViewAppointment from "../AddAppointment/ViewAppointment";
 
-import { Calendar, momentLocalizer } from "react-big-calendar";
+import { event } from "../../utils/Event";
+
+import { Calendar, momentLocalizer, SlotInfo } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import moment from "moment";
 
 const localizer = momentLocalizer(moment);
 
-type event = {
-    title: string;
-    start: Date;
-    end: Date;
-    notes: string;
-    appointmentId: string;
-    associateUsername: string;
-    clientPhoneNumber: string;
-}
-
-const InitalEvents: event[] = [
-    {
-        title: "John Doe",
-        start: new Date(2024, 5, 0),
-        end: new Date(2024, 5, 0),
-        notes: "test",
-        appointmentId: "-1",
-        associateUsername: "user",
-        clientPhoneNumber: "555-555-5555"
-    }
-]
+const InitalEvents: event[] = []
 
 
 
@@ -37,11 +20,21 @@ const updateEvents = (range: Date[] | { start: Date; end: Date }, setEvents: (ev
     var dateRange: { startDateRange: Date; endDateRange: Date };
 
     if (Array.isArray(range)) {
-        dateRange = {
-            startDateRange: range[0],
-            endDateRange: range[1]
+        console.log("here " + range);
+        let start: Date = range[0];
+        let end: Date = range[range.length - 1];
+        if (start === end) {
+            // it is a single day view so set to the end of the day 
+            end = new Date(start);
+            end.setHours(23, 59, 59, 999);
+        }
+        dateRange = {            
+            startDateRange: start,
+            endDateRange: end
         }
     } else {
+        console.log("other " + range);
+        
         dateRange = {
             startDateRange: range.start,
             endDateRange: range.end
@@ -80,11 +73,45 @@ const updateEvents = (range: Date[] | { start: Date; end: Date }, setEvents: (ev
 
 const ViewAppointments: React.FC = () => {
     const [events, setEvents] = useState<event[]>(InitalEvents);
+    const [isApptOpened, setIsApptOpened] = useState(false)
+    const [isViewApptOpened, setIsViewApptOpened] = useState(false)
+    const [curClickedDate, setCurClickedDate] = useState<Date | null>(null);
+    const [curClickedEvent, setCurClickedEvent] = useState<event | null>(null);
+
+    useEffect(() => {
+        // FInd the initial start and end range
+        const today = new Date();
+        const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+        const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        const range = { start: monthStart, end: monthEnd }; 
+        updateEvents(range, setEvents);
+    }, [isApptOpened])
+
+    const swapApptModal = (isModalOpened: boolean) => {
+        setIsApptOpened(!isModalOpened)
+    }
+
+    const swapViewApptApptModal = (isModalOpened: boolean) => {
+        console.log(isViewApptOpened);
+        
+        setIsViewApptOpened(!isModalOpened)
+    }
+
+    const handleSelectSlot = (slotInfo: SlotInfo) => {
+        // open the appointment creation on the time slot
+        setCurClickedDate(slotInfo.start) 
+        setIsApptOpened(true);   
+    }
+
+    const handleEventClick = (event: event) => {
+        setCurClickedEvent(event);
+        setIsViewApptOpened(true);
+    }
 
     return (
         <>
             <Header />
-            <AddAppointmentButton />
+            <button onClick={() => swapApptModal(isApptOpened)}>Add New Appointment</button>
             <div style={{ height: '500px' }}>
                 <Calendar
                     localizer={localizer}
@@ -95,8 +122,13 @@ const ViewAppointments: React.FC = () => {
                     onRangeChange={(range: Date[] | { start: Date; end: Date }) => {
                         updateEvents(range, setEvents);
                     }}
+                    onSelectSlot={handleSelectSlot}
+                    onDoubleClickEvent={handleEventClick}
+                    selectable
                 />
             </div>
+            <AppointmentFilloutModal isOpened={isApptOpened} swapModal={swapApptModal} startingDate={curClickedDate} />
+            <ViewAppointment isOpened={isViewApptOpened} swapModal={swapViewApptApptModal} curEvent={curClickedEvent} />
         </>
     );
 };

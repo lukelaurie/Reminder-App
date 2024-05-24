@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DateTimePicker from 'react-datetime-picker';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
@@ -6,11 +6,12 @@ import 'react-calendar/dist/Calendar.css';
 
 interface Props {
     onSubmit: (startDate: Date, endDate: Date, notes: string, clientName: string, clientPhoneNumber: string) => void;
+    startingDate: Date | null
 }
 
-const AppointmentForm: React.FC<Props> = ({ onSubmit }) => {
-    const [startDate, setStartDate] = useState<Date | null>(null);
-    const [endDate, setEndDate] = useState<Date | null>(null);
+const AppointmentForm: React.FC<Props> = ({ onSubmit, startingDate }) => {
+    const [startDate, setStartDate] = useState<Date | null>(startingDate);
+    const [endDate, setEndDate] = useState<Date | null>(startingDate);
     const [notes, setNotes] = useState("");
     const [clientName, setClientName] = useState("");
     const [clientPhoneNumber, setClientPhoneNumber] = useState("");

@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import AppointmentForm from "./AppointmentForm";
 import "../../styles/addAppointmentStyles.css";
@@ -8,9 +7,10 @@ Modal.setAppElement("#root");
 interface Props {
     isOpened: boolean;
     swapModal: (isModalOpened: boolean) => void;
+    startingDate: Date | null
 }
 
-const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal }) => {
+const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, startingDate }) => {
     const createAppointment = (
         startDate: Date,
         endDate: Date,
@@ -74,7 +74,7 @@ const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal }) => {
             >
                 <h2>Add New Associate</h2>
                 <button onClick={() => swapModal(true)}>x</button>
-                <AppointmentForm onSubmit={createAppointment} />
+                <AppointmentForm onSubmit={createAppointment} startingDate={startingDate} />
             </Modal>
         </>
     );
