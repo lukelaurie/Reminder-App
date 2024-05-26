@@ -85,7 +85,7 @@ const ViewAppointments: React.FC = () => {
         const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
         const range = { start: monthStart, end: monthEnd }; 
         updateEvents(range, setEvents);
-    }, [isApptOpened])
+    }, [isApptOpened, isViewApptOpened])
 
     const swapApptModal = (isModalOpened: boolean) => {
         setIsApptOpened(!isModalOpened)

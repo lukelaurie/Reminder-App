@@ -54,7 +54,7 @@ exports.lambdaHandler = async (event) => {
         // convert to seconds
         const startUnixValue = Math.floor(startDateValue / 1000);
         const endUnixValue = Math.floor(endDateValue / 1000);
-        createNewAppointment(
+        await createNewAppointment(
             startUnixValue,
             endUnixValue,
             notes,
@@ -83,8 +83,10 @@ async function createNewAppointment(
     notes,
     clientName,
     clientPhoneNumber,
-    associateUsername
+    associateUsername,
+    appointmentId
 ) {
+
     const newAppointment = {
         appointmentId: appointmentId || uuidv4(), // checks if just updating or creating new appt
         startDate: startDate,
