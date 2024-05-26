@@ -55,4 +55,13 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["isLoggedInFunction"]
 
+[function_build_definitions.cb2f88d4-da4e-40ca-b454-d343805671a0]
+codeuri = "C:\\Users\\Luke\\Desktop\\Projects\\Appointment\\sam-app\\lambda_functions\\delete_appointment"
+runtime = "nodejs18.x"
+architecture = "x86_64"
+handler = "index.lambdaHandler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["deleteAppointmentFunction"]
+
 [layer_build_definitions]

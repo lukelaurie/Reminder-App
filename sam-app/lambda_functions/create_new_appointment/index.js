@@ -23,6 +23,7 @@ exports.lambdaHandler = async (event) => {
         const notes = body.notes;
         const clientName = body.clientName;
         const clientPhoneNumber = body.clientPhoneNumber;
+        const appointmentId = body.appointmentId;
         let associateUsername;
         // checks if username was provided in the cookie
         try {
@@ -59,7 +60,8 @@ exports.lambdaHandler = async (event) => {
             notes,
             clientName,
             clientPhoneNumber,
-            associateUsername
+            associateUsername,
+            appointmentId
         );
         // TODO: send appointment created message to the client
         return {
@@ -83,9 +85,8 @@ async function createNewAppointment(
     clientPhoneNumber,
     associateUsername
 ) {
-    const appointmentId = uuidv4();
     const newAppointment = {
-        appointmentId: appointmentId, // primary key
+        appointmentId: appointmentId || uuidv4(), // checks if just updating or creating new appt
         startDate: startDate,
         endDate: endDate,
         notes: notes,

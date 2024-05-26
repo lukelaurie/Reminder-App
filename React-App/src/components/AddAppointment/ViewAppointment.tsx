@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "../../styles/addAppointmentStyles.css";
 import { event } from "../../utils/Event";
@@ -11,6 +12,34 @@ interface Props {
 }
 
 const ViewAppointment: React.FC<Props> = ({ isOpened, swapModal, curEvent }) => {
+    const [curDate, useCurDate] = useState(""); 
+
+    useEffect(() => {
+        if (curEvent?.start === undefined || curEvent?.end === undefined) {
+            useCurDate("undefined");
+            return;
+        }
+        const startDate = curEvent?.start;
+        const endDate = curEvent?.end;
+        // check that that matching
+        let formattedStartDate;
+        let formattedEndDate;
+        // get the correct formatiing based on the times
+        if (startDate.getMonth() !== endDate.getMonth() || startDate.getDate() !== endDate.getDate() || startDate.getFullYear() !== endDate.getFullYear()) {
+            formattedStartDate = `${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}
+            at ${startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}`;
+
+            formattedEndDate = `${endDate.getMonth() + 1}/${endDate.getDate()}/${endDate.getFullYear()}
+            at ${endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}`;
+        } else {
+            formattedStartDate = `${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}
+            at ${startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}`;
+
+            formattedEndDate = `${endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}`;
+        }
+        useCurDate(`${formattedStartDate} to ${formattedEndDate}`);
+    }, [curEvent])
+
     const updateAppt = (): void => {
         console.log("todo");
     }
@@ -18,6 +47,7 @@ const ViewAppointment: React.FC<Props> = ({ isOpened, swapModal, curEvent }) => 
     const deleteAppt = (): void => {
         console.log("todo");
     }
+
 
     return (
         <>
@@ -30,8 +60,9 @@ const ViewAppointment: React.FC<Props> = ({ isOpened, swapModal, curEvent }) => 
             >
                 <button onClick={() => swapModal(true)}>x</button>
                 <h1>Client Name: {curEvent?.title}</h1>
-                {/* <h2>{curEvent?.start}</h2> */}
-                <h2>notes: {curEvent?.notes}</h2>
+                <h1>Client Phone: {curEvent?.clientPhoneNumber}</h1>
+                <h2>Date: {curDate}</h2>
+                <h2>Notes: {curEvent?.notes}</h2>
                 <button onClick={updateAppt}>Update Appointment</button>
                 <br></br>
                 <button onClick={deleteAppt}>Delete Appointment</button>
