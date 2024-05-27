@@ -86,9 +86,12 @@ async function createNewAppointment(
     associateUsername,
     appointmentId
 ) {
-
+    // checks if just updating or creating new appt
+    if (!appointmentId) {
+        appointmentId = uuidv4();
+    }
     const newAppointment = {
-        appointmentId: appointmentId || uuidv4(), // checks if just updating or creating new appt
+        appointmentId: appointmentId,
         startDate: startDate,
         endDate: endDate,
         notes: notes,

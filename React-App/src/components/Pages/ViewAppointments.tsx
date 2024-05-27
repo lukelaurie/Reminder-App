@@ -73,9 +73,9 @@ const updateEvents = (range: Date[] | { start: Date; end: Date }, setEvents: (ev
 
 const ViewAppointments: React.FC = () => {
     const [events, setEvents] = useState<event[]>(InitalEvents);
-    const [isApptOpened, setIsApptOpened] = useState(false)
-    const [isViewApptOpened, setIsViewApptOpened] = useState(false)
-    const [curClickedDate, setCurClickedDate] = useState<Date | null>(null);
+    const [isApptOpened, setIsApptOpened] = useState(false);
+    const [isViewApptOpened, setIsViewApptOpened] = useState(false);
+    const [isUpdateMode, setIsUpdateMode] = useState(false);
     const [curClickedEvent, setCurClickedEvent] = useState<event | null>(null);
 
     useEffect(() => {
@@ -88,18 +88,28 @@ const ViewAppointments: React.FC = () => {
     }, [isApptOpened, isViewApptOpened])
 
     const swapApptModal = (isModalOpened: boolean) => {
-        setIsApptOpened(!isModalOpened)
+        // only want an empty event
+        if (!isUpdateMode) setCurClickedEvent(null);
+        setIsApptOpened(!isModalOpened);
     }
 
     const swapViewApptApptModal = (isModalOpened: boolean) => {
-        console.log(isViewApptOpened);
-        
-        setIsViewApptOpened(!isModalOpened)
+        setIsViewApptOpened(!isModalOpened);
     }
 
     const handleSelectSlot = (slotInfo: SlotInfo) => {
         // open the appointment creation on the time slot
-        setCurClickedDate(slotInfo.start) 
+        let newEvent: event = {
+            title: "",
+            start: slotInfo.start,
+            end: slotInfo.end,
+            notes: "",
+            appointmentId: "",
+            associateUsername: "",
+            clientPhoneNumber: ""
+        }
+        setCurClickedEvent(newEvent);
+        setIsUpdateMode(false);
         setIsApptOpened(true);   
     }
 
@@ -111,7 +121,10 @@ const ViewAppointments: React.FC = () => {
     return (
         <>
             <Header />
-            <button onClick={() => swapApptModal(isApptOpened)}>Add New Appointment</button>
+            <button onClick={() =>{
+                setIsUpdateMode(false);
+                swapApptModal(isApptOpened);
+            }}>Add New Appointment</button>
             <div style={{ height: '500px' }}>
                 <Calendar
                     localizer={localizer}
@@ -127,8 +140,8 @@ const ViewAppointments: React.FC = () => {
                     selectable
                 />
             </div>
-            <AppointmentFilloutModal isOpened={isApptOpened} swapModal={swapApptModal} startingDate={curClickedDate} />
-            <ViewAppointment isOpened={isViewApptOpened} swapModal={swapViewApptApptModal} curEvent={curClickedEvent} />
+            <AppointmentFilloutModal isOpened={isApptOpened} swapModal={swapApptModal} curEvent={curClickedEvent} isUpdateMode={isUpdateMode}/>
+            <ViewAppointment isOpened={isViewApptOpened} swapViewModal={swapViewApptApptModal} swapApptModal={swapApptModal} setIsUpdateMode={setIsUpdateMode} isUpdateMode={isUpdateMode} curEvent={curClickedEvent} />
         </>
     );
 };

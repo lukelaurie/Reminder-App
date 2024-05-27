@@ -7,14 +7,20 @@ Modal.setAppElement("#root");
 
 interface Props {
     isOpened: boolean;
-    swapModal: (isModalOpened: boolean) => void;
+    swapViewModal: (isModalOpened: boolean) => void;
+    swapApptModal: (isModalOpened: boolean) => void;
+    setIsUpdateMode: React.Dispatch<React.SetStateAction<boolean>>;
+    isUpdateMode: boolean;
     curEvent: event | null;
 }
 
 const ViewAppointment: React.FC<Props> = ({
     isOpened,
-    swapModal,
-    curEvent,
+    swapViewModal,
+    swapApptModal,
+    setIsUpdateMode,
+    isUpdateMode,
+    curEvent
 }) => {
     const [curDate, useCurDate] = useState("");
 
@@ -66,8 +72,18 @@ const ViewAppointment: React.FC<Props> = ({
         useCurDate(`${formattedStartDate} to ${formattedEndDate}`);
     }, [curEvent]);
 
+    useEffect(() => {
+        // swap the view to user being able to update an appointment
+        if (isUpdateMode) {
+            swapViewModal(true);
+            swapApptModal(false);    
+        }
+    }, [isUpdateMode])
+
     const updateAppt = (): void => {
-        console.log("todo");
+        // first set to false so that the useEffect is correctly executed
+        setIsUpdateMode(false);
+        setTimeout(() => setIsUpdateMode(true), 0);
     };
 
     const deleteAppt = (): void => {
@@ -100,12 +116,12 @@ const ViewAppointment: React.FC<Props> = ({
         <>
             <Modal
                 isOpen={isOpened}
-                onRequestClose={() => swapModal(true)}
+                onRequestClose={() => swapViewModal(true)}
                 contentLabel="WHat is this"
                 className="customModal"
                 overlayClassName="customModalOverlay"
             >
-                <button onClick={() => swapModal(true)}>x</button>
+                <button onClick={() => swapViewModal(true)}>x</button>
                 <h1>Client Name: {curEvent?.title}</h1>
                 <h1>Client Phone: {curEvent?.clientPhoneNumber}</h1>
                 <h2>Date: {curDate}</h2>

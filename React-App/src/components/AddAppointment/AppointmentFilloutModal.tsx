@@ -1,22 +1,36 @@
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import AppointmentForm from "./AppointmentForm";
 import "../../styles/addAppointmentStyles.css";
+import { event } from "../../utils/Event";
 
 Modal.setAppElement("#root");
 
 interface Props {
     isOpened: boolean;
-    swapModal: (isModalOpened: boolean) => void;
-    startingDate: Date | null
+    swapModal: (isModalOpened: boolean, shouldKeepEvent: boolean) => void;
+    isUpdateMode: boolean
+    curEvent: event | null;
 }
 
-const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, startingDate }) => {
+const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, isUpdateMode, curEvent }) => {
+    const [formType, setFormType] = useState("Add New Appointment");
+
+    useEffect(() => {
+        if (isUpdateMode) {
+            setFormType("Update Appointment");
+        } else {
+            setFormType("Add New Appointment");
+        }
+    }, [isUpdateMode]);
+    
     const createAppointment = (
         startDate: Date,
         endDate: Date,
         notes: string,
         clientName: string,
-        clientPhoneNumber: string
+        clientPhoneNumber: string, 
+
     ): void => {
         // validate the input
         if (
@@ -34,13 +48,18 @@ const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, startin
             alert("Phone number is invalid.");
             return;
         }
-        let appointData = {
-            startDate: startDate,
-            endDate: endDate,
-            notes: notes,
-            clientName: clientName,
-            clientPhoneNumber: clientPhoneNumber,
-        };
+        const appointData: {
+            startDate: Date;
+            endDate: Date;
+            notes: string;
+            clientName: string;
+            clientPhoneNumber: string;
+            appointmentId?: string // optional param
+        } = {startDate, endDate, notes, clientName, clientPhoneNumber}
+        // check if modifying an existing appointment rather than a new one
+        if (isUpdateMode && curEvent?.appointmentId) {
+            appointData.appointmentId = curEvent.appointmentId;
+        }
         // make a request to the backend with the given login information
         fetch("http://127.0.0.1:3000/createNewAppointment", {
             method: "POST",
@@ -58,7 +77,11 @@ const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, startin
                 if (data !== "valid") {
                     alert(data);
                 } else {
-                    alert("Appointment Created!");
+                    if (isUpdateMode) {
+                        alert("Appointment Updated!");
+                    } else {
+                        alert("Appointment Created!");
+                    }
                 }
             });
     };
@@ -67,14 +90,14 @@ const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, startin
         <>
             <Modal
                 isOpen={isOpened}
-                onRequestClose={() => swapModal(true)}
+                onRequestClose={() => swapModal(true, false)}
                 contentLabel="WHat is this"
                 className="customModal"
                 overlayClassName="customModalOverlay"
             >
-                <h2>Add New Associate</h2>
-                <button onClick={() => swapModal(true)}>x</button>
-                <AppointmentForm onSubmit={createAppointment} startingDate={startingDate} />
+                <h2>{formType}</h2>
+                <button onClick={() => swapModal(true, false)}>x</button>
+                <AppointmentForm onSubmit={createAppointment} curEvent={curEvent} />
             </Modal>
         </>
     );
