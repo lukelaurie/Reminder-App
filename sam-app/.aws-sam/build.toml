@@ -64,4 +64,13 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["deleteAppointmentFunction"]
 
+[function_build_definitions.86dd61b2-f1c6-45a4-890c-1a73ca08d56d]
+codeuri = "C:\\Users\\Luke\\Desktop\\Projects\\Appointment\\sam-app\\lambda_functions\\retrieve_associate"
+runtime = "nodejs18.x"
+architecture = "x86_64"
+handler = "index.lambdaHandler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["retrieveAssociateFunction"]
+
 [layer_build_definitions]

@@ -12,6 +12,7 @@ interface Props {
     setIsUpdateMode: React.Dispatch<React.SetStateAction<boolean>>;
     isUpdateMode: boolean;
     curEvent: event | null;
+    adjustAppointment: (adjustType: string, appointData: string | undefined) => void;
 }
 
 const ViewAppointment: React.FC<Props> = ({
@@ -20,7 +21,8 @@ const ViewAppointment: React.FC<Props> = ({
     swapApptModal,
     setIsUpdateMode,
     isUpdateMode,
-    curEvent
+    curEvent,
+    adjustAppointment
 }) => {
     const [curDate, useCurDate] = useState("");
 
@@ -105,6 +107,7 @@ const ViewAppointment: React.FC<Props> = ({
             .then((data) => {
                 // checks if the data was valid
                 if (data === "valid") {
+                    adjustAppointment("delete", curEvent?.appointmentId);
                     alert("Meeting has been deleted");
                 } else {
                     alert("Error: Unable to delete the meeting");

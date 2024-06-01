@@ -163,3 +163,23 @@ Resources:
                     Properties:
                         Path: /deleteAppointment
                         Method: post
+    retrieveAssociateFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: lambda_functions/retrieve_associate/
+            Handler: index.lambdaHandler
+            Runtime: nodejs18.x
+            Layers:
+                - !Ref SharedUsernameLayer
+            Environment:
+                Variables:
+                    JWT_SECRET_KEY_VALUE: "flj3289gnw89jnfgjnw33fn33dfs"
+            Architectures:
+                - x86_64
+            Events:
+                deleteAppointment:
+                    Type: Api
+                    Properties:
+                        Path: /retrieveAssociate
+                        Method: get
+

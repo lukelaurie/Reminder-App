@@ -11,9 +11,10 @@ interface Props {
     swapModal: (isModalOpened: boolean, shouldKeepEvent: boolean) => void;
     isUpdateMode: boolean
     curEvent: event | null;
+    adjustAppointment: (adjustType: string, appointData: string | undefined) => void;
 }
 
-const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, isUpdateMode, curEvent }) => {
+const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, isUpdateMode, curEvent, adjustAppointment }) => {
     const [formType, setFormType] = useState("Add New Appointment");
 
     useEffect(() => {
@@ -78,8 +79,10 @@ const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, isUpdat
                     alert(data);
                 } else {
                     if (isUpdateMode) {
+                        adjustAppointment("update", curEvent?.appointmentId);
                         alert("Appointment Updated!");
                     } else {
+                        adjustAppointment("create", "null");
                         alert("Appointment Created!");
                     }
                 }

@@ -13,14 +13,26 @@ import moment from "moment";
 const localizer = momentLocalizer(moment);
 
 const InitalEvents: event[] = []
+// manage the already seen dates so don't have to constantly make requests to backend
+const rangesVisited: Set<string> = new Set<string>();
+const idSeen: Set<string> = new Set<string>();
 
+function removeApptFromEvent (appointmentId: string | undefined, events: event[], setEvents: (events: event[]) => void) {
+    for (const event of events) {
+        // remove the event with the matching id
+        if (event.appointmentId === appointmentId) {
+            const newEvents = events.filter(val => val !== event);
+            setEvents(newEvents); 
+            idSeen.delete(appointmentId);
+            return;
+        }
+    }
+}
 
-
-const updateEvents = (range: Date[] | { start: Date; end: Date }, setEvents: (events: event[]) => void) => {
+function updateEvents (range: Date[] | { start: Date; end: Date }, events: event[], setEvents: (events: event[]) => void, requestRequired: boolean) {
     var dateRange: { startDateRange: Date; endDateRange: Date };
 
     if (Array.isArray(range)) {
-        console.log("here " + range);
         let start: Date = range[0];
         let end: Date = range[range.length - 1];
         if (start === end) {
@@ -33,14 +45,17 @@ const updateEvents = (range: Date[] | { start: Date; end: Date }, setEvents: (ev
             endDateRange: end
         }
     } else {
-        console.log("other " + range);
-        
         dateRange = {
             startDateRange: range.start,
             endDateRange: range.end
         }
     }
-    console.log("date range obj: " + JSON.stringify(dateRange));
+    // check if the events already exist 
+    let dateRangeStr: string = dateRange.startDateRange.toDateString() + dateRange.endDateRange.toDateString();
+    if (!requestRequired && rangesVisited.has(dateRangeStr)) {
+        return;
+    }
+    rangesVisited.add(dateRangeStr);    
     fetch("http://127.0.0.1:3000/retrieveAppointments", {
         method: "POST",
         headers: {
@@ -53,8 +68,15 @@ const updateEvents = (range: Date[] | { start: Date; end: Date }, setEvents: (ev
             return response.json();
         })
         .then((data) => {
-            let eventsInThisRange: event[] = [];
+            let eventsInThisRange = [...events];
             for (let i = 0; i < data.length; i++) {
+                // check if the event needs to be added 
+                if (idSeen.has(data[i]["appointmentId"])) {
+                    eventsInThisRange = eventsInThisRange.filter(event => event.appointmentId !== data[i]["appointmentId"]);
+                    idSeen.delete(data[i]["appointmentId"]);
+                }; 
+                idSeen.add(data[i]["appointmentId"]);
+
                 let newEvent: event = {
                     title: data[i]["clientName"],
                     start: new Date(data[i]["startDate"] * 1000),
@@ -66,7 +88,6 @@ const updateEvents = (range: Date[] | { start: Date; end: Date }, setEvents: (ev
                 }
                 eventsInThisRange.push(newEvent);
             }
-            console.log(eventsInThisRange);
             setEvents(eventsInThisRange);
         });
 };
@@ -79,13 +100,35 @@ const ViewAppointments: React.FC = () => {
     const [curClickedEvent, setCurClickedEvent] = useState<event | null>(null);
 
     useEffect(() => {
+        modifyEvents(false);
+    }, [])
+
+    const modifyEvents = (requestRequired: boolean) => {
         // FInd the initial start and end range
         const today = new Date();
         const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+        // modify days to account for prior Sunday
+        monthStart.setDate(monthStart.getDate() - monthStart.getDay())
         const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        // modify days to account for future Saturday
+        monthEnd.setDate(monthEnd.getDate() + (6 - monthEnd.getDay()));
         const range = { start: monthStart, end: monthEnd }; 
-        updateEvents(range, setEvents);
-    }, [isApptOpened, isViewApptOpened])
+        updateEvents(range, events, setEvents, requestRequired);
+    }
+
+    const adjustAppointment = (adjustType: string, appointId: string | undefined) => {
+        switch (adjustType) {
+            case "delete": 
+                removeApptFromEvent(appointId, events, setEvents);
+                break;
+            case "update":
+                //removeApptFromEvent(appointId, events, setEvents);
+                modifyEvents(true);
+                break;
+            case "create":
+                modifyEvents(true);
+        }
+    }
 
     const swapApptModal = (isModalOpened: boolean) => {
         // only want an empty event
@@ -133,15 +176,15 @@ const ViewAppointments: React.FC = () => {
                     endAccessor="end"
                     style={{ height: 500 }}
                     onRangeChange={(range: Date[] | { start: Date; end: Date }) => {
-                        updateEvents(range, setEvents);
+                        updateEvents(range, events, setEvents, false);
                     }}
                     onSelectSlot={handleSelectSlot}
                     onDoubleClickEvent={handleEventClick}
                     selectable
                 />
             </div>
-            <AppointmentFilloutModal isOpened={isApptOpened} swapModal={swapApptModal} curEvent={curClickedEvent} isUpdateMode={isUpdateMode}/>
-            <ViewAppointment isOpened={isViewApptOpened} swapViewModal={swapViewApptApptModal} swapApptModal={swapApptModal} setIsUpdateMode={setIsUpdateMode} isUpdateMode={isUpdateMode} curEvent={curClickedEvent} />
+            <AppointmentFilloutModal isOpened={isApptOpened} swapModal={swapApptModal} curEvent={curClickedEvent} isUpdateMode={isUpdateMode} adjustAppointment={adjustAppointment}/>
+            <ViewAppointment isOpened={isViewApptOpened} swapViewModal={swapViewApptApptModal} swapApptModal={swapApptModal} setIsUpdateMode={setIsUpdateMode} isUpdateMode={isUpdateMode} curEvent={curClickedEvent} adjustAppointment={adjustAppointment} />
         </>
     );
 };
