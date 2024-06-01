@@ -29,7 +29,7 @@ function removeApptFromEvent (appointmentId: string | undefined, events: event[]
     }
 }
 
-function updateEvents (range: Date[] | { start: Date; end: Date }, events: event[], setEvents: (events: event[]) => void, requestRequired: boolean) {
+function updateEvents (range: Date[] | { start: Date; end: Date }, events: event[], setEvents: (events: event[]) => void, requestRequired: boolean, setCurClickedMonth: (month: number) => void) {    
     var dateRange: { startDateRange: Date; endDateRange: Date };
 
     if (Array.isArray(range)) {
@@ -50,6 +50,13 @@ function updateEvents (range: Date[] | { start: Date; end: Date }, events: event
             endDateRange: range.end
         }
     }
+    // checks if a month swap was clicked
+    if (!requestRequired) {
+        const tempDate = new Date(dateRange["startDateRange"]);
+        tempDate.setDate(tempDate.getDate() + 10);
+        setCurClickedMonth(tempDate.getMonth());
+    }
+
     // check if the events already exist 
     let dateRangeStr: string = dateRange.startDateRange.toDateString() + dateRange.endDateRange.toDateString();
     if (!requestRequired && rangesVisited.has(dateRangeStr)) {
@@ -98,6 +105,10 @@ const ViewAppointments: React.FC = () => {
     const [isViewApptOpened, setIsViewApptOpened] = useState(false);
     const [isUpdateMode, setIsUpdateMode] = useState(false);
     const [curClickedEvent, setCurClickedEvent] = useState<event | null>(null);
+    const [curClickedMonth, setCurClickedMonth] = useState<number>(() => {
+        const today = new Date();
+        return today.getMonth();
+    });
 
     useEffect(() => {
         modifyEvents(false);
@@ -106,14 +117,14 @@ const ViewAppointments: React.FC = () => {
     const modifyEvents = (requestRequired: boolean) => {
         // FInd the initial start and end range
         const today = new Date();
-        const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+        const monthStart = new Date(today.getFullYear(), curClickedMonth, 1);
         // modify days to account for prior Sunday
         monthStart.setDate(monthStart.getDate() - monthStart.getDay())
-        const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        const monthEnd = new Date(today.getFullYear(), curClickedMonth + 1, 0);
         // modify days to account for future Saturday
         monthEnd.setDate(monthEnd.getDate() + (6 - monthEnd.getDay()));
         const range = { start: monthStart, end: monthEnd }; 
-        updateEvents(range, events, setEvents, requestRequired);
+        updateEvents(range, events, setEvents, requestRequired, setCurClickedMonth);
     }
 
     const adjustAppointment = (adjustType: string, appointId: string | undefined) => {
@@ -176,7 +187,7 @@ const ViewAppointments: React.FC = () => {
                     endAccessor="end"
                     style={{ height: 500 }}
                     onRangeChange={(range: Date[] | { start: Date; end: Date }) => {
-                        updateEvents(range, events, setEvents, false);
+                        updateEvents(range, events, setEvents, false, setCurClickedMonth);
                     }}
                     onSelectSlot={handleSelectSlot}
                     onDoubleClickEvent={handleEventClick}
