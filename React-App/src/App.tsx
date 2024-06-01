@@ -6,6 +6,7 @@ import ViewAppointments from "./components/Pages/ViewAppointments";
 import Help from "./components/Pages/Help";
 import Home from "./components/Pages/Home";
 import PrivateRoutes from "./utils/Auth";
+import "./App.css";
 
 function App() {
   return (

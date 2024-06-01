@@ -4,3 +4,14 @@
   padding: 2rem;
   text-align: center;
 }
+
+body {
+  background-color: #161616;
+}
+
+h1,
+h2,
+p,
+li {
+  color: #f5f5f5
+}
