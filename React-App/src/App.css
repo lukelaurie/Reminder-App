@@ -1,12 +1,7 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
 body {
   background-color: #161616;
+  padding: 0%;
+  margin: 0%;
 }
 
 h1,
@@ -14,4 +9,9 @@ h2,
 p,
 li {
   color: #f5f5f5
+}
+
+.title-image {
+    width: 80%;
+    object-fit: contain;
 }

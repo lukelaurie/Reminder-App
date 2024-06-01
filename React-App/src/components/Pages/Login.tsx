@@ -1,5 +1,6 @@
 import React from "react"; // we need this to make JSX compile
 import LoginForm from "../Login/LoginForm";
+import "../../styles/loginRegister.css";
 
 const Login: React.FC = () => {
     const loginCall = (
@@ -16,8 +17,6 @@ const Login: React.FC = () => {
             username: username,
             password: password,
         };
-        console.log("Sending Login Request!");
-        console.log(accountData);
         // make a request to the backend with the given login information
         fetch("http://127.0.0.1:3000/login", {
             method: "POST",
@@ -42,10 +41,15 @@ const Login: React.FC = () => {
             });
     };
     return (
-        <>
-            <h1>Login</h1>
-            <LoginForm onSubmit={loginCall} />
-        </>
+        <div className="login-container">
+            <div className="login-image">
+                <img src="forest.jpg" alt="loginImage" className="forest-image" />
+            </div>
+            <div className="login-form">
+                <img src="PlanPerfectLogo.png" alt="titleImage" className="title-image" />
+                <LoginForm onSubmit={loginCall} />
+            </div>
+        </div>
     );
 };
 
