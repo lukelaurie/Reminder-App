@@ -1,5 +1,6 @@
 import React from 'react'; // we need this to make JSX compile
 import AccountForm from "../CreateAccount/AccountForm";
+import "../../styles/loginRegister.css";
 
 const CreateAccount: React.FC = () => {
 
@@ -40,10 +41,21 @@ const CreateAccount: React.FC = () => {
         })
     }
     return (
-        <>
-            <h1>Create Account</h1>
-            <AccountForm onSubmit={createAccount} />
-        </>
+            <div className="login-container">
+                <div className="login-image">
+                    <img src="forest.jpg" alt="login-image" className="forest-image" />
+                    <img src="PlanPerfectLogo.png" alt="titleImage" className="top-title-image" />
+                    <div className="overlay-text">
+                        <h1 className="large-image-text">Manage with Ease</h1>
+                        <h2 className="medium-image-text">Streamline your appointments and ensure timely notifications for your clients.</h2>
+                    </div>
+                </div>
+                <div className="login-form">
+                    <img src="PlanPerfectLogo.png" alt="titleImage" className="title-image" />
+                    <h1 className="form-header">Create Your Account</h1>
+                    <AccountForm onSubmit={createAccount} />
+                </div>
+            </div>
     );
 }
 

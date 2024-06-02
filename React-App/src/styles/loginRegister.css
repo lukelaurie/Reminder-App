@@ -1,7 +1,8 @@
+/* Display for 2 side by side panels */
 .login-container {
     display: flex;
-    height: 100vh;
 }
+
 
 .login-image {
     flex: 1;
@@ -9,14 +10,127 @@
 
 .forest-image {
     width: 100%;
-    height: 100%;
     object-fit: cover;
+}
+
+.forest-image-login {
+    height: 100vh; 
 }
 
 .login-form {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    margin-top: 50px;
+}
+
+/* Display for the overlay information */
+.top-title-image {
+    position: absolute;
+    top: 3%;
+    left: 0%;
+    width: 20%;
+}
+.overlay-text {
+    position: absolute;
+    top: 40%;
+    left: 5%;
+    width: 40%;
+}
+
+.large-image-text {
+    font-size: 3rem;
+}
+
+.medium-image-text {
+    font-size: 1.5rem;
+}
+
+/* Display for form header */
+.form-header {
+    margin: 3% 0 1%;
+    font-size: 3rem;
+}
+
+.register-container {
+    display: flex;
+    align-items: center;
+    margin: 2% 0;
+}
+
+.register-question {
+    margin: 0 10px 0 0;
+    font-size: 1rem; 
+}
+
+.register-link {
+    color: #03A1A1; 
+    font-family: Arial, sans-serif; 
+    font-size: 16px; 
+    text-decoration: none;
+}
+
+.register-link:hover, .register-link:active {
+    color: #03A1A1;
+    text-decoration: underline;
+}
+
+/* Display for input sections */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.account-form-input {
+    background-color: #000000;
+    border: none;
+    display: block;
+    padding: 20px 15px;
+    margin: 2% 0;
+    width: 60%;
+    /* Text styling */
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.account-form-input::placeholder {
+    color: #999985;
+}
+
+.account-form-input:focus {
+    outline: none;
+    border: 1px solid #03A1A1; 
+}
+
+/* Keep autofilling colors the same */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #000000 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* login/Register button */
+.register-submit {
+    background-color: #03A1A1;
+    border: 1px solid #03A1A1; 
+    border-radius: 20px; 
+    margin-top: 5%;
+    padding: 15px 105px;
+    /* Text styling */
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.register-submit:hover {
+    background-color: #161616;
+    color: #03A1A1;
 }

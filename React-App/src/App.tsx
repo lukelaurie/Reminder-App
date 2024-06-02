@@ -21,6 +21,8 @@ function App() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<CreateAccount />} />
+        {/* Wildcard route for default */}
+        <Route path="*" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

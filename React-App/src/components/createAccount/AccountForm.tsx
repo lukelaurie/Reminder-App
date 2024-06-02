@@ -1,4 +1,5 @@
 import { useState } from 'react'; // we need this to make JSX compile
+import "../../styles/loginRegister.css";
 
 interface Props {
     onSubmit: (username: string, companyName: string, name: string, phoneNumber: string, password: string, confirmPassword: string, event: React.FormEvent) => void;
@@ -38,27 +39,20 @@ const AccountForm: React.FC<Props> = ({ onSubmit }) => {
 
     return (
         <>
-            <form className='accountForm'>
-                <label htmlFor='username'>Username: </label>
-                <input type='text' id='username' placeholder='Enter username' className='accountFormInput' required onChange={handleUsernameChange} />
+            <form className='form-container'>
+                <input type='text' id='username' placeholder='Enter username' className='account-form-input' required onChange={handleUsernameChange} />
 
-                <label htmlFor='companyName'>Company Name: </label>
-                <input type='text' id='companyName' placeholder='Enter company name' className='accountFormInput' required onChange={handleCompanyNameChange} />
+                <input type='text' id='companyName' placeholder='Enter company name' className='account-form-input' required onChange={handleCompanyNameChange} />
 
-                <label htmlFor='name'>Name: </label>
-                <input type='text' id='name' placeholder='Enter name' className='accountFormInput' required onChange={handleNameChange} />
+                <input type='text' id='name' placeholder='Enter name' className='account-form-input' required onChange={handleNameChange} />
 
-                {/* TODO: make it so that the user can only type in numbers and it will auto format */}
-                <label htmlFor='phoneNumber'>Phone Number: </label>
-                <input type='text' id='phoneNumber' placeholder='Enter phone number' className='accountFormInput' required onChange={handlePhoneNumberChange} />
+                <input type='text' id='phoneNumber' placeholder='Enter phone number' className='account-form-input' required onChange={handlePhoneNumberChange} />
 
-                <label htmlFor='password'>Password: </label>
-                <input type='password' id='password' placeholder='Enter password' className='accountFormInput' required onChange={handlePasswordChange} />
+                <input type='password' id='password' placeholder='Enter password' className='account-form-input' required onChange={handlePasswordChange} />
 
-                <label htmlFor='confirmPassword'>Confirm Password: </label>
-                <input type='password' id='confirmPassword' placeholder='Confirm password' className='accountFormInput' required onChange={handleConfirmPasswordChange} />
+                <input type='password' id='confirmPassword' placeholder='Confirm password' className='account-form-input' required onChange={handleConfirmPasswordChange} />
 
-                <input type="submit" onClick={(event) => onSubmit(username, companyName, name, phoneNumber, password, confirmPassword, event)} />
+                <input type="submit" value="Register" className='register-submit' onClick={(event) => onSubmit(username, companyName, name, phoneNumber, password, confirmPassword, event)} />
             </form>
         </>
     );

@@ -1,4 +1,5 @@
 import { useState } from 'react'; // we need this to make JSX compile
+import "../../styles/loginRegister.css";
 
 interface Props {
     onSubmit: (username: string, password: string, event: React.FormEvent) => void;
@@ -18,14 +19,12 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
 
     return (
         <>
-            <form className='accountForm'>
-                <label htmlFor='username'>Username: </label>
-                <input type='text' id='username' placeholder='Enter username' className='accountFormInput' required onChange={handleUsernameChange} />
+            <form className='form-container'>
+                <input type='text' id='username' placeholder='Enter username' className='account-form-input' required onChange={handleUsernameChange} />
 
-                <label htmlFor='password'>Password: </label>
-                <input type='password' id='password' placeholder='Enter password' className='accountFormInput' required onChange={handlePasswordChange} />
+                <input type='password' id='password' placeholder='Enter password' className='account-form-input' required onChange={handlePasswordChange} />
 
-                <input type="submit" onClick={(event) => onSubmit(username, password, event)} />
+                <input type="submit" value="SIGN IN" className='register-submit' onClick={(event) => onSubmit(username, password, event)} />
             </form>
         </>
     );
