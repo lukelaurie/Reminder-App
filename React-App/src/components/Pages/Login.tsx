@@ -34,7 +34,6 @@ const Login: React.FC = () => {
                 if (data === "valid") {
                     // redirect to the home page
                     window.location.href = "/";
-                    // alert("login successful");
                 } else {
                     alert(data);
                 }

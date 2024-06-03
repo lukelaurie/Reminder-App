@@ -1,15 +1,20 @@
 import React from 'react'; // we need this to make JSX compile
 import AccountForm from "../CreateAccount/AccountForm";
 import "../../styles/loginRegister.css";
+import { da } from 'date-fns/locale';
 
 const CreateAccount: React.FC = () => {
 
-    const createAccount = (username: string, companyName: string, name: string, phoneNumber: string, password: string, confirmPassword: string, event: React.FormEvent): void => {
+    const createAccount = (username: string, companyName: string, name: string, phoneNumber: string | undefined, password: string, confirmPassword: string, event: React.FormEvent): void => {
         event.preventDefault();
         if (!username || !password || !confirmPassword || !phoneNumber || !name || !companyName) {
             alert("Please fill out all fields.");
             return;
         }
+        // modify the phone number to be in correct format 
+        phoneNumber = "+1" + phoneNumber.replace(/\D/g, "");
+        console.log(phoneNumber);
+
         let pattern = new RegExp("\\+[0-9]{11}");
         if (!pattern.test(phoneNumber)) {
             alert("Phone number is invalid.");
@@ -26,8 +31,6 @@ const CreateAccount: React.FC = () => {
             "name": name,
             "companyName": companyName
         }
-        console.log("Account created!");
-        console.log(accountData);
         fetch("http://127.0.0.1:3000/addAssociate", {
             method: "POST",
             headers: {
@@ -37,7 +40,13 @@ const CreateAccount: React.FC = () => {
         }).then((response) => {
             return response.text();
         }).then((data) => {
-            console.log(data);
+            if (data === "The new user has been placed!") {
+                // redirect to the home page
+                alert("Account Created");
+                window.location.href = "/login";
+            } else {
+                alert(data);
+            }
         })
     }
     return (
