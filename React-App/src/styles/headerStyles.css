@@ -1,14 +1,22 @@
-.headerTitle {
-}
-
 /* Header formating */
-.topNav {
+.top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 4%;
+    background-color: #1f1f1f;
+    padding: 1% 7% 1% 0;
 }
 
 .topLink a {
     margin: 5%;
+}
+
+.title-logo {
+    width: 30%;
+    margin-top: 1%;
+}
+
+.large-nav {
+    padding: 5%;
+    font-size: 1.5rem !important;
 }

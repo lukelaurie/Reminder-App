@@ -4,8 +4,8 @@ import "../../styles/headerStyles.css";
 
 const Header: React.FC = () => {
     return (
-        <div className="topNav">
-            <h1 className="headerTitle">Appointment Manager</h1>
+        <div className="top-nav">
+            <img src="PlanPerfectLogo.png" alt="titleImage" className="title-logo" />
             <HeaderLink />
         </div>
     );

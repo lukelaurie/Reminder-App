@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
+import "../../styles/homesStyles.css";
 
 const Home: React.FC = () => {
     const [dayTime, setDaytime] = useState("");
@@ -80,15 +81,24 @@ const Home: React.FC = () => {
     }
     return (
         <>
-            <Header />
-            <h1>Welcome to {companyName}'s Appointment Manager</h1>
-            <h1>
-                Good {dayTime}, {userName}!
-            </h1>
-            <h2>You have {appointmentCount} remaining appointments today.</h2>
-            {appointmentCount > 0 && (
-                <h2>Your next appointment is with {nextAppointmentClient}.</h2>
-            )}
+        <Header />
+        <div className="home-container">
+            <div className="home-information">
+                <h1>
+                    Good {dayTime}, {userName}!
+                </h1>
+                <h2>You have {appointmentCount} remaining appointments today.</h2>
+                {appointmentCount > 0 && (
+                    <h2>Your next appointment is with {nextAppointmentClient}.</h2>
+                )}
+            </div>
+            <div className="home-image">
+                <img src="sky.jpg" alt="sky-image" className="sky-image" />
+                <div className="overlay-text">
+                    <h1 className="large-image-text">Welcome to {companyName}'s Appointment Manager</h1>
+                </div>
+            </div>
+        </div>
         </>
     );
 };

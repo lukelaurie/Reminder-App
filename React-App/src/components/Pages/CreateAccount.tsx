@@ -1,7 +1,6 @@
 import React from 'react'; // we need this to make JSX compile
 import AccountForm from "../CreateAccount/AccountForm";
 import "../../styles/loginRegister.css";
-import { da } from 'date-fns/locale';
 
 const CreateAccount: React.FC = () => {
 

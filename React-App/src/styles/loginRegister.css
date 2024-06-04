@@ -3,7 +3,6 @@
     display: flex;
 }
 
-
 .login-image {
     flex: 1;
 }
@@ -14,7 +13,7 @@
 }
 
 .forest-image-login {
-    height: 100vh; 
+    height: 100vh;
 }
 
 .login-form {
@@ -34,7 +33,7 @@
     width: 20%;
 }
 .overlay-text {
-    position: absolute;
+    position: relative;
     top: 40%;
     left: 5%;
     width: 40%;
@@ -62,19 +61,7 @@
 
 .register-question {
     margin: 0 10px 0 0;
-    font-size: 1rem; 
-}
-
-.register-link {
-    color: #03A1A1; 
-    font-family: Arial, sans-serif; 
-    font-size: 16px; 
-    text-decoration: none;
-}
-
-.register-link:hover, .register-link:active {
-    color: #03A1A1;
-    text-decoration: underline;
+    font-size: 1rem;
 }
 
 /* Display for input sections */
@@ -104,7 +91,7 @@
 
 .account-form-input:focus {
     outline: none;
-    border: 1px solid #03A1A1; 
+    border: 1px solid #03a1a1;
 }
 
 /* Keep autofilling colors the same */
@@ -118,9 +105,9 @@ input:-webkit-autofill:active {
 
 /* login/Register button */
 .register-submit {
-    background-color: #03A1A1;
-    border: 1px solid #03A1A1; 
-    border-radius: 20px; 
+    background-color: #03a1a1;
+    border: 1px solid #03a1a1;
+    border-radius: 20px;
     margin-top: 5%;
     padding: 15px 105px;
     /* Text styling */
@@ -132,5 +119,5 @@ input:-webkit-autofill:active {
 
 .register-submit:hover {
     background-color: #161616;
-    color: #03A1A1;
+    color: #03a1a1;
 }
