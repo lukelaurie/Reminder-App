@@ -40,7 +40,7 @@ const Home: React.FC = () => {
             endDateRange: endDate
         };
         const curDate: Date = new Date();
-        const curHours: number = startDate.getHours();
+        const curHours: number = curDate.getHours();
         // determine what time of day to show the user
         if (curHours < 12) {
             setDaytime("Morning");
@@ -84,18 +84,18 @@ const Home: React.FC = () => {
         <Header />
         <div className="home-container">
             <div className="home-information">
-                <h1>
+                <h1 className="good-text">
                     Good {dayTime}, {userName}!
                 </h1>
-                <h2>You have {appointmentCount} remaining appointments today.</h2>
+                <h2 className="appoints-text">You have {appointmentCount} remaining appointments today.</h2>
                 {appointmentCount > 0 && (
-                    <h2>Your next appointment is with {nextAppointmentClient}.</h2>
+                    <h2 className="appoints-text">Your next appointment is with {nextAppointmentClient}.</h2>
                 )}
             </div>
             <div className="home-image">
                 <img src="sky.jpg" alt="sky-image" className="sky-image" />
-                <div className="overlay-text">
-                    <h1 className="large-image-text">Welcome to {companyName}'s Appointment Manager</h1>
+                <div className="home-overlay-text">
+                    <h1 className="home-large-image-text">Welcome to {companyName}'s Appointment Manager</h1>
                 </div>
             </div>
         </div>

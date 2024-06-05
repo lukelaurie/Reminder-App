@@ -1,0 +1,53 @@
+/* Container for the help page */
+.help-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #ffffff; 
+}
+
+/* Main title */
+.help-title {
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Section titles */
+.help-section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #ffffff; /* Underline effect */
+    padding-bottom: 0.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Text paragraphs */
+.help-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* List items */
+.help-list {
+    list-style-type: disc;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.help-list li {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Hover effect for list items */
+.help-list li:hover {
+    color: #ffcc00; /* Change color on hover for interactivity */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}

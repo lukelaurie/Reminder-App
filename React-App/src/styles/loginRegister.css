@@ -33,7 +33,7 @@
     width: 20%;
 }
 .overlay-text {
-    position: relative;
+    position: absolute;
     top: 40%;
     left: 5%;
     width: 40%;

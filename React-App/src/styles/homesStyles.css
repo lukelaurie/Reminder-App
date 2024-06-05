@@ -4,6 +4,7 @@
 
 .home-information {
     flex: 1;
+    height: 100vh;
 }
 
 .home-image {
@@ -17,7 +18,7 @@
 }
 
 /* Display for ovrlay text */
-.overlay-text {
+.home-overlay-text {
     position: absolute;
     top: 40%;
     left: 75%;
@@ -26,6 +27,50 @@
     text-align: center; 
 }
 
-.large-image-text {
+.home-large-image-text {
     font-size: 3.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+}
+
+.home-large-image-text:hover {
+    color: #DCAE96; 
+    cursor: pointer; 
+    transition: color 0.3s ease;  
+}
+/* .home-large-image-text {
+    font-size: 3.5rem;
+    color: #DCAE96;
+} */
+
+/* Display for the text on the left */ 
+.home-information {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.good-text {
+    font-size: 3rem;
+    color: #ffffff; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.appoints-text {
+    font-size: 2.5rem;
+    color: #ffffff; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
+    font-weight: bold; 
+    margin-bottom: 1rem; 
+}
+
+/* Additional styling for hover effect */
+.good-text:hover, .appoints-text:hover {
+    color: #ffcc00; 
+    cursor: pointer; 
+    transition: color 0.3s ease; 
 }

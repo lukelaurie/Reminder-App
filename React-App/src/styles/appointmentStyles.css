@@ -1,0 +1,108 @@
+/* Container */
+.rbc-calendar {
+    background-color: #161616;
+    color: #ffffff;
+}
+
+/* Event items */
+.rbc-event {
+    background-color: #333333;
+    border: 1px solid #444444;
+    color: #ffffff;
+}
+
+/* Selected slot */
+.rbc-selected {
+    background-color: #555555;
+}
+
+/* Day headers: So days in other monthes matches in color */
+.rbc-day-bg {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+}
+
+.rbc-day-bg:hover {
+    background-color: #333333;
+}
+
+/* Time slot headers */
+.rbc-time-slot {
+    border-top: 1px solid #2a2a2a;
+}
+
+/* Time indicator */
+.rbc-current-time-indicator {
+    background-color: #00ffff;
+}
+
+/* Week and day views */
+.rbc-time-view {
+    border: 1px solid #2a2a2a;
+}
+
+/* Month view */
+.rbc-month-view {
+    border: 1px solid #2a2a2a;
+}
+
+/* Month day labels */
+.rbc-month-row {
+    border-top: 1px solid #2a2a2a;
+}
+
+.rbc-header {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #2a2a2a;
+    color: #ffffff;
+}
+
+.rbc-header a {
+    color: #ffffff;
+}
+
+.rbc-header a:hover {
+    color: #00ffff;
+}
+
+
+/* Time interval button selection */
+.rbc-btn-group button {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444444;
+}
+
+.rbc-btn-group button:hover {
+    background-color: #444444;
+    color: #ffffff;
+}
+
+/* Current day */
+.rbc-day-slot .rbc-time-slot.rbc-now {
+    background-color: rgba(0, 255, 255, 0.1) !important;
+}
+
+.rbc-day-slot .rbc-time-slot.rbc-now::before {
+    background-color: #00ffff !important;
+}
+
+.rbc-now {
+    background-color: #161616 !important;
+    color: #161616 !important;
+}
+
+
+
+
+/* Weekly and Daily view time slots */
+.rbc-time-view .rbc-time-header-content,
+.rbc-time-view .rbc-day-slot .rbc-time-slot {
+    border-top: 1px solid #2a2a2a;
+    border-right: 1px solid #2a2a2a;
+}
+
+.rbc-time-view .rbc-day-slot .rbc-time-slot:hover,
+.rbc-time-view .rbc-time-header-content:hover {
+    background-color: #333333;
+}

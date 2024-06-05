@@ -9,6 +9,7 @@ import { Calendar, momentLocalizer, SlotInfo } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import moment from "moment";
+import "../../styles/appointmentStyles.css";
 
 const localizer = momentLocalizer(moment);
 
