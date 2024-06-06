@@ -4,11 +4,21 @@
     color: #ffffff;
 }
 
+/* Remove padding from parent container */
+.my-calendar .rbc-calendar .rbc-event {
+    width: 100% !important;
+}
+
+.my-calendar .rbc-calendar .rbc-month-view {
+    padding: 0 !important;
+}
 /* Event items */
 .rbc-event {
+    width: 100%;
     background-color: #333333;
     border: 1px solid #444444;
     color: #ffffff;
+    z-index: 3; /* Place above the hover over */
 }
 
 /* Selected slot */
@@ -102,7 +112,7 @@
 
 .rbc-now {
     background-color: #161616 !important;
-    color: #161616 !important;
+    color: #00ffff !important;
 }
 
 /* Weekly and Daily view time slots */
@@ -116,6 +126,7 @@
 .rbc-time-view .rbc-day-slot .rbc-time-slot:hover,
 .rbc-time-view .rbc-time-header-content:hover {
     background-color: #333333;
+    z-index: 2;
 }
 
 /* Put above the rest so can still hover over */
@@ -136,7 +147,7 @@
 .rbc-toolbar .rbc-toolbar-label {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #00ffff;
+    color: #ffffff;
 }
 
 /* Style for the navigation buttons in the toolbar */
@@ -147,6 +158,7 @@
     font-size: 14px;
     padding: 5px 10px;
     margin: 0 5px;
+    border-radius: 0px;
 }
 
 .rbc-toolbar button:hover {
@@ -154,14 +166,41 @@
     color: #ffffff;
 }
 
-.rbc-toolbar button:focus {
-    outline: none;
-    border-color: #00ffff;
+/* Ensure the calender takes the full height */
+html, body, #root {
+    height: 100%;
+    padding: 0;
 }
 
-/* Ensuring the buttons match the dark theme */
-.rbc-toolbar button[aria-pressed="true"] {
-    background-color: #555555;
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.calendar-container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* set clicked slot to be blue */
+.rbc-event.selected {
+    background-color: blue;
     color: #ffffff;
-    border-color: #00ffff;
+}
+
+/* Style for add new appointment button */
+.new-appt-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444444;
+    width: 173px; /* Allow button to size based on content */
+    margin: 20px 0 5px 14px;
+}
+
+.new-appt-button:hover {
+    background-color: #444444;
 }

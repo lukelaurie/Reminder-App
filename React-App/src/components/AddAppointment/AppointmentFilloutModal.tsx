@@ -94,12 +94,11 @@ const AppointmentFilloutModal: React.FC<Props> = ({ isOpened, swapModal, isUpdat
             <Modal
                 isOpen={isOpened}
                 onRequestClose={() => swapModal(true, false)}
-                contentLabel="WHat is this"
-                className="customModal"
-                overlayClassName="customModalOverlay"
+                className="custom-modal"
+                overlayClassName="custom-modal-overlay"
             >
-                <h2>{formType}</h2>
-                <button onClick={() => swapModal(true, false)}>x</button>
+                <h1 className="modal-title">{formType}</h1>
+                <button className="exit-button" onClick={() => swapModal(true, false)}>x</button>
                 <AppointmentForm onSubmit={createAppointment} curEvent={curEvent} />
             </Modal>
         </>

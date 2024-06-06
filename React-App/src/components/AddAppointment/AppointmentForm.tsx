@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DateTimePicker from 'react-datetime-picker';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
+import "../../styles/addAppointmentStyles.css";
+
 import { event } from "../../utils/Event";
 
 interface Props {
@@ -29,24 +31,23 @@ const AppointmentForm: React.FC<Props> = ({ onSubmit, curEvent }) => {
     return (
         <>
             <form className='appointmentForm'>
-                <label htmlFor='startDate'>Start Date: </label>
-                {/* <input type='text' id='startDate' placeholder='Enter Start Date' className='appointFormInput' required onChange={(event) => setStartDate(event.target.value)} /> */}
-                <DateTimePicker onChange={setStartDate} value={startDate} disableClock={true} />
+                <label className="modal-label" htmlFor='startDate'>Start Date: </label>
+                <DateTimePicker className="date-picker" onChange={setStartDate} value={startDate} disableClock={true} />
                 <br></br>
-                <label htmlFor='endDate'>End Date: </label>
-                <DateTimePicker onChange={setEndDate} value={endDate} disableClock={true} />
+                <label className="modal-label" htmlFor='endDate'>End Date: </label>
+                <DateTimePicker className="date-picker" onChange={setEndDate} value={endDate} disableClock={true} />
                 <br></br>
                 
-                <label htmlFor='notes'>Notes: </label>
-                <input type='text' id='notes' placeholder='Enter Notes' value={notes} className='appointFormInput' required onChange={(event) => setNotes(event.target.value)} />
+                <label className="modal-label" htmlFor='notes'>Notes: </label>
+                <input type='text' id='notes' placeholder='Enter Notes' value={notes} className='appoint-form-input' required onChange={(event) => setNotes(event.target.value)} />
 
-                <label htmlFor='clientName'>Client Name: </label>
-                <input type='text' id='clientName' placeholder='Enter Client Name' value={clientName} className='appointFormInput' required onChange={(event) => setClientName(event.target.value)} />
+                <label className="modal-label" htmlFor='clientName'>Client Name: </label>
+                <input type='text' id='clientName' placeholder='Enter Client Name' value={clientName} className='appoint-form-input' required onChange={(event) => setClientName(event.target.value)} />
 
-                <label htmlFor='clientPhoneNumber'>Client Phone Number: </label>
-                <input type='text' id='clientPhoneNumber' placeholder='Enter Client Phone Number' value={clientPhoneNumber} className='appointFormInput' required onChange={(event) => setClientPhoneNumber(event.target.value)} />
+                <label className="modal-label" htmlFor='clientPhoneNumber'>Client Phone Number: </label>
+                <input type='text' id='clientPhoneNumber' placeholder='Enter Client Phone Number' value={clientPhoneNumber} className='appoint-form-input' required onChange={(event) => setClientPhoneNumber(event.target.value)} />
 
-                <input type="submit" onClick={sendSubmission} />
+                <input className="modal-sumbmit" type="submit" onClick={sendSubmission} />
             </form>
         </>
     );

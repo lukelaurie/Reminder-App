@@ -174,19 +174,18 @@ const ViewAppointments: React.FC = () => {
     }
 
     return (
-        <>
+        <div className="main-container">
             <Header />
-            <button onClick={() =>{
+            <button className="new-appt-button" onClick={() =>{
                 setIsUpdateMode(false);
                 swapApptModal(isApptOpened);
             }}>Add New Appointment</button>
-            <div style={{ height: '500px' }}>
+            <div className="calendar-container">
                 <Calendar
                     localizer={localizer}
                     events={events}
                     startAccessor="start"
                     endAccessor="end"
-                    style={{ height: 500 }}
                     onRangeChange={(range: Date[] | { start: Date; end: Date }) => {
                         updateEvents(range, events, setEvents, false, setCurClickedMonth);
                     }}
@@ -197,7 +196,7 @@ const ViewAppointments: React.FC = () => {
             </div>
             <AppointmentFilloutModal isOpened={isApptOpened} swapModal={swapApptModal} curEvent={curClickedEvent} isUpdateMode={isUpdateMode} adjustAppointment={adjustAppointment}/>
             <ViewAppointment isOpened={isViewApptOpened} swapViewModal={swapViewApptApptModal} swapApptModal={swapApptModal} setIsUpdateMode={setIsUpdateMode} isUpdateMode={isUpdateMode} curEvent={curClickedEvent} adjustAppointment={adjustAppointment} />
-        </>
+        </div>
     );
 };
 

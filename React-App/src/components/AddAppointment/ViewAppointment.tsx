@@ -120,18 +120,17 @@ const ViewAppointment: React.FC<Props> = ({
             <Modal
                 isOpen={isOpened}
                 onRequestClose={() => swapViewModal(true)}
-                contentLabel="WHat is this"
-                className="customModal"
-                overlayClassName="customModalOverlay"
+                className="custom-modal"
+                overlayClassName="custom-modal-overlay"
             >
-                <button onClick={() => swapViewModal(true)}>x</button>
-                <h1>Client Name: {curEvent?.title}</h1>
-                <h1>Client Phone: {curEvent?.clientPhoneNumber}</h1>
-                <h2>Date: {curDate}</h2>
-                <h2>Notes: {curEvent?.notes}</h2>
-                <button onClick={updateAppt}>Update Appointment</button>
+                <button className="exit-button" onClick={() => swapViewModal(true)}>x</button>
+                <h1 className="modal-title">Client Name: {curEvent?.title}</h1>
+                <h1 className="modal-title">Client Phone: {curEvent?.clientPhoneNumber}</h1>
+                <h2 className="modal-second">Date: {curDate}</h2>
+                <h2 className="modal-second">Notes: {curEvent?.notes}</h2>
+                <button className="change-button" onClick={updateAppt}>Update Appointment</button>
                 <br></br>
-                <button onClick={deleteAppt}>Delete Appointment</button>
+                <button className="change-button delete-button" onClick={deleteAppt}>Delete Appointment</button>
             </Modal>
         </>
     );
