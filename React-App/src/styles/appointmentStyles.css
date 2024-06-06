@@ -66,17 +66,30 @@
 }
 
 
-/* Time interval button selection */
-.rbc-btn-group button {
+/* Time interval button selection don't style the forward and back buttons though */
+.rbc-btn-group button:not(.rbc-nav-button) {
     background-color: #333333;
     color: #ffffff;
     border: 1px solid #444444;
+    /* Ensure consistent font size and padding */
+    font-size: 14px;
+    padding: 5px 10px;
 }
 
-.rbc-btn-group button:hover {
+/* Button hover state */
+.rbc-btn-group button:not(.rbc-nav-button):hover {
     background-color: #444444;
     color: #ffffff;
 }
+
+/* Startup state for the button */
+.rbc-btn-group button.rbc-active:not(.rbc-nav-button) {
+    background-color: #D4D4D4;
+    border: 1px solid #444444;
+    color: #373A3C;
+}
+
+
 
 /* Current day */
 .rbc-day-slot .rbc-time-slot.rbc-now {
@@ -92,17 +105,63 @@
     color: #161616 !important;
 }
 
-
-
-
 /* Weekly and Daily view time slots */
 .rbc-time-view .rbc-time-header-content,
 .rbc-time-view .rbc-day-slot .rbc-time-slot {
     border-top: 1px solid #2a2a2a;
     border-right: 1px solid #2a2a2a;
+    position: relative; /* Ensure position is relative */
 }
 
 .rbc-time-view .rbc-day-slot .rbc-time-slot:hover,
 .rbc-time-view .rbc-time-header-content:hover {
     background-color: #333333;
+}
+
+/* Put above the rest so can still hover over */
+.rbc-time-slot {
+    z-index: 2;
+}
+
+/* Calendar toolbar styles */
+.rbc-toolbar {
+    background-color: #161616;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+/* Specific styling for the date display */
+.rbc-toolbar .rbc-toolbar-label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ffff;
+}
+
+/* Style for the navigation buttons in the toolbar */
+.rbc-toolbar button {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444444;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+
+.rbc-toolbar button:hover {
+    background-color: #444444;
+    color: #ffffff;
+}
+
+.rbc-toolbar button:focus {
+    outline: none;
+    border-color: #00ffff;
+}
+
+/* Ensuring the buttons match the dark theme */
+.rbc-toolbar button[aria-pressed="true"] {
+    background-color: #555555;
+    color: #ffffff;
+    border-color: #00ffff;
 }
