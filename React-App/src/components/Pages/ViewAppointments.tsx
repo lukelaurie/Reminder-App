@@ -18,19 +18,19 @@ const InitalEvents: event[] = []
 const rangesVisited: Set<string> = new Set<string>();
 const idSeen: Set<string> = new Set<string>();
 
-function removeApptFromEvent (appointmentId: string | undefined, events: event[], setEvents: (events: event[]) => void) {
+function removeApptFromEvent(appointmentId: string | undefined, events: event[], setEvents: (events: event[]) => void) {
     for (const event of events) {
         // remove the event with the matching id
         if (event.appointmentId === appointmentId) {
             const newEvents = events.filter(val => val !== event);
-            setEvents(newEvents); 
+            setEvents(newEvents);
             idSeen.delete(appointmentId);
             return;
         }
     }
 }
 
-function updateEvents (range: Date[] | { start: Date; end: Date }, events: event[], setEvents: (events: event[]) => void, requestRequired: boolean, setCurClickedMonth: (month: number) => void) {    
+function updateEvents(range: Date[] | { start: Date; end: Date }, events: event[], setEvents: (events: event[]) => void, requestRequired: boolean, setCurClickedMonth: (month: number) => void) {
     var dateRange: { startDateRange: Date; endDateRange: Date };
 
     if (Array.isArray(range)) {
@@ -41,7 +41,7 @@ function updateEvents (range: Date[] | { start: Date; end: Date }, events: event
             end = new Date(start);
             end.setHours(23, 59, 59, 999);
         }
-        dateRange = {            
+        dateRange = {
             startDateRange: start,
             endDateRange: end
         }
@@ -63,7 +63,7 @@ function updateEvents (range: Date[] | { start: Date; end: Date }, events: event
     if (!requestRequired && rangesVisited.has(dateRangeStr)) {
         return;
     }
-    rangesVisited.add(dateRangeStr);    
+    rangesVisited.add(dateRangeStr);
     fetch("http://127.0.0.1:3000/retrieveAppointments", {
         method: "POST",
         headers: {
@@ -82,7 +82,7 @@ function updateEvents (range: Date[] | { start: Date; end: Date }, events: event
                 if (idSeen.has(data[i]["appointmentId"])) {
                     eventsInThisRange = eventsInThisRange.filter(event => event.appointmentId !== data[i]["appointmentId"]);
                     idSeen.delete(data[i]["appointmentId"]);
-                }; 
+                };
                 idSeen.add(data[i]["appointmentId"]);
 
                 let newEvent: event = {
@@ -124,13 +124,13 @@ const ViewAppointments: React.FC = () => {
         const monthEnd = new Date(today.getFullYear(), curClickedMonth + 1, 0);
         // modify days to account for future Saturday
         monthEnd.setDate(monthEnd.getDate() + (6 - monthEnd.getDay()));
-        const range = { start: monthStart, end: monthEnd }; 
+        const range = { start: monthStart, end: monthEnd };
         updateEvents(range, events, setEvents, requestRequired, setCurClickedMonth);
     }
 
     const adjustAppointment = (adjustType: string, appointId: string | undefined) => {
         switch (adjustType) {
-            case "delete": 
+            case "delete":
                 removeApptFromEvent(appointId, events, setEvents);
                 break;
             case "update":
@@ -165,7 +165,7 @@ const ViewAppointments: React.FC = () => {
         }
         setCurClickedEvent(newEvent);
         setIsUpdateMode(false);
-        setIsApptOpened(true);   
+        setIsApptOpened(true);
     }
 
     const handleEventClick = (event: event) => {
@@ -176,7 +176,7 @@ const ViewAppointments: React.FC = () => {
     return (
         <>
             <Header />
-            <button onClick={() =>{
+            <button onClick={() => {
                 setIsUpdateMode(false);
                 swapApptModal(isApptOpened);
             }}>Add New Appointment</button>
@@ -195,7 +195,7 @@ const ViewAppointments: React.FC = () => {
                     selectable
                 />
             </div>
-            <AppointmentFilloutModal isOpened={isApptOpened} swapModal={swapApptModal} curEvent={curClickedEvent} isUpdateMode={isUpdateMode} adjustAppointment={adjustAppointment}/>
+            <AppointmentFilloutModal isOpened={isApptOpened} swapModal={swapApptModal} curEvent={curClickedEvent} isUpdateMode={isUpdateMode} adjustAppointment={adjustAppointment} />
             <ViewAppointment isOpened={isViewApptOpened} swapViewModal={swapViewApptApptModal} swapApptModal={swapApptModal} setIsUpdateMode={setIsUpdateMode} isUpdateMode={isUpdateMode} curEvent={curClickedEvent} adjustAppointment={adjustAppointment} />
         </>
     );

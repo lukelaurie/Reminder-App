@@ -1,6 +1,6 @@
 .customModal {
-    background-color: rgb(168, 156, 156); 
-    opacity: 1; 
+    background-color: rgb(230, 86, 86);
+    opacity: 1;
     padding: 20px;
     border-radius: 4px;
     max-width: 600px;
@@ -10,7 +10,8 @@
 }
 
 .customModalOverlay {
-    background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black overlay */
+    background-color: rgba(0, 0, 0, 0.75);
+    /* Semi-transparent black overlay */
     position: fixed;
     top: 0;
     left: 0;
@@ -19,5 +20,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Ensure the overlay is below the modal content but above other content */
+    z-index: 1000;
+    /* Ensure the overlay is below the modal content but above other content */
 }
