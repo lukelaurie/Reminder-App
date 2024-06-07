@@ -3,11 +3,8 @@ import LoginForm from "../Login/LoginForm";
 import "../../styles/loginRegister.css";
 
 const Login: React.FC = () => {
-    const loginCall = (
-        username: string,
-        password: string,
-        event: React.FormEvent
-    ): void => {
+    
+    const loginCall = (username: string, password: string, event: React.FormEvent): void => {
         event.preventDefault();
         if (!username || !password) {
             alert("Please fill out all fields");
@@ -39,8 +36,10 @@ const Login: React.FC = () => {
                 }
             });
     };
+
     return (
         <div className="login-container">
+            {/* left hand panel */}
             <div className="login-image">
                 <img src="forest.jpg" alt="login-image" className="forest-image forest-image-login" />
                 <img src="PlanPerfectLogo.png" alt="titleImage" className="top-title-image" />
@@ -49,6 +48,7 @@ const Login: React.FC = () => {
                     <h2 className="medium-image-text">Streamline your appointments and ensure timely notifications for your clients.</h2>
                 </div>
             </div>
+            {/* right hand panel where user can login */}
             <div className="login-form">
                 <img src="PlanPerfectLogo.png" alt="titleImage" className="title-image" />
                 <h1 className="form-header">Login</h1>

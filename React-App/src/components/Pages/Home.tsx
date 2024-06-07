@@ -8,6 +8,8 @@ const Home: React.FC = () => {
     const [companyName, setCompanyName] = useState("");
     const [appointmentCount, setAppointmentCount] = useState(0);
     const [nextAppointmentClient, setNextAppointmentClient] = useState("");
+
+    // get the information about the user when the page is opened
     useEffect(() => {
         getUserData();
         getTimeOfDay();
@@ -21,23 +23,25 @@ const Home: React.FC = () => {
                 "Content-Type": "application/json",
             },
             credentials: "include",
-        }).then((response) => {
-            return response.json()
-        }).then((data) => {
-            setUserName(data["name"]);
-            setCompanyName(data["companyName"]);
-        });
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setUserName(data["name"]);
+                setCompanyName(data["companyName"]);
+            });
     };
 
     const getTimeOfDay = () => {
-        // get the appointments from the start to the end of the day 
+        // get the appointments from the start to the end of the day
         let startDate: Date = new Date();
         startDate.setHours(0, 0, 0);
         let endDate: Date = new Date();
         endDate.setHours(23, 59, 59, 999);
         var dateRange: { startDateRange: Date; endDateRange: Date } = {
             startDateRange: startDate,
-            endDateRange: endDate
+            endDateRange: endDate,
         };
         const curDate: Date = new Date();
         const curHours: number = curDate.getHours();
@@ -50,55 +54,66 @@ const Home: React.FC = () => {
             setDaytime("Evening");
         }
         fetch("http://127.0.0.1:3000/retrieveAppointments", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dateRange),
-        credentials: "include",
-    })
-        .then((response) => {
-            return response.json();
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dateRange),
+            credentials: "include",
         })
-        .then((data) => {
-            let appointmentTotal: number = 0;
-            let prevSeen: Date | null = null;
-            let clientName: string = "";
-            // find the number of remaining appointments for the day
-            for (let i = 0; i < data.length; i++) {
-                const eventDate = new Date(data[i]["startDate"] * 1000);
-                if (curDate  < eventDate) {
-                    appointmentTotal++;
-                    if (!prevSeen || prevSeen > eventDate) {
-                        prevSeen = eventDate;
-                        clientName = data[i]["clientName"];
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let appointmentTotal: number = 0;
+                let prevSeen: Date | null = null;
+                let clientName: string = "";
+                // find the number of remaining appointments for the day
+                for (let i = 0; i < data.length; i++) {
+                    const eventDate = new Date(data[i]["startDate"] * 1000);
+                    if (curDate < eventDate) {
+                        appointmentTotal++;
+                        // Checks for exisitng appointment and if new appointmetn is before existing
+                        if (!prevSeen || prevSeen > eventDate) {
+                            prevSeen = eventDate;
+                            clientName = data[i]["clientName"];
+                        }
                     }
                 }
-            }
-            setAppointmentCount(appointmentTotal);
-            setNextAppointmentClient(clientName);
-        });
-    }
+                setAppointmentCount(appointmentTotal);
+                setNextAppointmentClient(clientName);
+            });
+    };
     return (
         <>
-        <Header />
-        <div className="home-container">
-            <div className="home-information">
-                <h1 className="good-text">
-                    Good {dayTime}, {userName}!
-                </h1>
-                <h2 className="appoints-text">You have {appointmentCount} remaining appointments today.</h2>
-                {appointmentCount > 0 && (
-                    <h2 className="appoints-text">Your next appointment is with {nextAppointmentClient}.</h2>
-                )}
-            </div>
-            <div className="home-image">
-                <img src="sky.jpg" alt="sky-image" className="sky-image" />
-                <div className="home-overlay-text">
-                    <h1 className="home-large-image-text">Welcome to {companyName}'s Appointment Manager</h1>
+            <Header />
+            {/* left panel */}
+            <div className="home-container">
+                <div className="home-information">
+                    <h1 className="good-text">
+                        Good {dayTime}, {userName}!
+                    </h1>
+                    <h2 className="appoints-text">
+                        You have {appointmentCount} remaining appointments
+                        today.
+                    </h2>
+                    {appointmentCount > 0 && (
+                        <h2 className="appoints-text">
+                            Your next appointment is with{" "}
+                            {nextAppointmentClient}.
+                        </h2>
+                    )}
+                </div>
+                {/* right panel */}
+                <div className="home-image">
+                    <img src="sky.jpg" alt="sky-image" className="sky-image" />
+                    <div className="home-overlay-text">
+                        <h1 className="home-large-image-text">
+                            Welcome to {companyName}'s Appointment Manager
+                        </h1>
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     );
 };

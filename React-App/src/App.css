@@ -4,34 +4,7 @@ body {
   margin: 0%;
 }
 
-h1,
-h2,
-p,
-li,
-a {
+h1, h2, p, li, a {
   color: #f5f5f5;
   font-family: Arial, sans-serif;
-}
-
-.title-image {
-  width: 60%;
-  object-fit: contain;
-}
-
-/* Styling for the links */
-.register-link {
-  color: #03a1a1;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  text-decoration: none;
-}
-
-.register-link:hover,
-.register-link:active {
-  color: #03a1a1;
-  text-decoration: underline;
-}
-
-.register-link.active {
-  color: #ff5733;
 }

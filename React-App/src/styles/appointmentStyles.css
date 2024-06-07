@@ -12,14 +12,6 @@
 .my-calendar .rbc-calendar .rbc-month-view {
     padding: 0 !important;
 }
-/* Event items */
-.rbc-event {
-    width: 100%;
-    background-color: #333333;
-    border: 1px solid #444444;
-    color: #ffffff;
-    z-index: 3; /* Place above the hover over */
-}
 
 /* Selected slot */
 .rbc-selected {
@@ -53,6 +45,7 @@
 
 /* Month view */
 .rbc-month-view {
+    background-color: #161616;
     border: 1px solid #2a2a2a;
 }
 
@@ -99,8 +92,6 @@
     color: #373A3C;
 }
 
-
-
 /* Current day */
 .rbc-day-slot .rbc-time-slot.rbc-now {
     background-color: rgba(0, 255, 255, 0.1) !important;
@@ -110,8 +101,10 @@
     background-color: #00ffff !important;
 }
 
-.rbc-now {
+.rbc-time-view .rbc-now {
     background-color: #161616 !important;
+}
+.rbc-now {
     color: #00ffff !important;
 }
 
@@ -203,4 +196,26 @@ html, body, #root {
 
 .new-appt-button:hover {
     background-color: #444444;
+}
+
+
+/* Event items for month  week and day views */
+/* Event items */
+.rbc-event, .rbc-time-view .rbc-event {
+    width: 100%;
+    background-color: #333333;
+    border: 1px solid #444444;
+    color: #ffffff;
+    border-radius: 0;
+    z-index: 3; /* Place above the hover over */
+}
+
+.rbc-selected {
+    background-color: #265985 !important;
+    border-radius: 0;
+}
+
+/* Get full width for event */
+.rbc-events-container {
+    margin: 0 !important;
 }

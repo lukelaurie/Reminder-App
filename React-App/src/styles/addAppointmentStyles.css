@@ -65,6 +65,11 @@
     background-color: #1c476e;
 }
 
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    resize: none;
+    height: 30px;
+}
 .appoint-form-input {
     width: 100%;
     padding: 8px;
@@ -81,4 +86,21 @@
     margin-bottom: 15px;
     border: none;
     border-radius: 4px;
+}
+
+/* Prevent autofilling with wrong color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #333333 !important;
+}
+
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #000000 inset !important;
+    -webkit-text-fill-color: #333333 !important;
 }
