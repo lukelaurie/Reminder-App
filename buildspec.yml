@@ -11,6 +11,14 @@ phases:
         commands:
             - echo "Zipping deployment packages..."
             - mkdir lambda_zips
+            - mkdir lambda_zips/add_new_associate
+            - mkdir lambda_zips/create_new_appointment
+            - mkdir lambda_zips/login
+            - mkdir lambda_zips/retrieve_appointments
+            - mkdir lambda_zips/send_appointment_reminders
+            - mkdir lambda_zips/is_logged_in
+            - mkdir lambda_zips/delete_appointment
+            - mkdir lambda_zips/retrieve_associate
             - cp sam-app/lambda_functions/add_new_associate/index.js lambda_zips/add_new_associate/index.mjs
             - cp sam-app/lambda_functions/create_new_appointment/index.js lambda_zips/create_new_appointment/index.mjs
             - cp sam-app/lambda_functions/login/index.js lambda_zips/login/index.mjs
