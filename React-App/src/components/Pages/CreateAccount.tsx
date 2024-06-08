@@ -12,7 +12,6 @@ const CreateAccount: React.FC = () => {
         }
         // modify the phone number to be in correct format 
         phoneNumber = "+1" + phoneNumber.replace(/\D/g, "");
-
         let pattern = new RegExp("\\+[0-9]{11}");
         if (!pattern.test(phoneNumber)) {
             alert("Phone number is invalid.");

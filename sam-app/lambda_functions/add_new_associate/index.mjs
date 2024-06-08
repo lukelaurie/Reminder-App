@@ -1,5 +1,5 @@
-const AWS = require("aws-sdk");
-const bcrypt = require("bcryptjs");
+import AWS from "aws-sdk";
+import bcrypt from "bcryptjs";
 
 let awsConfig = {
     region: "us-east-2",
@@ -11,7 +11,7 @@ AWS.config.update(awsConfig);
 let dynamoDB = new AWS.DynamoDB.DocumentClient();
 const tableName = "associates";
 
-exports.lambdaHandler = async (event) => {
+export const lambdaHandler = async (event) => {
     try {
         // Retrieve the data from the request
         const body = JSON.parse(event.body);
@@ -33,7 +33,7 @@ exports.lambdaHandler = async (event) => {
                 body: "Username alrady exists"
             };
         }
-        encryptedPassword = await saltAndHashPassword(password);
+        const encryptedPassword = await saltAndHashPassword(password);
         createNewAssociate(username, encryptedPassword, phoneNumber, name, companyName);
         return {
             statusCode: 200,

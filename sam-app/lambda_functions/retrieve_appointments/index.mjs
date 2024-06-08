@@ -1,5 +1,5 @@
-const AWS = require("aws-sdk");
-const cookieHandler = require("get_username_from_cookie");
+import AWS from "aws-sdk";
+import cookieHandler from "get_username_from_cookie";
 
 let awsConfig = {
     region: "us-east-2",
@@ -12,7 +12,7 @@ AWS.config.update(awsConfig);
 let dynamoDB = new AWS.DynamoDB.DocumentClient();
 const appointmentTableName = "appointment";
 
-exports.lambdaHandler = async (event) => {
+export const lambdaHandler = async (event) => {
     try {
         // Retrieve the data from the request
         const body = JSON.parse(event.body);
@@ -42,7 +42,7 @@ exports.lambdaHandler = async (event) => {
         const startUnixValueRange = Math.floor(startDateValueRange / 1000);
         const endUnixValueRange = Math.floor(endDateValueRange / 1000);
         // get all of the appointments with the associated username
-        associatedppointments = await getAllAppointments(
+        const associatedppointments = await getAllAppointments(
             associateUsername,
             startUnixValueRange,
             endUnixValueRange

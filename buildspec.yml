@@ -20,14 +20,14 @@ phases:
             - mkdir delete_appointment
             - mkdir retrieve_associate
 
-            - cp sam-app/lambda_functions/add_new_associate/index.js add_new_associate/index.mjs
-            - cp sam-app/lambda_functions/create_new_appointment/index.js create_new_appointment/index.mjs
-            - cp sam-app/lambda_functions/login/index.js login/index.mjs
-            - cp sam-app/lambda_functions/retrieve_appointments/index.js retrieve_appointments/index.mjs
-            - cp sam-app/lambda_functions/send_appointment_reminders/index.js send_appointment_reminders/index.mjs
-            - cp sam-app/lambda_functions/is_logged_in/index.js is_logged_in/index.mjs
-            - cp sam-app/lambda_functions/delete_appointment/index.js delete_appointment/index.mjs
-            - cp sam-app/lambda_functions/retrieve_associate/index.js retrieve_associate/index.mjs
+            - cp sam-app/lambda_functions/add_new_associate/index.mjs add_new_associate/index.mjs
+            - cp sam-app/lambda_functions/create_new_appointment/index.mjs create_new_appointment/index.mjs
+            - cp sam-app/lambda_functions/login/index.mjs login/index.mjs
+            - cp sam-app/lambda_functions/retrieve_appointments/index.mjs retrieve_appointments/index.mjs
+            - cp sam-app/lambda_functions/send_appointment_reminders/index.mjs send_appointment_reminders/index.mjs
+            - cp sam-app/lambda_functions/is_logged_in/index.mjs is_logged_in/index.mjs
+            - cp sam-app/lambda_functions/delete_appointment/index.mjs delete_appointment/index.mjs
+            - cp sam-app/lambda_functions/retrieve_associate/index.mjs retrieve_associate/index.mjs
             - cd lambda_zips
 
             - zip -j -r9 newAssociate.zip ../add_new_associate/index.mjs

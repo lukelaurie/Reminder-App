@@ -1,5 +1,6 @@
-const AWS = require("aws-sdk");
-const cookieHandler = require("get_username_from_cookie");
+import AWS from "aws-sdk";
+// import getUsernameFromCookie from "./get_username_from_cookie";
+import cookieHandler from "get_username_from_cookie";
 
 let awsConfig = {
     region: "us-east-2",
@@ -12,7 +13,7 @@ AWS.config.update(awsConfig);
 let dynamoDB = new AWS.DynamoDB.DocumentClient();
 const tableName = "associates";
 
-exports.lambdaHandler = async (event) => {
+export const lambdaHandler = async (event) => {
     try {
         let associateUsername;
         // checks if username was provided in the cookie
@@ -27,7 +28,7 @@ exports.lambdaHandler = async (event) => {
             };
         }
         // get all of the data associated with the associate
-        associate = await getAssociate(associateUsername);
+        const associate = await getAssociate(associateUsername);
         let associateData = {
             "name": associate["name"],
             "companyName": associate["companyName"]
