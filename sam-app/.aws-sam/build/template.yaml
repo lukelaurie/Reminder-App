@@ -59,6 +59,7 @@ Resources:
       Environment:
         Variables:
           JWT_SECRET_KEY_VALUE: flj3289gnw89jnfgjnw33fn33dfs
+          NODE_PATH: /opt/nodejs/
       Architectures:
       - x86_64
       Events:
@@ -78,6 +79,7 @@ Resources:
       Environment:
         Variables:
           JWT_SECRET_KEY_VALUE: flj3289gnw89jnfgjnw33fn33dfs
+          NODE_PATH: /opt/nodejs/
       Architectures:
       - x86_64
       Events:
@@ -99,6 +101,7 @@ Resources:
       Environment:
         Variables:
           JWT_SECRET_KEY_VALUE: flj3289gnw89jnfgjnw33fn33dfs
+          NODE_PATH: /opt/nodejs/
       Architectures:
       - x86_64
       Events:
@@ -120,6 +123,7 @@ Resources:
       Environment:
         Variables:
           JWT_SECRET_KEY_VALUE: flj3289gnw89jnfgjnw33fn33dfs
+          NODE_PATH: /opt/nodejs/
       Architectures:
       - x86_64
       Events:
@@ -141,6 +145,7 @@ Resources:
       Environment:
         Variables:
           JWT_SECRET_KEY_VALUE: flj3289gnw89jnfgjnw33fn33dfs
+          NODE_PATH: /opt/nodejs/
       Architectures:
       - x86_64
       Events:
@@ -162,6 +167,7 @@ Resources:
       Environment:
         Variables:
           JWT_SECRET_KEY_VALUE: flj3289gnw89jnfgjnw33fn33dfs
+          NODE_PATH: /opt/nodejs/
       Architectures:
       - x86_64
       Events:
@@ -183,6 +189,7 @@ Resources:
       Environment:
         Variables:
           JWT_SECRET_KEY_VALUE: flj3289gnw89jnfgjnw33fn33dfs
+          NODE_PATH: /opt/nodejs/
       Architectures:
       - x86_64
       Events:

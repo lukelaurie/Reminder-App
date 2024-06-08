@@ -1,6 +1,6 @@
-const cookieHandler = require("get_username_from_cookie");
+import cookieHandler from "get_username_from_cookie";
 
-exports.lambdaHandler = async (event) => {
+export const lambdaHandler = async (event) => {
     try {
         // check if the username from the cookie exists
         if (!(await cookieHandler.getUsernameFromCookie(event))) {

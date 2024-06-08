@@ -4,11 +4,13 @@
     color: #ffffff;
 }
 
-/* Event items */
-.rbc-event {
-    background-color: #333333;
-    border: 1px solid #444444;
-    color: #ffffff;
+/* Remove padding from parent container */
+.my-calendar .rbc-calendar .rbc-event {
+    width: 100% !important;
+}
+
+.my-calendar .rbc-calendar .rbc-month-view {
+    padding: 0 !important;
 }
 
 /* Selected slot */
@@ -43,6 +45,7 @@
 
 /* Month view */
 .rbc-month-view {
+    background-color: #161616;
     border: 1px solid #2a2a2a;
 }
 
@@ -64,7 +67,6 @@
 .rbc-header a:hover {
     color: #00ffff;
 }
-
 
 /* Time interval button selection don't style the forward and back buttons though */
 .rbc-btn-group button:not(.rbc-nav-button) {
@@ -89,8 +91,6 @@
     color: #373A3C;
 }
 
-
-
 /* Current day */
 .rbc-day-slot .rbc-time-slot.rbc-now {
     background-color: rgba(0, 255, 255, 0.1) !important;
@@ -100,9 +100,11 @@
     background-color: #00ffff !important;
 }
 
-.rbc-now {
+.rbc-time-view .rbc-now {
     background-color: #161616 !important;
-    color: #161616 !important;
+}
+.rbc-now {
+    color: #00ffff !important;
 }
 
 /* Weekly and Daily view time slots */
@@ -116,6 +118,7 @@
 .rbc-time-view .rbc-day-slot .rbc-time-slot:hover,
 .rbc-time-view .rbc-time-header-content:hover {
     background-color: #333333;
+    z-index: 2;
 }
 
 /* Put above the rest so can still hover over */
@@ -136,7 +139,7 @@
 .rbc-toolbar .rbc-toolbar-label {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #00ffff;
+    color: #ffffff;
 }
 
 /* Style for the navigation buttons in the toolbar */
@@ -147,6 +150,7 @@
     font-size: 14px;
     padding: 5px 10px;
     margin: 0 5px;
+    border-radius: 0px;
 }
 
 .rbc-toolbar button:hover {
@@ -154,14 +158,81 @@
     color: #ffffff;
 }
 
-.rbc-toolbar button:focus {
-    outline: none;
-    border-color: #00ffff;
+/* Ensure the calendar takes the full height */
+html, body, #root {
+    height: 100%;
+    padding: 0;
 }
 
-/* Ensuring the buttons match the dark theme */
-.rbc-toolbar button[aria-pressed="true"] {
-    background-color: #555555;
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.calendar-container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* set clicked slot to be blue */
+.rbc-event.selected {
+    background-color: blue;
     color: #ffffff;
-    border-color: #00ffff;
+}
+
+/* Style for add new appointment button */
+.new-appt-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444444;
+    width: 173px; /* Allow button to size based on content */
+    margin: 20px 0 5px 14px;
+}
+
+.new-appt-button:hover {
+    background-color: #444444;
+}
+
+/* Event items for month week and day views */
+/* Event items */
+.rbc-event, .rbc-time-view .rbc-event {
+    width: 100%;
+    background-color: #333333;
+    border: 1px solid #444444;
+    color: #ffffff;
+    border-radius: 0;
+    z-index: 3; /* Place above the hover over */
+}
+
+.rbc-selected {
+    background-color: #265985 !important;
+    border-radius: 0;
+}
+
+/* Get full width for event */
+.rbc-events-container {
+    margin: 0 !important;
+}
+
+/* Hide the time label in events */
+.rbc-event-label {
+    display: none;
+}
+
+/* Ensure the event content (client name) is displayed properly */
+.rbc-event-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Remove blur border on focus/active */
+.rbc-event:focus,
+.rbc-event:active {
+    outline: none;
+    box-shadow: none;
 }

@@ -1,6 +1,6 @@
-const AWS = require("aws-sdk");
-const cookieHandler = require("get_username_from_cookie")
-const { v4: uuidv4 } = require("uuid");
+import AWS from "aws-sdk";
+import cookieHandler from "get_username_from_cookie";
+import { v4 as uuidv4 } from "uuid";
 
 let awsConfig = {
     region: "us-east-2",
@@ -14,7 +14,7 @@ let dynamoDB = new AWS.DynamoDB.DocumentClient();
 const appointmentTableName = "appointment";
 const associateTableName = "associates";
 
-exports.lambdaHandler = async (event) => {
+export const lambdaHandler = async (event) => {
     try {
         // Retrieve the data from the request
         const body = JSON.parse(event.body);

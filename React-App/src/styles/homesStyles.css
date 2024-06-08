@@ -14,35 +14,31 @@
 .sky-image {
     width: 100%;
     height: 100vh;
-    object-fit: cover; 
+    object-fit: cover;
 }
 
-/* Display for ovrlay text */
+/* Display for ovrelay text */
 .home-overlay-text {
     position: absolute;
     top: 40%;
     left: 75%;
     transform: translate(-50%, -50%);
     width: 50%;
-    text-align: center; 
+    text-align: center;
 }
 
 .home-large-image-text {
     font-size: 3.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .home-large-image-text:hover {
-    color: #DCAE96; 
-    cursor: pointer; 
-    transition: color 0.3s ease;  
+    color: #dcae96;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
-/* .home-large-image-text {
-    font-size: 3.5rem;
-    color: #DCAE96;
-} */
 
-/* Display for the text on the left */ 
+/* Display for the text on the left */
 .home-information {
     flex: 1;
     display: flex;
@@ -54,7 +50,7 @@
 
 .good-text {
     font-size: 3rem;
-    color: #ffffff; 
+    color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     font-weight: bold;
     margin-bottom: 1rem;
@@ -62,15 +58,16 @@
 
 .appoints-text {
     font-size: 2.5rem;
-    color: #ffffff; 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
-    font-weight: bold; 
-    margin-bottom: 1rem; 
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 /* Additional styling for hover effect */
-.good-text:hover, .appoints-text:hover {
-    color: #ffcc00; 
-    cursor: pointer; 
-    transition: color 0.3s ease; 
+.good-text:hover,
+.appoints-text:hover {
+    color: #ffcc00;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }

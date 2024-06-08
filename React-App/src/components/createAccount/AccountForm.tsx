@@ -59,6 +59,7 @@ const AccountForm: React.FC<Props> = ({ onSubmit }) => {
                 <PhoneNumberInput
                     value={phoneNumber}
                     onChange={handlePhoneNumberChange}
+                    phoneType="register"
                 />
 
                 <input
@@ -84,15 +85,7 @@ const AccountForm: React.FC<Props> = ({ onSubmit }) => {
                     value="Register"
                     className="register-submit"
                     onClick={(event) =>
-                        onSubmit(
-                            username,
-                            companyName,
-                            name,
-                            phoneNumber,
-                            password,
-                            confirmPassword,
-                            event
-                        )
+                        onSubmit(username, companyName, name, phoneNumber, password, confirmPassword, event)
                     }
                 />
             </form>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "../../styles/addAppointmentStyles.css";
 import { event } from "../../utils/Event";
+import { PhoneNumber } from "react-phone-number-input";
 
 Modal.setAppElement("#root");
 
@@ -12,21 +13,33 @@ interface Props {
     setIsUpdateMode: React.Dispatch<React.SetStateAction<boolean>>;
     isUpdateMode: boolean;
     curEvent: event | null;
-    adjustAppointment: (adjustType: string, appointData: string | undefined) => void;
+    adjustAppointment: (
+        adjustType: string,
+        appointData: string | undefined
+    ) => void;
 }
 
-const ViewAppointment: React.FC<Props> = ({
-    isOpened,
-    swapViewModal,
-    swapApptModal,
-    setIsUpdateMode,
-    isUpdateMode,
-    curEvent,
-    adjustAppointment
-}) => {
-    const [curDate, useCurDate] = useState("");
+const ViewAppointment: React.FC<Props> = ({isOpened, swapViewModal, swapApptModal, setIsUpdateMode, isUpdateMode, curEvent, adjustAppointment}) => {
+    const formatPhoneNumber = (phoneNumber: string | undefined): string => {
+        if (!phoneNumber) return ""
 
+        // Remove the country code and any non-numeric characters
+        const cleaned = ("" + phoneNumber).replace(/\D/g, "").substring(1);
+
+        // Format the number as (###) ###-####
+        const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+
+        if (match) {
+            return `(${match[1]}) ${match[2]}-${match[3]}`;
+        }
+
+        return ""; // invalid phoen numbe
+    };
+
+    const [curDate, useCurDate] = useState("");
+    const [clientPhoneNumber, setClientPhoneNumber] = useState<string | undefined>("");
     useEffect(() => {
+        setClientPhoneNumber(formatPhoneNumber(curEvent?.clientPhoneNumber));
         if (curEvent?.start === undefined || curEvent?.end === undefined) {
             useCurDate("undefined");
             return;
@@ -78,9 +91,9 @@ const ViewAppointment: React.FC<Props> = ({
         // swap the view to user being able to update an appointment
         if (isUpdateMode) {
             swapViewModal(true);
-            swapApptModal(false);    
+            swapApptModal(false);
         }
-    }, [isUpdateMode])
+    }, [isUpdateMode]);
 
     const updateAppt = (): void => {
         // first set to false so that the useEffect is correctly executed
@@ -90,8 +103,8 @@ const ViewAppointment: React.FC<Props> = ({
 
     const deleteAppt = (): void => {
         let deleteData = {
-            "appointmentId": curEvent?.appointmentId
-        }
+            appointmentId: curEvent?.appointmentId,
+        };
 
         fetch("http://127.0.0.1:3000/deleteAppointment", {
             method: "POST",
@@ -107,6 +120,7 @@ const ViewAppointment: React.FC<Props> = ({
             .then((data) => {
                 // checks if the data was valid
                 if (data === "valid") {
+                    // remove appointment from the calender ui
                     adjustAppointment("delete", curEvent?.appointmentId);
                     alert("Meeting has been deleted");
                 } else {
@@ -120,18 +134,30 @@ const ViewAppointment: React.FC<Props> = ({
             <Modal
                 isOpen={isOpened}
                 onRequestClose={() => swapViewModal(true)}
-                contentLabel="WHat is this"
-                className="customModal"
-                overlayClassName="customModalOverlay"
+                className="custom-modal"
+                overlayClassName="custom-modal-overlay"
             >
-                <button onClick={() => swapViewModal(true)}>x</button>
-                <h1>Client Name: {curEvent?.title}</h1>
-                <h1>Client Phone: {curEvent?.clientPhoneNumber}</h1>
-                <h2>Date: {curDate}</h2>
-                <h2>Notes: {curEvent?.notes}</h2>
-                <button onClick={updateAppt}>Update Appointment</button>
+                <button
+                    className="exit-button"
+                    onClick={() => swapViewModal(true)}
+                >x</button>
+                {/* Information about the appointment */}
+                <h1 className="modal-title">Client Name: {curEvent?.title}</h1>
+                <h1 className="modal-title">
+                    Client Phone: {clientPhoneNumber}
+                </h1>
+                <h2 className="modal-second">Date: {curDate}</h2>
+                <h2 className="modal-second">Notes: {curEvent?.notes}</h2>
+                <button className="change-button" onClick={updateAppt}>
+                    Update Appointment
+                </button>
                 <br></br>
-                <button onClick={deleteAppt}>Delete Appointment</button>
+                <button
+                    className="change-button delete-button"
+                    onClick={deleteAppt}
+                >
+                    Delete Appointment
+                </button>
             </Modal>
         </>
     );

@@ -1,7 +1,7 @@
-const AWS = require("aws-sdk");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const cookie = require("cookie");
+import AWS from "aws-sdk";
+import bcrypt from "bcryptjs";
+import jwt  from "jsonwebtoken";
+import cookie  from "cookie";
 
 let awsConfig = {
     region: "us-east-2",
@@ -14,7 +14,7 @@ let dynamoDB = new AWS.DynamoDB.DocumentClient();
 const tableName = "associates";
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY_VALUE;
 
-exports.lambdaHandler = async (event) => {
+export const lambdaHandler = async (event) => {
     try {
         // Retrieve the data from the request
         const body = JSON.parse(event.body);

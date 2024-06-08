@@ -12,8 +12,6 @@ const CreateAccount: React.FC = () => {
         }
         // modify the phone number to be in correct format 
         phoneNumber = "+1" + phoneNumber.replace(/\D/g, "");
-        console.log(phoneNumber);
-
         let pattern = new RegExp("\\+[0-9]{11}");
         if (!pattern.test(phoneNumber)) {
             alert("Phone number is invalid.");
@@ -48,16 +46,19 @@ const CreateAccount: React.FC = () => {
             }
         })
     }
+
     return (
             <div className="login-container">
+                {/* left hand panel */}
                 <div className="login-image">
-                    <img src="forest.jpg" alt="login-image" className="forest-image" />
+                    <img src="forest.jpg" alt="login-image" className="forest-image forest-image-register" />
                     <img src="PlanPerfectLogo.png" alt="titleImage" className="top-title-image" />
                     <div className="overlay-text">
                         <h1 className="large-image-text">Manage with Ease</h1>
                         <h2 className="medium-image-text">Streamline your appointments and ensure timely notifications for your clients.</h2>
                     </div>
                 </div>
+                {/* right hand panel where user can login */}
                 <div className="login-form">
                     <img src="PlanPerfectLogo.png" alt="titleImage" className="title-image" />
                     <h1 className="form-header">Create Your Account</h1>

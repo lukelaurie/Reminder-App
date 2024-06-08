@@ -1,4 +1,10 @@
-/* Display for 2 side by side panels */
+/* logo display */
+.title-image {
+    width: 60%;
+    object-fit: contain;
+  }
+
+/* Display for lwft side panel */
 .login-container {
     display: flex;
 }
@@ -16,6 +22,11 @@
     height: 100vh;
 }
 
+.forest-image-register {
+    height: 120vh;
+}
+
+/* Display for right side panel */
 .login-form {
     flex: 1;
     display: flex;
@@ -94,7 +105,16 @@
     border: 1px solid #03a1a1;
 }
 
-/* Keep autofilling colors the same */
+.main-form-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Prevents autofilling colors the same */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -103,7 +123,7 @@ input:-webkit-autofill:active {
     -webkit-text-fill-color: #ffffff !important;
 }
 
-/* login/Register button */
+/* login/register button */
 .register-submit {
     background-color: #03a1a1;
     border: 1px solid #03a1a1;

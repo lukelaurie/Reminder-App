@@ -1,17 +1,17 @@
-.customModal {
-    background-color: rgb(230, 86, 86);
-    opacity: 1;
+/* modal styling */
+.custom-modal {
+    background-color: #f0f0f0;
     padding: 20px;
-    border-radius: 4px;
-    max-width: 600px;
+    border-radius: 8px;
+    max-width: 500px;
     margin: auto;
     position: relative;
     z-index: 1001;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
 }
 
-.customModalOverlay {
-    background-color: rgba(0, 0, 0, 0.75);
-    /* Semi-transparent black overlay */
+.custom-modal-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
     left: 0;
@@ -20,6 +20,87 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
-    /* Ensure the overlay is below the modal content but above other content */
+    z-index: 1000; /* Ensure the overlay is below the modal content but above other content */
+}
+
+.modal-title {
+    margin-top: 0;
+    color: #333333;
+}
+
+.modal-second {
+    margin-bottom: 10px;
+    color: #666666;
+}
+
+.exit-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #265985;
+    color: #ffffff;
+    border: none;
+    font-size: 20px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 1002; /* Ensure the button is above the modal content */
+}
+
+.change-button, .modal-sumbmit {
+    padding: 8px 16px;
+    margin-top: 10px;
+    background-color: #265985;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.delete-button {
+    padding-right: 21px;
+}
+
+.change-button:hover, .exit-button:hover, .modal-sumbmit:hover {
+    background-color: #1c476e;
+}
+
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    resize: none;
+    height: 30px;
+}
+.appoint-form-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.date-picker {
+    width: 100%;
+    padding: 8px 0;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Prevent autofilling with wrong color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #333333 !important;
+}
+
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #000000 inset !important;
+    -webkit-text-fill-color: #333333 !important;
 }

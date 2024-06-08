@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/loginRegister.css";
 
 interface PhoneNumberInputProps {
     value: string | undefined;
     onChange: (value: string | undefined) => void;
+    phoneType: string
 }
 
-const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
-    value,
-    onChange
-}) => {
+const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({value, onChange, phoneType}) => {
+    const [className, setClassName] = useState("account-form-input")
+
+    useEffect(() => {
+        if (phoneType === "form") setClassName("main-form-input");
+    }, [])
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
         // Filter out non-numeric characters from the input value
@@ -35,7 +39,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
             placeholder="(123) 456-7890"
             value={value}
             onChange={handleChange}
-            className="account-form-input"
+            className={className}
         />
     );
 };

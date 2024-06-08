@@ -11,19 +11,34 @@ phases:
         commands:
             - echo "Zipping deployment packages..."
             - mkdir lambda_zips
-            - cp sam-app/lambda_functions/add_new_associate/index.js lambda_zips/newAssociate.js
-            - cp sam-app/lambda_functions/create_new_appointment/index.js lambda_zips/newAppointment.js
-            - cp sam-app/lambda_functions/login/index.js lambda_zips/login.js
-            - cp sam-app/lambda_functions/retrieve_appointments/index.js lambda_zips/retrieveAppointments.js
-            - cp sam-app/lambda_functions/send_appointment_reminders/index.js lambda_zips/sendAppointmentReminders.js
-            - cp sam-app/lambda_functions/is_logged_in/index.js lambda_zips/isLoggedIn.js
+            - mkdir add_new_associate
+            - mkdir create_new_appointment
+            - mkdir login
+            - mkdir retrieve_appointments
+            - mkdir send_appointment_reminders
+            - mkdir is_logged_in
+            - mkdir delete_appointment
+            - mkdir retrieve_associate
+
+            - cp sam-app/lambda_functions/add_new_associate/index.mjs add_new_associate/index.mjs
+            - cp sam-app/lambda_functions/create_new_appointment/index.mjs create_new_appointment/index.mjs
+            - cp sam-app/lambda_functions/login/index.mjs login/index.mjs
+            - cp sam-app/lambda_functions/retrieve_appointments/index.mjs retrieve_appointments/index.mjs
+            - cp sam-app/lambda_functions/send_appointment_reminders/index.mjs send_appointment_reminders/index.mjs
+            - cp sam-app/lambda_functions/is_logged_in/index.mjs is_logged_in/index.mjs
+            - cp sam-app/lambda_functions/delete_appointment/index.mjs delete_appointment/index.mjs
+            - cp sam-app/lambda_functions/retrieve_associate/index.mjs retrieve_associate/index.mjs
             - cd lambda_zips
-            - zip -r9 newAssociate.zip newAssociate.js
-            - zip -r9 newAppointment.zip newAppointment.js
-            - zip -r9 login.zip login.js
-            - zip -r9 retrieveAppointments.zip retrieveAppointments.js
-            - zip -r9 sendAppointmentReminders.zip sendAppointmentReminders.js
-            - zip -r9 isLoggedIn.zip isLoggedIn.js
+
+            - zip -j -r9 newAssociate.zip ../add_new_associate/index.mjs
+            - zip -j -r9 newAppointment.zip ../create_new_appointment/index.mjs
+            - zip -j -r9 login.zip ../login/index.mjs
+            - zip -j -r9 retrieveAppointments.zip ../retrieve_appointments/index.mjs
+            - zip -j -r9 sendAppointmentReminders.zip ../send_appointment_reminders/index.mjs
+            - zip -j -r9 isLoggedIn.zip ../is_logged_in/index.mjs
+            - zip -j -r9 deleteAppointment.zip ../delete_appointment/index.mjs
+            - zip -j -r9 retrieveAssociate.zip ../retrieve_associate/index.mjs
+
             - echo "Zipping deployment package for Lambda layer..."
             - cd ../sam-app/layers/cookie/nodejs/node_modules/get_username_from_cookie
             - zip -r9 ../../../../../../lambda_zips/getUsernameLayer.zip .
@@ -41,6 +56,8 @@ phases:
             - aws lambda update-function-code --function-name retrieveAppointments --zip-file fileb://retrieveAppointments.zip
             - aws lambda update-function-code --function-name sendAppointmentReminders --zip-file fileb://sendAppointmentReminders.zip
             - aws lambda update-function-code --function-name isLoggedIn --zip-file fileb://isLoggedIn.zip
+            - aws lambda update-function-code --function-name deleteAppointments --zip-file fileb://deleteAppointment.zip
+            - aws lambda update-function-code --function-name retrieveAssociate --zip-file fileb://isLoggedIn.zip
             - aws lambda publish-layer-version --layer-name getUsernameLayer --description "Shared Node.js get username layer" --zip-file fileb://getUsernameLayer.zip --compatible-runtimes nodejs18.x
             - aws lambda publish-layer-version --layer-name getTextLayer --description "Shared Node.js text layer" --zip-file fileb://getTextLayer.zip --compatible-runtimes nodejs18.x
             - echo "DONE NOW!!"

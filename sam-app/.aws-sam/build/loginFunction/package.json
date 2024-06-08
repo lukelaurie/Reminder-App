@@ -6,6 +6,7 @@
   "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
   "author": "SAM CLI",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "axios": "^1.6.0",
     "bcryptjs": "^2.4.3",
