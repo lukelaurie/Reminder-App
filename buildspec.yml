@@ -40,10 +40,10 @@ phases:
             - zip -j -r9 retrieveAssociate.zip ../retrieve_associate/index.mjs
 
             - echo "Zipping deployment package for Lambda layer..."
-            - cd ../sam-app/layers/cookie
+            - cd ../sam-app/layers/cookie/nodejs
             - zip -r9 ../../../lambda_zips/getUsernameLayer.zip .
             - cd ../../../lambda_zips
-            - cd ../sam-app/layers/text
+            - cd ../sam-app/layers/text/nodejs
             - zip -r9 ../../../lambda_zips/getTextLayer.zip .
             - cd ../../../lambda_zips
 
