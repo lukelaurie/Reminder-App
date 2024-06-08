@@ -41,11 +41,11 @@ phases:
 
             - echo "Zipping deployment package for Lambda layer..."
             - cd ../sam-app/layers/cookie/nodejs
-            - zip -r9 ../../../lambda_zips/getUsernameLayer.zip .
-            - cd ../../../lambda_zips
+            - zip -r9 ../../../../lambda_zips/getUsernameLayer.zip .
+            - cd ../../../../lambda_zips
             - cd ../sam-app/layers/text/nodejs
-            - zip -r9 ../../../lambda_zips/getTextLayer.zip .
-            - cd ../../../lambda_zips
+            - zip -r9 ../../../../lambda_zips/getTextLayer.zip .
+            - cd ../../../../lambda_zips
 
     post_build:
         commands:
