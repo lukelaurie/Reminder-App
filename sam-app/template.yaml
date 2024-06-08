@@ -129,6 +129,7 @@ Resources:
                     Properties:
                         Path: /sendAppointmentReminders
                         Method: post
+                        
     isLoggedInFunction:
         Type: AWS::Serverless::Function
         Properties:
