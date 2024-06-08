@@ -14,7 +14,6 @@ phases:
             - cd lambda_zips
             - cp ../sam-app/lambda_functions/add_new_associate/index.js ./index.mjs
             - zip -r9 newAssociate.zip ./index.mjs
-            - rm ./index.mjs
             - cp ../sam-app/lambda_functions/create_new_appointment/index.js ./index.mjs
             - zip -r9 newAppointment.zip.zip ./index.mjs
             - rm ./index.mjs
@@ -36,6 +35,8 @@ phases:
             - cp ../sam-app/lambda_functions/retrieve_associate/index.js ./index.mjs
             - zip -r9 retrieveAssociate.zip ./index.mjs
             - rm ./index.mjs
+            - echo "here we are" 
+            - ls
             - cd ../sam-app/layers/cookie/nodejs/node_modules/get_username_from_cookie
             - zip -r9 ../../../../../../lambda_zips/getUsernameLayer.zip .
             - cd ../../../../../../lambda_zips
