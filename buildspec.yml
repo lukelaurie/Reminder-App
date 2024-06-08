@@ -11,25 +11,31 @@ phases:
         commands:
             - echo "Zipping deployment packages..."
             - mkdir lambda_zips
-            - mkdir lambda_zips/add_new_associate
-            - cp sam-app/lambda_functions/add_new_associate/index.js lambda_zips/add_new_associate/index.mjs
-            - mkdir lambda_zips/create_new_appointment
-            - cp sam-app/lambda_functions/create_new_appointment/index.js lambda_zips/create_new_appointment/index.mjs
-            - mkdir lambda_zips/login
-            - cp sam-app/lambda_functions/login/index.js lambda_zips/login/index.mjs
-            - mkdir lambda_zips/retrieve_appointments
-            - cp sam-app/lambda_functions/retrieve_appointments/index.js lambda_zips/retrieve_appointments/index.mjs
-            - mkdir lambda_zips/send_appointment_reminders
-            - cp sam-app/lambda_functions/send_appointment_reminders/index.js lambda_zips/send_appointment_reminders/index.mjs
-            - mkdir lambda_zips/is_logged_in
-            - cp sam-app/lambda_functions/is_logged_in/index.js lambda_zips/is_logged_in/index.mjs
-            - mkdir lambda_zips/delete_appointment
-            - cp sam-app/lambda_functions/delete_appointment/index.js lambda_zips/delete_appointment/index.mjs
-            - mkdir lambda_zips/retrieve_associate
-            - cp sam-app/lambda_functions/retrieve_associate/index.js lambda_zips/retrieve_associate/index.mjs
             - cd lambda_zips
-            - for dir in */; do zip -r9 "${dir%/}.zip" "$dir"; done
-            - echo "Zipping deployment package for Lambda layer..."
+            - cp sam-app/lambda_functions/add_new_associate/index.js ./index.mjs
+            - zip -r9 newAssociate.zip ./index.mjs
+            - rm ./index.mjs
+            - cp sam-app/lambda_functions/create_new_appointment/index.js ./index.mjs
+            - zip -r9 newAppointment.zip.zip ./index.mjs
+            - rm ./index.mjs
+            - cp sam-app/lambda_functions/login/index.js ./index.mjs
+            - zip -r9 login.zip ./index.mjs
+            - rm ./index.mjs
+            - cp sam-app/lambda_functions/retrieve_appointments/index.js ./index.mjs
+            - zip -r9 retrieveAppointments.zip ./index.mjs
+            - rm ./index.mjs
+            - cp sam-app/lambda_functions/send_appointment_reminders/index.js ./index.mjs
+            - zip -r9 sendAppointmentReminders.zip ./index.mjs
+            - rm ./index.mjs
+            - cp sam-app/lambda_functions/is_logged_in/index.js ./index.mjs
+            - zip -r9 isLoggedIn.zip ./index.mjs
+            - rm ./index.mjs
+            - cp sam-app/lambda_functions/delete_appointment/index.js ./index.mjs
+            - zip -r9 deleteAppointment.zip ./index.mjs
+            - rm ./index.mjs
+            - cp sam-app/lambda_functions/retrieve_associate/index.js ./index.mjs
+            - zip -r9 retrieveAssociate.zip ./index.mjs
+            - rm ./index.mjs
             - cd ../sam-app/layers/cookie/nodejs/node_modules/get_username_from_cookie
             - zip -r9 ../../../../../../lambda_zips/getUsernameLayer.zip .
             - cd ../../../../../../lambda_zips
