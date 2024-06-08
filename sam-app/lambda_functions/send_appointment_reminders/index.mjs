@@ -1,7 +1,7 @@
 import textMessage from "send-text-message";
 
 
-export const lambdaHandler = async (event) => {
+export const handler = async (event) => {
     try {
         await textMessage.sendTextMessage(
             "+15204058935",

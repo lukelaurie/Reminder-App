@@ -14,7 +14,7 @@ let dynamoDB = new AWS.DynamoDB.DocumentClient();
 const tableName = "associates";
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY_VALUE;
 
-export const lambdaHandler = async (event) => {
+export const handler = async (event) => {
     try {
         // Retrieve the data from the request
         const body = JSON.parse(event.body);

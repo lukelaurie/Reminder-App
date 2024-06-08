@@ -1,6 +1,6 @@
 import cookieHandler from "get_username_from_cookie";
 
-export const lambdaHandler = async (event) => {
+export const handler = async (event) => {
     try {
         // check if the username from the cookie exists
         if (!(await cookieHandler.getUsernameFromCookie(event))) {

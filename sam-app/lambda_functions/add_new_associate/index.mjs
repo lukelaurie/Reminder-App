@@ -11,7 +11,7 @@ AWS.config.update(awsConfig);
 let dynamoDB = new AWS.DynamoDB.DocumentClient();
 const tableName = "associates";
 
-export const lambdaHandler = async (event) => {
+export const handler = async (event) => {
     try {
         // Retrieve the data from the request
         const body = JSON.parse(event.body);
