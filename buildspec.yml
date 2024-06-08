@@ -12,28 +12,28 @@ phases:
             - echo "Zipping deployment packages..."
             - mkdir lambda_zips
             - cd lambda_zips
-            - cp sam-app/lambda_functions/add_new_associate/index.js ./index.mjs
+            - cp ../sam-app/lambda_functions/add_new_associate/index.js ./index.mjs
             - zip -r9 newAssociate.zip ./index.mjs
             - rm ./index.mjs
-            - cp sam-app/lambda_functions/create_new_appointment/index.js ./index.mjs
+            - cp ../sam-app/lambda_functions/create_new_appointment/index.js ./index.mjs
             - zip -r9 newAppointment.zip.zip ./index.mjs
             - rm ./index.mjs
-            - cp sam-app/lambda_functions/login/index.js ./index.mjs
+            - cp ../sam-app/lambda_functions/login/index.js ./index.mjs
             - zip -r9 login.zip ./index.mjs
             - rm ./index.mjs
-            - cp sam-app/lambda_functions/retrieve_appointments/index.js ./index.mjs
+            - cp ../sam-app/lambda_functions/retrieve_appointments/index.js ./index.mjs
             - zip -r9 retrieveAppointments.zip ./index.mjs
             - rm ./index.mjs
-            - cp sam-app/lambda_functions/send_appointment_reminders/index.js ./index.mjs
+            - cp ../sam-app/lambda_functions/send_appointment_reminders/index.js ./index.mjs
             - zip -r9 sendAppointmentReminders.zip ./index.mjs
             - rm ./index.mjs
-            - cp sam-app/lambda_functions/is_logged_in/index.js ./index.mjs
+            - cp ../sam-app/lambda_functions/is_logged_in/index.js ./index.mjs
             - zip -r9 isLoggedIn.zip ./index.mjs
             - rm ./index.mjs
-            - cp sam-app/lambda_functions/delete_appointment/index.js ./index.mjs
+            - cp ../sam-app/lambda_functions/delete_appointment/index.js ./index.mjs
             - zip -r9 deleteAppointment.zip ./index.mjs
             - rm ./index.mjs
-            - cp sam-app/lambda_functions/retrieve_associate/index.js ./index.mjs
+            - cp ../sam-app/lambda_functions/retrieve_associate/index.js ./index.mjs
             - zip -r9 retrieveAssociate.zip ./index.mjs
             - rm ./index.mjs
             - cd ../sam-app/layers/cookie/nodejs/node_modules/get_username_from_cookie
