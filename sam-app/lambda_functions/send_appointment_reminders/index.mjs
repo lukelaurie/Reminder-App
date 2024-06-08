@@ -1,9 +1,9 @@
-import textMessage from "send-text-message";
+import { sendTextMessage } from 'send-text-message/index.mjs';
 
 
 export const handler = async (event) => {
     try {
-        await textMessage.sendTextMessage(
+        await sendTextMessage(
             "+15204058935",
             "THis is a test message being sent to myself"
         );

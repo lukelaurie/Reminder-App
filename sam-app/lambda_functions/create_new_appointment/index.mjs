@@ -1,5 +1,5 @@
 import AWS from "aws-sdk";
-import cookieHandler from "get_username_from_cookie";
+import { getUsernameFromCookie } from "get_username_from_cookie/index.mjs";
 import { v4 as uuidv4 } from "uuid";
 
 let awsConfig = {
@@ -27,7 +27,7 @@ export const handler = async (event) => {
         let associateUsername;
         // checks if username was provided in the cookie
         try {
-            associateUsername = await cookieHandler.getUsernameFromCookie(event);
+            associateUsername = await getUsernameFromCookie(event);
         } catch (error) {
             return {
                 statusCode: 400,

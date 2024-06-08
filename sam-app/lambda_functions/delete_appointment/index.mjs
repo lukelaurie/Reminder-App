@@ -1,5 +1,5 @@
 import AWS from "aws-sdk";
-import cookieHandler from "get_username_from_cookie";
+import { getUsernameFromCookie } from "get_username_from_cookie/index.mjs";
 
 let awsConfig = {
     region: "us-east-2",
@@ -19,7 +19,7 @@ export const handler = async (event) => {
         const appointmentId = body.appointmentId;
         // checks if user has authorization to delete
         try {
-            await cookieHandler.getUsernameFromCookie(event);
+            await getUsernameFromCookie(event);
         } catch (error) {
             return {
                 statusCode: 400,
