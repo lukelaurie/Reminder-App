@@ -30,15 +30,15 @@ phases:
             - cp sam-app/lambda_functions/retrieve_associate/index.js retrieve_associate/index.mjs
             - cd lambda_zips
 
-            - zip -r9 newAssociate.zip ../add_new_associate/index.mjs
-            - zip -r9 newAppointment.zip ../create_new_appointment/index.mjs
-            - zip -r9 login.zip ../login/index.mjs
-            - zip -r9 retrieveAppointments.zip ../retrieve_appointments/index.mjs
-            - zip -r9 sendAppointmentReminders.zip ../send_appointment_reminders/index.mjs
-            - zip -r9 isLoggedIn.zip ../is_logged_in/index.mjs
-            - zip -r9 deleteAppointment.zip ../delete_appointment/index.mjs
-            - zip -r9 retrieveAssociate.zip ../retrieve_associate/index.mjs
-            
+            - zip -j -r9 newAssociate.zip ../add_new_associate/index.mjs
+            - zip -j -r9 newAppointment.zip ../create_new_appointment/index.mjs
+            - zip -j -r9 login.zip ../login/index.mjs
+            - zip -j -r9 retrieveAppointments.zip ../retrieve_appointments/index.mjs
+            - zip -j -r9 sendAppointmentReminders.zip ../send_appointment_reminders/index.mjs
+            - zip -j -r9 isLoggedIn.zip ../is_logged_in/index.mjs
+            - zip -j -r9 deleteAppointment.zip ../delete_appointment/index.mjs
+            - zip -j -r9 retrieveAssociate.zip ../retrieve_associate/index.mjs
+
             - echo "Zipping deployment package for Lambda layer..."
             - cd ../sam-app/layers/cookie/nodejs/node_modules/get_username_from_cookie
             - zip -r9 ../../../../../../lambda_zips/getUsernameLayer.zip .
