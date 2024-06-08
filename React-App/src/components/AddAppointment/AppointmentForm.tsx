@@ -27,7 +27,12 @@ const AppointmentForm: React.FC<Props> = ({ onSubmit, curEvent }) => {
     );
     const [notes, setNotes] = useState(curEvent?.notes || "");
     const [clientName, setClientName] = useState(curEvent?.title || "");
-    const [phoneNumber, setPhoneNumber] = useState<string | undefined>("");
+    // remove the '+1'
+    let phoneNum = "";
+    if (curEvent?.clientPhoneNumber) {
+        phoneNum = curEvent?.clientPhoneNumber.substring(2, curEvent?.clientPhoneNumber.length);
+    }
+    const [phoneNumber, setPhoneNumber] = useState<string | undefined>(phoneNum);
 
     const handlePhoneNumberChange = (value: string | undefined) => {
         setPhoneNumber(value);

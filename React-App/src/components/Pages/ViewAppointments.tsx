@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import AppointmentFilloutModal from "../AddAppointment/AppointmentFilloutModal";
 import ViewAppointment from "../AddAppointment/ViewAppointment";
 import { event } from "../../utils/Event";
-import { Calendar, momentLocalizer, SlotInfo } from "react-big-calendar";
+import { Calendar, momentLocalizer, SlotInfo, EventProps } from "react-big-calendar";
 import moment from "moment";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -153,10 +153,12 @@ const ViewAppointments: React.FC = () => {
     };
 
     const adjustAppointment = (adjustType: string, appointId: string | undefined) => {
+        swapApptModal(true);
         // determine how to handle the specific month types
         switch (adjustType) {
             case "delete":
                 removeApptFromEvent(appointId, events, setEvents);
+                swapViewApptApptModal(true);
                 break;
             case "update":
                 modifyEvents(true);
@@ -209,7 +211,7 @@ const ViewAppointments: React.FC = () => {
                 }}>
                 Add New Appointment
             </button>
-            {/* THe calender itself */}
+            {/* The calender itself */}
             <div className="calendar-container">
                 <Calendar
                     localizer={localizer}
@@ -223,7 +225,7 @@ const ViewAppointments: React.FC = () => {
                     }}
                     onSelectSlot={handleSelectSlot}
                     onDoubleClickEvent={handleEventClick}
-                    selectable
+                    selectable                
                 />
             </div>
             {/* The modals for appointment fillout and information */}
