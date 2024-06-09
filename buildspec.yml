@@ -50,7 +50,6 @@ phases:
     post_build:
         commands:
             - echo "Updating Lambda Functions..."
-            - source .env
             - aws lambda update-function-code --function-name addNewAssociate --zip-file fileb://newAssociate.zip
             - aws lambda update-function-code --function-name createNewAppointment --zip-file fileb://newAppointment.zip
             - aws lambda update-function-code --function-name logAssociateIn --zip-file fileb://login.zip
@@ -62,12 +61,12 @@ phases:
             - aws lambda publish-layer-version --layer-name getUsernameLayer --description "Shared Node.js get username layer" --zip-file fileb://getUsernameLayer.zip --compatible-runtimes nodejs18.x
             - aws lambda publish-layer-version --layer-name getTextLayer --description "Shared Node.js text layer" --zip-file fileb://getTextLayer.zip --compatible-runtimes nodejs18.x
             - echo "Setting environment variables for Lambda functions..."
-            - aws lambda update-function-configuration --function-name addNewAssociate --environment "Variables={AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY,JWT_SECRET_KEY_VALUE=$JWT_SECRET_KEY_VALUE}"
-            - aws lambda update-function-configuration --function-name createNewAppointment --environment "Variables={AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY,JWT_SECRET_KEY_VALUE=$JWT_SECRET_KEY_VALUE}"
-            - aws lambda update-function-configuration --function-name logAssociateIn --environment "Variables={AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY,JWT_SECRET_KEY_VALUE=$JWT_SECRET_KEY_VALUE}"
-            - aws lambda update-function-configuration --function-name retrieveAppointments --environment "Variables={AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY,JWT_SECRET_KEY_VALUE=$JWT_SECRET_KEY_VALUE}"
-            - aws lambda update-function-configuration --function-name sendAppointmentReminders --environment "Variables={AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY,JWT_SECRET_KEY_VALUE=$JWT_SECRET_KEY_VALUE}"
-            - aws lambda update-function-configuration --function-name isLoggedIn --environment "Variables={AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY,JWT_SECRET_KEY_VALUE=$JWT_SECRET_KEY_VALUE}"
-            - aws lambda update-function-configuration --function-name deleteAppointments --environment "Variables={AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY,JWT_SECRET_KEY_VALUE=$JWT_SECRET_KEY_VALUE}"
-            - aws lambda update-function-configuration --function-name retrieveAssociate --environment "Variables={AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY,JWT_SECRET_KEY_VALUE=$JWT_SECRET_KEY_VALUE}"
+            - aws lambda update-function-configuration --function-name addNewAssociate --environment "Variables={AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID},AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY},JWT_SECRET_KEY_VALUE=${JWT_SECRET_KEY_VALUE}}"
+            - aws lambda update-function-configuration --function-name createNewAppointment --environment "Variables={AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID},AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY},JWT_SECRET_KEY_VALUE=${JWT_SECRET_KEY_VALUE}}"
+            - aws lambda update-function-configuration --function-name logAssociateIn --environment "Variables={AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID},AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY},JWT_SECRET_KEY_VALUE=${JWT_SECRET_KEY_VALUE}}"
+            - aws lambda update-function-configuration --function-name retrieveAppointments --environment "Variables={AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID},AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY},JWT_SECRET_KEY_VALUE=${JWT_SECRET_KEY_VALUE}}"
+            - aws lambda update-function-configuration --function-name sendAppointmentReminders --environment "Variables={AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID},AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY},JWT_SECRET_KEY_VALUE=${JWT_SECRET_KEY_VALUE}}"
+            - aws lambda update-function-configuration --function-name isLoggedIn --environment "Variables={AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID},AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY},JWT_SECRET_KEY_VALUE=${JWT_SECRET_KEY_VALUE}}"
+            - aws lambda update-function-configuration --function-name deleteAppointments --environment "Variables={AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID},AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY},JWT_SECRET_KEY_VALUE=${JWT_SECRET_KEY_VALUE}}"
+            - aws lambda update-function-configuration --function-name retrieveAssociate --environment "Variables={AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID},AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY},JWT_SECRET_KEY_VALUE=${JWT_SECRET_KEY_VALUE}}"
             - echo "DONE NOW!!"
