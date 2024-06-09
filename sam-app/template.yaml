@@ -40,7 +40,7 @@ Resources:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: lambda_functions/add_new_associate/
-            Handler: index.lambdaHandler
+            Handler: index.handler
             Runtime: nodejs18.x
             Architectures:
                 - x86_64
@@ -54,7 +54,7 @@ Resources:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: lambda_functions/create_new_appointment/
-            Handler: index.lambdaHandler
+            Handler: index.handler
             Runtime: nodejs18.x
             Layers:
                 - !Ref SharedTextLayer
@@ -75,7 +75,7 @@ Resources:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: lambda_functions/login/
-            Handler: index.lambdaHandler
+            Handler: index.handler
             Runtime: nodejs18.x
             Environment:
                 Variables:
@@ -93,7 +93,7 @@ Resources:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: lambda_functions/retrieve_appointments/
-            Handler: index.lambdaHandler
+            Handler: index.handler
             Runtime: nodejs18.x
             Layers:
                 - !Ref SharedUsernameLayer
@@ -113,7 +113,7 @@ Resources:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: lambda_functions/send_appointment_reminders/
-            Handler: index.lambdaHandler
+            Handler: index.handler
             Runtime: nodejs18.x
             Layers:
                 - !Ref SharedTextLayer
@@ -129,11 +129,12 @@ Resources:
                     Properties:
                         Path: /sendAppointmentReminders
                         Method: post
+                        
     isLoggedInFunction:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: lambda_functions/is_logged_in/
-            Handler: index.lambdaHandler
+            Handler: index.handler
             Runtime: nodejs18.x
             Layers:
                 - !Ref SharedUsernameLayer
@@ -153,7 +154,7 @@ Resources:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: lambda_functions/delete_appointment/
-            Handler: index.lambdaHandler
+            Handler: index.handler
             Runtime: nodejs18.x
             Layers:
                 - !Ref SharedUsernameLayer
@@ -173,7 +174,7 @@ Resources:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: lambda_functions/retrieve_associate/
-            Handler: index.lambdaHandler
+            Handler: index.handler
             Runtime: nodejs18.x
             Layers:
                 - !Ref SharedUsernameLayer

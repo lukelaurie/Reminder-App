@@ -35,7 +35,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: newAssociateFunction
-      Handler: index.lambdaHandler
+      Handler: index.handler
       Runtime: nodejs18.x
       Architectures:
       - x86_64
@@ -51,7 +51,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: newAppointmentFunction
-      Handler: index.lambdaHandler
+      Handler: index.handler
       Runtime: nodejs18.x
       Layers:
       - Ref: SharedTextLayer
@@ -74,7 +74,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: loginFunction
-      Handler: index.lambdaHandler
+      Handler: index.handler
       Runtime: nodejs18.x
       Environment:
         Variables:
@@ -94,7 +94,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: retrieveAppointmentsFunction
-      Handler: index.lambdaHandler
+      Handler: index.handler
       Runtime: nodejs18.x
       Layers:
       - Ref: SharedUsernameLayer
@@ -116,7 +116,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: sendAppointmentRemindersFunction
-      Handler: index.lambdaHandler
+      Handler: index.handler
       Runtime: nodejs18.x
       Layers:
       - Ref: SharedTextLayer
@@ -138,7 +138,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: isLoggedInFunction
-      Handler: index.lambdaHandler
+      Handler: index.handler
       Runtime: nodejs18.x
       Layers:
       - Ref: SharedUsernameLayer
@@ -160,7 +160,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: deleteAppointmentFunction
-      Handler: index.lambdaHandler
+      Handler: index.handler
       Runtime: nodejs18.x
       Layers:
       - Ref: SharedUsernameLayer
@@ -182,7 +182,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: retrieveAssociateFunction
-      Handler: index.lambdaHandler
+      Handler: index.handler
       Runtime: nodejs18.x
       Layers:
       - Ref: SharedUsernameLayer
