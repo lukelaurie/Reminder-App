@@ -17,13 +17,16 @@ const Home: React.FC = () => {
 
     const getUserData = () => {
         // fetch the associate information
-        fetch("http://127.0.0.1:3000/retrieveAssociate", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        })
+        fetch(
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/appointment-management/retrieveAssociate",
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            }
+        )
             .then((response) => {
                 return response.json();
             })
@@ -53,14 +56,17 @@ const Home: React.FC = () => {
         } else {
             setDaytime("Evening");
         }
-        fetch("http://127.0.0.1:3000/retrieveAppointments", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dateRange),
-            credentials: "include",
-        })
+        fetch(
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/appointment-management/retrieveAppointments",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dateRange),
+                credentials: "include",
+            }
+        )
             .then((response) => {
                 return response.json();
             })

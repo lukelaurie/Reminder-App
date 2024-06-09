@@ -11,10 +11,19 @@ interface Props {
     swapModal: (isModalOpened: boolean, shouldKeepEvent: boolean) => void;
     isUpdateMode: boolean;
     curEvent: event | null;
-    adjustAppointment: (adjustType: string,appointData: string | undefined) => void;
+    adjustAppointment: (
+        adjustType: string,
+        appointData: string | undefined
+    ) => void;
 }
 
-const AppointmentFilloutModal: React.FC<Props> = ({isOpened, swapModal, isUpdateMode, curEvent, adjustAppointment}) => {
+const AppointmentFilloutModal: React.FC<Props> = ({
+    isOpened,
+    swapModal,
+    isUpdateMode,
+    curEvent,
+    adjustAppointment,
+}) => {
     const [formType, setFormType] = useState("Add New Appointment");
 
     useEffect(() => {
@@ -25,14 +34,26 @@ const AppointmentFilloutModal: React.FC<Props> = ({isOpened, swapModal, isUpdate
         }
     }, [isUpdateMode]);
 
-    const createAppointment = (startDate: Date, endDate: Date, notes: string, clientName: string, clientPhoneNumber: string | undefined): void => {
+    const createAppointment = (
+        startDate: Date,
+        endDate: Date,
+        notes: string,
+        clientName: string,
+        clientPhoneNumber: string | undefined
+    ): void => {
         // validate the input
-        if (!startDate || !endDate || !notes || !clientName || !clientPhoneNumber) {
+        if (
+            !startDate ||
+            !endDate ||
+            !notes ||
+            !clientName ||
+            !clientPhoneNumber
+        ) {
             alert("Please fill out all fields.");
             return;
         }
 
-        // modify the phone number to be in correct format 
+        // modify the phone number to be in correct format
         clientPhoneNumber = "+1" + clientPhoneNumber.replace(/\D/g, "");
         let pattern = new RegExp("\\+[0-9]{11}");
         if (!pattern.test(clientPhoneNumber)) {
@@ -52,14 +73,17 @@ const AppointmentFilloutModal: React.FC<Props> = ({isOpened, swapModal, isUpdate
             appointData.appointmentId = curEvent.appointmentId;
         }
         // make a request to the backend with the given object information
-        fetch("http://127.0.0.1:3000/createNewAppointment", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(appointData),
-            credentials: "include",
-        })
+        fetch(
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/appointment-management/createNewAppointment",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(appointData),
+                credentials: "include",
+            }
+        )
             .then((response) => {
                 return response.text();
             })
@@ -91,7 +115,10 @@ const AppointmentFilloutModal: React.FC<Props> = ({isOpened, swapModal, isUpdate
                 <h1 className="modal-title">{formType}</h1>
                 <button
                     className="exit-button"
-                    onClick={() => swapModal(true, false)}>x</button>
+                    onClick={() => swapModal(true, false)}
+                >
+                    x
+                </button>
                 <AppointmentForm
                     onSubmit={createAppointment}
                     curEvent={curEvent}
