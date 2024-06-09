@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "../../styles/addAppointmentStyles.css";
 import { event } from "../../utils/Event";
-import { PhoneNumber } from "react-phone-number-input";
+//import { PhoneNumber } from "react-phone-number-input";
 
 Modal.setAppElement("#root");
 
@@ -19,7 +19,7 @@ interface Props {
     ) => void;
 }
 
-const ViewAppointment: React.FC<Props> = ({isOpened, swapViewModal, swapApptModal, setIsUpdateMode, isUpdateMode, curEvent, adjustAppointment}) => {
+const ViewAppointment: React.FC<Props> = ({ isOpened, swapViewModal, swapApptModal, setIsUpdateMode, isUpdateMode, curEvent, adjustAppointment }) => {
     const formatPhoneNumber = (phoneNumber: string | undefined): string => {
         if (!phoneNumber) return ""
 
@@ -55,29 +55,26 @@ const ViewAppointment: React.FC<Props> = ({isOpened, swapViewModal, swapApptModa
             startDate.getDate() !== endDate.getDate() ||
             startDate.getFullYear() !== endDate.getFullYear()
         ) {
-            formattedStartDate = `${
-                startDate.getMonth() + 1
-            }/${startDate.getDate()}/${startDate.getFullYear()}
+            formattedStartDate = `${startDate.getMonth() + 1
+                }/${startDate.getDate()}/${startDate.getFullYear()}
             at ${startDate.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-            })}`;
+                    hour: "2-digit",
+                    minute: "2-digit",
+                })}`;
 
-            formattedEndDate = `${
-                endDate.getMonth() + 1
-            }/${endDate.getDate()}/${endDate.getFullYear()}
+            formattedEndDate = `${endDate.getMonth() + 1
+                }/${endDate.getDate()}/${endDate.getFullYear()}
             at ${endDate.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-            })}`;
+                    hour: "2-digit",
+                    minute: "2-digit",
+                })}`;
         } else {
-            formattedStartDate = `${
-                startDate.getMonth() + 1
-            }/${startDate.getDate()}/${startDate.getFullYear()}
+            formattedStartDate = `${startDate.getMonth() + 1
+                }/${startDate.getDate()}/${startDate.getFullYear()}
             at ${startDate.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-            })}`;
+                    hour: "2-digit",
+                    minute: "2-digit",
+                })}`;
 
             formattedEndDate = `${endDate.toLocaleTimeString([], {
                 hour: "2-digit",
