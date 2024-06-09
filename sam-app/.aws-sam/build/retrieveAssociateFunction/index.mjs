@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 // import getUsernameFromCookie from "./get_username_from_cookie";
-import cookieHandler from "get_username_from_cookie";
+import { getUsernameFromCookie } from "get_username_from_cookie/index.mjs";
 
 let awsConfig = {
     region: "us-east-2",
@@ -18,7 +18,7 @@ export const handler = async (event) => {
         let associateUsername;
         // checks if username was provided in the cookie
         try {
-            associateUsername = await cookieHandler.getUsernameFromCookie(
+            associateUsername = await getUsernameFromCookie(
                 event
             );
         } catch (error) {

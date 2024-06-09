@@ -16,6 +16,7 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY_VALUE;
 
 export const handler = async (event) => {
     try {
+        console.log(awsConfig);
         // Retrieve the data from the request
         const body = JSON.parse(event.body);
         const username = body.username;
