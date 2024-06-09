@@ -49,7 +49,9 @@ const ViewAppointments: React.FC = () => {
         }
     };
 
-    const getDateRange = (range: Date[] | { start: Date; end: Date }): { startDateRange: Date; endDateRange: Date } => {
+    const getDateRange = (
+        range: Date[] | { start: Date; end: Date }
+    ): { startDateRange: Date; endDateRange: Date } => {
         var dateRange: { startDateRange: Date; endDateRange: Date };
 
         // Determine which formate the date was passed in
@@ -75,7 +77,13 @@ const ViewAppointments: React.FC = () => {
         return dateRange;
     };
 
-    const updateEvents = (range: Date[] | { start: Date; end: Date }, events: event[], setEvents: (events: event[]) => void, requestRequired: boolean, setCurClickedMonth: (month: number) => void): void => {
+    const updateEvents = (
+        range: Date[] | { start: Date; end: Date },
+        events: event[],
+        setEvents: (events: event[]) => void,
+        requestRequired: boolean,
+        setCurClickedMonth: (month: number) => void
+    ): void => {
         var dateRange = getDateRange(range);
 
         // checks if a month swap was clicked
@@ -94,14 +102,17 @@ const ViewAppointments: React.FC = () => {
         }
 
         rangesVisited.add(dateRangeStr);
-        fetch("http://127.0.0.1:3000/retrieveAppointments", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dateRange),
-            credentials: "include",
-        })
+        fetch(
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/appointment-management/retrieveAppointments",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dateRange),
+                credentials: "include",
+            }
+        )
             .then((response) => {
                 return response.json();
             })
@@ -152,7 +163,10 @@ const ViewAppointments: React.FC = () => {
         );
     };
 
-    const adjustAppointment = (adjustType: string, appointId: string | undefined) => {
+    const adjustAppointment = (
+        adjustType: string,
+        appointId: string | undefined
+    ) => {
         swapApptModal(true);
         // determine how to handle the specific month types
         switch (adjustType) {
@@ -208,7 +222,8 @@ const ViewAppointments: React.FC = () => {
                 onClick={() => {
                     setIsUpdateMode(false);
                     swapApptModal(isApptOpened);
-                }}>
+                }}
+            >
                 Add New Appointment
             </button>
             {/* The calender itself */}
@@ -221,7 +236,13 @@ const ViewAppointments: React.FC = () => {
                     onRangeChange={(
                         range: Date[] | { start: Date; end: Date }
                     ) => {
-                        updateEvents(range, events, setEvents, false, setCurClickedMonth);
+                        updateEvents(
+                            range,
+                            events,
+                            setEvents,
+                            false,
+                            setCurClickedMonth
+                        );
                     }}
                     onSelectSlot={handleSelectSlot}
                     onDoubleClickEvent={handleEventClick}

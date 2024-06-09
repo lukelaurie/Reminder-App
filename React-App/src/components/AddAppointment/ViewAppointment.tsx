@@ -19,9 +19,17 @@ interface Props {
     ) => void;
 }
 
-const ViewAppointment: React.FC<Props> = ({ isOpened, swapViewModal, swapApptModal, setIsUpdateMode, isUpdateMode, curEvent, adjustAppointment }) => {
+const ViewAppointment: React.FC<Props> = ({
+    isOpened,
+    swapViewModal,
+    swapApptModal,
+    setIsUpdateMode,
+    isUpdateMode,
+    curEvent,
+    adjustAppointment,
+}) => {
     const formatPhoneNumber = (phoneNumber: string | undefined): string => {
-        if (!phoneNumber) return ""
+        if (!phoneNumber) return "";
 
         // Remove the country code and any non-numeric characters
         const cleaned = ("" + phoneNumber).replace(/\D/g, "").substring(1);
@@ -37,7 +45,9 @@ const ViewAppointment: React.FC<Props> = ({ isOpened, swapViewModal, swapApptMod
     };
 
     const [curDate, useCurDate] = useState("");
-    const [clientPhoneNumber, setClientPhoneNumber] = useState<string | undefined>("");
+    const [clientPhoneNumber, setClientPhoneNumber] = useState<
+        string | undefined
+    >("");
     useEffect(() => {
         setClientPhoneNumber(formatPhoneNumber(curEvent?.clientPhoneNumber));
         if (curEvent?.start === undefined || curEvent?.end === undefined) {
@@ -55,26 +65,29 @@ const ViewAppointment: React.FC<Props> = ({ isOpened, swapViewModal, swapApptMod
             startDate.getDate() !== endDate.getDate() ||
             startDate.getFullYear() !== endDate.getFullYear()
         ) {
-            formattedStartDate = `${startDate.getMonth() + 1
-                }/${startDate.getDate()}/${startDate.getFullYear()}
+            formattedStartDate = `${
+                startDate.getMonth() + 1
+            }/${startDate.getDate()}/${startDate.getFullYear()}
             at ${startDate.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                })}`;
+                hour: "2-digit",
+                minute: "2-digit",
+            })}`;
 
-            formattedEndDate = `${endDate.getMonth() + 1
-                }/${endDate.getDate()}/${endDate.getFullYear()}
+            formattedEndDate = `${
+                endDate.getMonth() + 1
+            }/${endDate.getDate()}/${endDate.getFullYear()}
             at ${endDate.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                })}`;
+                hour: "2-digit",
+                minute: "2-digit",
+            })}`;
         } else {
-            formattedStartDate = `${startDate.getMonth() + 1
-                }/${startDate.getDate()}/${startDate.getFullYear()}
+            formattedStartDate = `${
+                startDate.getMonth() + 1
+            }/${startDate.getDate()}/${startDate.getFullYear()}
             at ${startDate.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                })}`;
+                hour: "2-digit",
+                minute: "2-digit",
+            })}`;
 
             formattedEndDate = `${endDate.toLocaleTimeString([], {
                 hour: "2-digit",
@@ -103,14 +116,17 @@ const ViewAppointment: React.FC<Props> = ({ isOpened, swapViewModal, swapApptMod
             appointmentId: curEvent?.appointmentId,
         };
 
-        fetch("http://127.0.0.1:3000/deleteAppointment", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(deleteData),
-            credentials: "include",
-        })
+        fetch(
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/appointment-management/deleteAppointment",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(deleteData),
+                credentials: "include",
+            }
+        )
             .then((response) => {
                 return response.text();
             })
@@ -137,7 +153,9 @@ const ViewAppointment: React.FC<Props> = ({ isOpened, swapViewModal, swapApptMod
                 <button
                     className="exit-button"
                     onClick={() => swapViewModal(true)}
-                >x</button>
+                >
+                    x
+                </button>
                 {/* Information about the appointment */}
                 <h1 className="modal-title">Client Name: {curEvent?.title}</h1>
                 <h1 className="modal-title">

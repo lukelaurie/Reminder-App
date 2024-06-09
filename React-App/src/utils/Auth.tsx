@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 
 async function isLoggedIn(): Promise<boolean> {
     try {
-        const response = await fetch("http://127.0.0.1:3000/isLoggedIn", {
-            credentials: "include"
-        });
+        const response = await fetch(
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/appointment-management/isLoggedIn",
+            {
+                credentials: "include",
+            }
+        );
         // Return true if the status code is 200
         return response.status === 200;
     } catch (error) {
@@ -25,9 +28,9 @@ const PrivateRoutes: React.FC = () => {
             setAuthenticated(loggedIn);
             setLoggedIn(false);
         }
-        auth()
-    }, [])
-    // allow redirection only after logged in check is completed 
+        auth();
+    }, []);
+    // allow redirection only after logged in check is completed
     if (loggedIn) return;
 
     return authenticated ? <Outlet /> : <Navigate to="login" />;
