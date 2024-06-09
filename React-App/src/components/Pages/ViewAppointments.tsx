@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import AppointmentFilloutModal from "../AddAppointment/AppointmentFilloutModal";
 import ViewAppointment from "../AddAppointment/ViewAppointment";
 import { event } from "../../utils/Event";
-import { Calendar, momentLocalizer, SlotInfo, EventProps } from "react-big-calendar";
+import { Calendar, momentLocalizer, SlotInfo } from "react-big-calendar";
 import moment from "moment";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -225,7 +225,7 @@ const ViewAppointments: React.FC = () => {
                     }}
                     onSelectSlot={handleSelectSlot}
                     onDoubleClickEvent={handleEventClick}
-                    selectable                
+                    selectable
                 />
             </div>
             {/* The modals for appointment fillout and information */}
