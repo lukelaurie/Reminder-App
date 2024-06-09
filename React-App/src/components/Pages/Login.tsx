@@ -30,13 +30,9 @@ const Login: React.FC = () => {
             }
         )
             .then((response) => {
-                console.log(response);
-                
                 return response.text();
             })
             .then((data) => {
-                console.log(data);
-                
                 // checks if the data was valid
                 if (data === "valid") {
                     // redirect to the home page

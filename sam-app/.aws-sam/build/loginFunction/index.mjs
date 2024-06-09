@@ -7,7 +7,7 @@ let awsConfig = {
     region: "us-east-2",
     endpoint: "http://dynamodb.us-east-2.amazonaws.com",
     accessKeyId: process.env.ACCESS_KEY,
-    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY
 };
 AWS.config.update(awsConfig);
 let dynamoDB = new AWS.DynamoDB.DocumentClient();
@@ -16,7 +16,6 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY_VALUE;
 
 export const handler = async (event) => {
     try {
-        console.log(awsConfig);
         // Retrieve the data from the request
         const body = JSON.parse(event.body);
         const username = body.username;
@@ -48,9 +47,9 @@ export const handler = async (event) => {
         });
         // cookie to add to the response
         const cookieToSet = cookie.serialize("token", jwtToken, {
-            httpOnly: true,
+            // httpOnly: true,
             sameSite: "None",
-            secure: true,
+            // secure: true,
             path: "/", // Ensure the cookie is available for all routes
             maxAge: 60 * 60 * 24, // age is 1 day
         });

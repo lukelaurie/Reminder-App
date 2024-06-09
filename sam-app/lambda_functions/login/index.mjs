@@ -47,9 +47,9 @@ export const handler = async (event) => {
         });
         // cookie to add to the response
         const cookieToSet = cookie.serialize("token", jwtToken, {
-            httpOnly: true,
+            // httpOnly: true,
             sameSite: "None",
-            secure: true,
+            // secure: true,
             path: "/", // Ensure the cookie is available for all routes
             maxAge: 60 * 60 * 24, // age is 1 day
         });

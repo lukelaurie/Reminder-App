@@ -5,8 +5,8 @@ import { getUsernameFromCookie } from "get_username_from_cookie/index.mjs";
 let awsConfig = {
     region: "us-east-2",
     endpoint: "http://dynamodb.us-east-2.amazonaws.com",
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.ACCESS_KEY,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY
 };
 AWS.config.update(awsConfig);
 
