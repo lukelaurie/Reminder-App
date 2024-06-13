@@ -74,7 +74,7 @@ const AppointmentFilloutModal: React.FC<Props> = ({
         }
         // make a request to the backend with the given object information
         fetch(
-            "http://localhost:3000/createNewAppointment",
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/createNewAppointment",
             {
                 method: "POST",
                 headers: {

@@ -114,15 +114,6 @@
     border-radius: 4px;
 }
 
-/* Prevents autofilling colors the same */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px #000000 inset !important;
-    -webkit-text-fill-color: #ffffff !important;
-}
-
 /* login/register button */
 .register-submit {
     background-color: #03a1a1;
@@ -140,4 +131,13 @@ input:-webkit-autofill:active {
 .register-submit:hover {
     background-color: #161616;
     color: #03a1a1;
+}
+
+/* Prevents autofilling colors the same */
+input.account-form-input:-webkit-autofill,
+input.account-form-input:-webkit-autofill:hover,
+input.account-form-input:-webkit-autofill:focus,
+input.account-form-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #000000 inset;
+    -webkit-text-fill-color: #ffffff;
 }

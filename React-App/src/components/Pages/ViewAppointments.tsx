@@ -15,7 +15,7 @@ const localizer = momentLocalizer(moment);
 const InitalEvents: event[] = [];
 
 // manage the already seen dates so don't have to constantly make requests to backend
-const rangesVisited: Set<string> = new Set<string>();
+let rangesVisited: Set<string>;
 const idSeen: Set<string> = new Set<string>();
 
 const ViewAppointments: React.FC = () => {
@@ -30,6 +30,7 @@ const ViewAppointments: React.FC = () => {
     });
 
     useEffect(() => {
+        rangesVisited = new Set<string>();
         modifyEvents(false);
     }, []);
 
@@ -103,7 +104,7 @@ const ViewAppointments: React.FC = () => {
 
         rangesVisited.add(dateRangeStr);
         fetch(
-            "http://localhost:3000/retrieveAppointments",
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/retrieveAppointments",
             {
                 method: "POST",
                 headers: {

@@ -18,7 +18,7 @@ const Home: React.FC = () => {
     const getUserData = () => {
         // fetch the associate information
         fetch(
-            "http://localhost:3000/retrieveAssociate",
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/retrieveAssociate",
             {
                 method: "GET",
                 headers: {
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
             setDaytime("Evening");
         }
         fetch(
-            "http://localhost:3000/retrieveAppointments",
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/retrieveAppointments",
             {
                 method: "POST",
                 headers: {

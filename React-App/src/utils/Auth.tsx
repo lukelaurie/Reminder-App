@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 async function isLoggedIn(): Promise<boolean> {
     try {
         const response = await fetch(
-            "http://localhost:3000/isLoggedIn",
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/isLoggedIn",
             {
                 credentials: "include",
             }

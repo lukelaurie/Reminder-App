@@ -19,7 +19,7 @@ const Login: React.FC = () => {
         };
         // make a request to the backend with the given login information
         fetch(
-            "http://localhost:3000/login",
+            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/login",
             {
                 method: "POST",
                 headers: {
