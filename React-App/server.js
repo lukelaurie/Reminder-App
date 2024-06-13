@@ -1,13 +1,13 @@
 import express from 'express';
-const app = express()
-const port = 3000
+import path from 'path';
 
-app.use(express.static('dist'));
+const app = express();
+const port = process.env.PORT || 3000;
 
-app.get('/test', (req, res) => {
-    res.send('Hello World!');
-});
+// Serve static files from the 'dist' directory
+app.use(express.static(path.join(__dirname, 'dist')));
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+// Serve the React app for all other routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
