@@ -103,7 +103,7 @@ const ViewAppointments: React.FC = () => {
 
         rangesVisited.add(dateRangeStr);
         fetch(
-            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/appointment-management/retrieveAppointments",
+            "http://localhost:3000/retrieveAppointments",
             {
                 method: "POST",
                 headers: {

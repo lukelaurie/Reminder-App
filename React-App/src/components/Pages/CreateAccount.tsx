@@ -43,7 +43,7 @@ const CreateAccount: React.FC = () => {
             companyName: companyName,
         };
         fetch(
-            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/appointment-management/addAssociate",
+            "http://localhost:3000/addAssociate",
             {
                 method: "POST",
                 headers: {

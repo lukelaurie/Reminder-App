@@ -117,7 +117,7 @@ const ViewAppointment: React.FC<Props> = ({
         };
 
         fetch(
-            "https://5jcfs1sxsj.execute-api.us-east-2.amazonaws.com/appointment-management/deleteAppointment",
+            "http://localhost:3000/deleteAppointment",
             {
                 method: "POST",
                 headers: {
