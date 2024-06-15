@@ -1,7 +1,7 @@
 /* logo display */
 .mobile-message {
     position: fixed;
-    top: 20%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
