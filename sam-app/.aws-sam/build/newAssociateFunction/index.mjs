@@ -34,7 +34,7 @@ export const handler = async (event) => {
             };
         }
         const encryptedPassword = await saltAndHashPassword(password);
-        createNewAssociate(username, encryptedPassword, phoneNumber, name, companyName);
+        await createNewAssociate(username, encryptedPassword, phoneNumber, name, companyName);
         return {
             statusCode: 200,
             body: "The new user has been placed!"

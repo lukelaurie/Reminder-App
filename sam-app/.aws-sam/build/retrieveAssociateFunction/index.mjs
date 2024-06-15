@@ -1,5 +1,4 @@
 import AWS from "aws-sdk";
-// import getUsernameFromCookie from "./get_username_from_cookie";
 import { getUsernameFromCookie } from "get_username_from_cookie/index.mjs";
 
 let awsConfig = {
