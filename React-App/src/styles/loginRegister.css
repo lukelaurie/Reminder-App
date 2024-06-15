@@ -1,4 +1,17 @@
 /* logo display */
+.mobile-message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    z-index: 1000;
+    font-size: 3rem;
+}
+
+
 .title-image {
     width: 60%;
     object-fit: contain;

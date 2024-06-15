@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "../../styles/addAppointmentStyles.css";
 import { event } from "../../utils/Event";
-//import { PhoneNumber } from "react-phone-number-input";
+import CustomAlert from "../General/CustomAlert";
 
 Modal.setAppElement("#root");
 
@@ -48,6 +48,8 @@ const ViewAppointment: React.FC<Props> = ({
     const [clientPhoneNumber, setClientPhoneNumber] = useState<
         string | undefined
     >("");
+    const [alertMessage, setAlertMessage] = useState("");
+
     useEffect(() => {
         setClientPhoneNumber(formatPhoneNumber(curEvent?.clientPhoneNumber));
         if (curEvent?.start === undefined || curEvent?.end === undefined) {
@@ -135,15 +137,18 @@ const ViewAppointment: React.FC<Props> = ({
                 if (data === "valid") {
                     // remove appointment from the calender ui
                     adjustAppointment("delete", curEvent?.appointmentId);
-                    alert("Meeting has been deleted");
+                    setAlertMessage("Meeting has been deleted.");
                 } else {
-                    alert("Error: Unable to delete the meeting");
+                    setAlertMessage("Please fill out all fields.");
                 }
             });
     };
 
     return (
         <>
+            {alertMessage !== "" && (
+                <CustomAlert message={alertMessage} onClose={() => setAlertMessage("")} />
+            )}
             <Modal
                 isOpen={isOpened}
                 onRequestClose={() => swapViewModal(true)}

@@ -1,8 +1,32 @@
-import React from "react"; // we need this to make JSX compile
+import React, { useState, useEffect } from "react"; // we need this to make JSX compile
 import LoginForm from "../Login/LoginForm";
 import "../../styles/loginRegister.css";
+import CustomAlert from "../General/CustomAlert";
 
 const Login: React.FC = () => {
+    const [alertMessage, setAlertMessage] = useState("");
+    const [isMobile, setIsMobile] = useState(false);
+
+    const handleResize = () => {
+        setIsMobile(window.innerWidth < 900);
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize); 
+        handleResize();
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [])
+
+    if (isMobile) {
+        return (
+            <div className="mobile-message">
+                You need to be on a desktop to use this website.
+            </div>
+        );
+    }
+
     const loginCall = (
         username: string,
         password: string,
@@ -38,13 +62,16 @@ const Login: React.FC = () => {
                     // redirect to the home page
                     window.location.href = "/";
                 } else {
-                    alert(data);
+                    setAlertMessage(data);
                 }
             });
     };
 
     return (
         <div className="login-container">
+            {alertMessage !== "" && (
+                <CustomAlert message={alertMessage} onClose={() => setAlertMessage("")} />
+            )}
             {/* left hand panel */}
             <div className="login-image">
                 <img

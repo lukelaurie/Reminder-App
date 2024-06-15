@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import AppointmentForm from "./AppointmentForm";
 import "../../styles/addAppointmentStyles.css";
 import { event } from "../../utils/Event";
+import CustomAlert from "../General/CustomAlert";
 
 Modal.setAppElement("#root");
 
@@ -25,6 +26,7 @@ const AppointmentFilloutModal: React.FC<Props> = ({
     adjustAppointment,
 }) => {
     const [formType, setFormType] = useState("Add New Appointment");
+    const [alertMessage, setAlertMessage] = useState("");
 
     useEffect(() => {
         if (isUpdateMode) {
@@ -49,7 +51,7 @@ const AppointmentFilloutModal: React.FC<Props> = ({
             !clientName ||
             !clientPhoneNumber
         ) {
-            alert("Please fill out all fields.");
+            setAlertMessage("Please fill out all fields.");
             return;
         }
 
@@ -57,7 +59,7 @@ const AppointmentFilloutModal: React.FC<Props> = ({
         clientPhoneNumber = "+1" + clientPhoneNumber.replace(/\D/g, "");
         let pattern = new RegExp("\\+[0-9]{11}");
         if (!pattern.test(clientPhoneNumber)) {
-            alert("Phone number is invalid.");
+            setAlertMessage("Phone number is invalid.");
             return;
         }
         const appointData: {
@@ -90,15 +92,15 @@ const AppointmentFilloutModal: React.FC<Props> = ({
             .then((data) => {
                 // checks if the data was valid
                 if (data !== "valid") {
-                    alert(data);
+                    setAlertMessage(data);
                 } else {
                     // after appointment has been created update the calender ui
                     if (isUpdateMode) {
                         adjustAppointment("update", curEvent?.appointmentId);
-                        alert("Appointment Updated!");
+                        setAlertMessage("Appointment Updated!");
                     } else {
                         adjustAppointment("create", "null");
-                        alert("Appointment Created!");
+                        setAlertMessage("Appointment Created!");
                     }
                 }
             });
@@ -106,6 +108,9 @@ const AppointmentFilloutModal: React.FC<Props> = ({
 
     return (
         <>
+            {alertMessage !== "" && (
+                <CustomAlert message={alertMessage} onClose={() => setAlertMessage("")} />
+            )}
             <Modal
                 isOpen={isOpened}
                 onRequestClose={() => swapModal(true, false)}

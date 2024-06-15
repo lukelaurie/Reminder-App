@@ -4,6 +4,7 @@ import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "../../styles/addAppointmentStyles.css";
+import CustomAlert from "../General/CustomAlert";
 
 import { event } from "../../utils/Event";
 
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const AppointmentForm: React.FC<Props> = ({ onSubmit, curEvent }) => {
+    const [alertMessage, setAlertMessage] = useState("");
     const [startDate, setStartDate] = useState<Date | undefined | null>(
         curEvent?.start
     );
@@ -44,12 +46,15 @@ const AppointmentForm: React.FC<Props> = ({ onSubmit, curEvent }) => {
         if (startDate && endDate) {
             onSubmit(startDate, endDate, notes, clientName, phoneNumber);
         } else {
-            alert("Please include the start and end date");
+            setAlertMessage("Please include the start and end date");
         }
     };
 
     return (
         <>
+            {alertMessage !== "" && (
+                <CustomAlert message={alertMessage} onClose={() => setAlertMessage("")} />
+            )}
             <form className="appointmentForm">
                 <label className="modal-label" htmlFor="startDate">
                     Start Date:{" "}

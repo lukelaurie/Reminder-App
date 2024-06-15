@@ -1,8 +1,32 @@
-import React from "react"; // we need this to make JSX compile
+import React, { useState, useEffect } from "react"; // we need this to make JSX compile
 import AccountForm from "../CreateAccount/AccountForm";
 import "../../styles/loginRegister.css";
+import CustomAlert from "../General/CustomAlert";
 
 const CreateAccount: React.FC = () => {
+    const [alertMessage, setAlertMessage] = useState("");
+    const [isMobile, setIsMobile] = useState(false);
+
+    const handleResize = () => {
+        setIsMobile(window.innerWidth < 900);
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize); 
+        handleResize();
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [])
+
+    if (isMobile) {
+        return (
+            <div className="mobile-message">
+                You need to be on a desktop to use this website.
+            </div>
+        );
+    }
+
     const createAccount = (
         username: string,
         companyName: string,
@@ -21,18 +45,18 @@ const CreateAccount: React.FC = () => {
             !name ||
             !companyName
         ) {
-            alert("Please fill out all fields.");
+            setAlertMessage("Please fill out all fields.");
             return;
         }
         // modify the phone number to be in correct format
         phoneNumber = "+1" + phoneNumber.replace(/\D/g, "");
         let pattern = new RegExp("\\+[0-9]{11}");
         if (!pattern.test(phoneNumber)) {
-            alert("Phone number is invalid.");
+            setAlertMessage("Phone number is invalid.");
             return;
         }
         if (password !== confirmPassword) {
-            alert("Passwords must match.");
+            setAlertMessage("Passwords must match.");
             return;
         }
         let accountData = {
@@ -58,16 +82,21 @@ const CreateAccount: React.FC = () => {
             .then((data) => {
                 if (data === "The new user has been placed!") {
                     // redirect to the home page
-                    alert("Account Created");
-                    window.location.href = "/login";
+                    setAlertMessage("Account Created.");
+                    setTimeout(() => {
+                        window.location.href = "/login";
+                    }, 1500);
                 } else {
-                    alert(data);
+                    setAlertMessage(data);
                 }
             });
     };
 
     return (
         <div className="login-container">
+            {alertMessage !== "" && (
+                <CustomAlert message={alertMessage} onClose={() => setAlertMessage("")} />
+            )}
             {/* left hand panel */}
             <div className="login-image">
                 <img
