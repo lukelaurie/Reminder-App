@@ -1,11 +1,11 @@
-# Stock Market Simulator
-Welcome to the Stock Market Simulator, where you can dive into the exciting world of stock trading with $10,000 virtual funds! This simulator allows you to make informed investment decisions by utilizing real-time data. Additionally, it offers an advanced feature that uses a linear prediction model to predict a stock's performance over the next year.
+## Plan Perfect
+The Full Stack Appointment Management Site is a comprehensive application designed for managing client bookings and automating text reminders. It features a React frontend for a user-friendly interface, a Node.js backend for efficient data processing, and TypeScript for enhanced code quality. Leveraging AWS services such as Lambda and DynamoDB, the backend is robust and efficient. The application is deployed using cloud computing technologies, ensuring scalability and reliability. Explore the codebase to understand how appointment management can be streamlined and automated to improve customer engagement.
 
 # Getting Started
 To get started, simply click on this [link]([http://stocksimulator.me](https://myappointmentmanager.link/login)) or download/clone the project repository.
 
 # Technologies Used
-The Stock Market Simulator is built using the following technologies:
+Plan Perfect is built using the following technologies:
 
 - ReactJS
 - Node.js
